@@ -12,25 +12,25 @@ export function HeroSection() {
   const { t, locale } = useTranslation()
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background/50 -z-10" />
 
-      <div className="container mx-auto px-4 md:px-6 py-12">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="space-y-6 text-center lg:text-left"
+            className="space-y-4 md:space-y-6 text-center lg:text-left order-2 lg:order-1"
           >
             {/* Time-based greeting */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-lg text-muted-foreground handwritten text-xl"
+              className="text-base md:text-lg text-muted-foreground handwritten text-lg md:text-xl"
             >
               {getGreeting(locale)}
             </motion.p>
@@ -40,7 +40,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold"
             >
               {t.hero.greeting}{' '}
               <span className="text-primary handwritten">{t.hero.name}</span>
@@ -51,7 +51,7 @@ export function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-xl md:text-2xl text-muted-foreground"
+              className="text-lg md:text-xl lg:text-2xl text-muted-foreground"
             >
               {t.hero.role}
             </motion.p>
@@ -61,7 +61,7 @@ export function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0"
+              className="text-base md:text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0"
             >
               {t.hero.tagline}
             </motion.p>
@@ -71,7 +71,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start pt-2"
             >
               <Button asChild size="lg" className="lofi-glow">
                 <Link href="/projects">
@@ -90,7 +90,7 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="relative"
+            className="relative order-1 lg:order-2"
           >
             <AvatarScene />
           </motion.div>
@@ -102,10 +102,10 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-10"
       >
         <div className="animate-gentle-pulse">
-          <div className="w-6 h-10 border-2 border-muted-foreground rounded-full flex items-start justify-center p-2">
+          <div className="w-5 h-8 md:w-6 md:h-10 border-2 border-muted-foreground rounded-full flex items-start justify-center p-1.5 md:p-2">
             <div className="w-1 h-2 bg-muted-foreground rounded-full animate-float" />
           </div>
         </div>

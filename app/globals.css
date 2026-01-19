@@ -3,78 +3,78 @@
 
 @import "tailwindcss";
 
-/* Lo-Fi Portfolio Theme - Morning Café & Late Night Coding */
+/* Lo-Fi Portfolio Theme - Gruvbox Light & Deep Blue Night */
 
 :root {
-  /* Light Theme - "Morning Café" */
-  --background: 254 251 247; /* #FDFBF7 - Creamy off-white */
-  --foreground: 61 52 43;    /* #3D342B - Warm dark brown */
+  /* Light Theme - "Gruvbox Lo-Fi" */
+  --background: 252 245 230; /* #FCF5E6 - Gruvbox-esque cream */
+  --foreground: 60 55 50;    /* #3C3732 - Soft charcoal brown */
 
-  --card: 247 243 235;       /* #F7F3EB */
-  --card-foreground: 61 52 43;
+  --card: 245 238 220;       /* #F5EEDC - Slightly darker cream */
+  --card-foreground: 60 55 50;
 
-  --popover: 255 255 255;
-  --popover-foreground: 61 52 43;
+  --popover: 252 245 230;
+  --popover-foreground: 60 55 50;
 
-  --primary: 166 123 91;     /* #A67B5B - Warm coffee brown */
-  --primary-foreground: 254 251 247;
+  --primary: 140 110 80;     /* #8C6E50 - Muted brown lo-fi */
+  --primary-foreground: 252 245 230;
 
-  --secondary: 212 196 176;  /* #D4C4B0 - Latte foam */
-  --secondary-foreground: 61 52 43;
+  --secondary: 190 175 155;  /* #BEAF9B - Soft beige */
+  --secondary-foreground: 60 55 50;
 
-  --muted: 232 223 216;      /* #E8DFD8 */
-  --muted-foreground: 139 115 85;
+  --muted: 215 205 190;      /* #D7CDBE - Aged lo-fi */
+  --muted-foreground: 110 100 90;
 
-  --accent: 196 164 132;     /* #C4A484 - Baked bread */
-  --accent-foreground: 254 251 247;
+  --accent: 165 130 90;      /* #A5825A - Desaturated gold */
+  --accent-foreground: 252 245 230;
 
-  --destructive: 196 112 112;
-  --destructive-foreground: 254 251 247;
+  --destructive: 160 70 70;
+  --destructive-foreground: 252 245 230;
 
-  --border: 229 221 213;     /* #E5DDD5 */
-  --input: 229 221 213;
-  --ring: 166 123 91;
+  --border: 205 195 180;     /* #CDC3B4 - Subtle border */
+  --input: 205 195 180;
+  --ring: 140 110 80;
 
-  --success: 122 155 118;    /* #7A9B76 - Muted sage */
-  --warning: 212 165 116;    /* #D4A574 - Soft amber */
-  --error: 196 112 112;      /* #C47070 - Muted brick */
+  --success: 100 120 85;     /* #647855 - Muted sage */
+  --warning: 165 120 70;     /* #A57846 - Dull amber */
+  --error: 160 70 70;        /* #A04646 - Soft brick */
 
   --radius: 0.75rem;
 }
 
 .dark {
-  /* Dark Theme - "Late Night Coding" */
-  --background: 26 22 18;    /* #1A1612 - Rich espresso */
-  --foreground: 232 221 208; /* #E8DDD0 - Soft cream */
+  /* Dark Theme - "Deep Blue Night" */
+  --background: 240 4 13;    /* hsl(240deg 4% 13%) - Blue-gray dark */
+  --foreground: 220 215 210; /* #DCD7D2 - Off-white */
 
-  --card: 36 30 24;          /* #241E18 */
-  --card-foreground: 232 221 208;
+  --card: 240 5 18;          /* Slightly lighter - cards */
+  --card-foreground: 220 215 210;
 
-  --popover: 26 22 18;
-  --popover-foreground: 232 221 208;
+  --popover: 240 4 13;
+  --popover-foreground: 220 215 210;
 
-  --primary: 212 165 116;    /* #D4A574 - Caramel */
-  --primary-foreground: 26 22 18;
+  --primary: 170 140 110;    /* #AA8C6E - Muted brown lo-fi */
+  --primary-foreground: 240 4 13;
 
-  --secondary: 61 52 43;     /* #3D342B - Milk chocolate */
-  --secondary-foreground: 232 221 208;
+  --secondary: 45 42 50;     /* #2D2A32 - Dark gray-blue */
+  --secondary-foreground: 220 215 210;
 
-  --muted: 42 36 30;         /* #2A241E - Dark mocha */
-  --muted-foreground: 168 144 120;
+  --muted: 240 5 10;         /* Very dark blue-gray */
+  --muted-foreground: 140 135 130;
 
-  --accent: 232 200 168;     /* #E8C8A8 - Warm vanilla */
-  --accent-foreground: 26 22 18;
+  --accent: 185 155 120;     /* #B99B78 - Soft sand */
+  --accent-foreground: 240 4 13;
 
-  --destructive: 212 122 122;
-  --destructive-foreground: 26 22 18;
+  --destructive: 175 85 85;
+  --destructive-foreground: 240 4 13;
 
-  --border: 42 36 30;
-  --input: 42 36 30;
-  --ring: 212 165 116;
+  --border: 240 5 20;        /* Subtle border */
+  --input: 240 5 20;
+  --ring: 170 140 110;
 
-  --success: 143 168 127;
-  --warning: 212 176 116;
-  --error: 212 122 122;
+  --success: 115 145 100;    /* #739164 - Muted forest */
+  --warning: 175 135 80;     /* #AF8750 - Dull gold */
+  --error: 175 85 85;        /* #AF5555 - Muted red */
 }
 
 @theme inline {
