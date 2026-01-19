@@ -3,8 +3,12 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { TranslationProvider } from "@/hooks/use-translation";
+import { MusicPlayerProvider } from "@/hooks/use-music-player";
+import { defaultPlaylist } from "@/content/music-playlist";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { MusicPlayer } from "@/components/music-player/music-player";
+import { ScrollProgress } from "@/components/animations/scroll-progress";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -43,13 +47,17 @@ export default function RootLayout({
       >
         <ThemeProvider defaultTheme="system">
           <TranslationProvider initialLocale="en">
-            <div className="min-h-screen flex flex-col">
-              <Header />
-              <main className="flex-1">
-                {children}
-              </main>
-              <Footer />
-            </div>
+            <MusicPlayerProvider defaultPlaylist={defaultPlaylist}>
+              <ScrollProgress />
+              <div className="min-h-screen flex flex-col">
+                <Header />
+                <main className="flex-1">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+              <MusicPlayer />
+            </MusicPlayerProvider>
           </TranslationProvider>
         </ThemeProvider>
       </body>

@@ -3,6 +3,8 @@
 import { useTranslation } from '@/hooks/use-translation'
 import { Button } from '@/components/ui/button'
 import { AvatarScene } from '@/components/3d/avatar-scene'
+import { FloatingParticles } from '@/components/animations/floating-particles'
+import { AnimatedGradient } from '@/components/animations/animated-gradient'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
@@ -13,8 +15,14 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background/50 -z-10" />
+      {/* Animated gradient background */}
+      <AnimatedGradient />
+
+      {/* Floating particles */}
+      <FloatingParticles />
+
+      {/* Background gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/40 -z-10" />
 
       <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -73,15 +81,24 @@ export function HeroSection() {
               transition={{ delay: 0.6, duration: 0.6 }}
               className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start pt-2"
             >
-              <Button asChild size="lg" className="lofi-glow">
-                <Link href="/projects">
-                  {t.hero.cta.projects}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="lofi-glow">
-                <Link href="/about">{t.hero.cta.contact}</Link>
-              </Button>
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Button asChild size="lg" className="lofi-glow">
+                  <Link href="/projects">
+                    {t.hero.cta.projects}
+                    <motion.div
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </motion.div>
+                  </Link>
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Button asChild variant="outline" size="lg" className="lofi-glow">
+                  <Link href="/about">{t.hero.cta.contact}</Link>
+                </Button>
+              </motion.div>
             </motion.div>
           </motion.div>
 

@@ -70,8 +70,8 @@ export function StackSection() {
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {Object.entries(techStack).map(([category, items]) => (
-            <motion.div key={category} variants={item}>
-              <Card className="h-full lofi-glow">
+            <motion.div key={category} variants={item} whileHover={{ y: -5 }}>
+              <Card className="h-full lofi-glow transition-shadow duration-300 hover:shadow-lg">
                 <CardHeader>
                   <CardTitle className="text-xl">
                     {t.stack.categories[category as keyof typeof t.stack.categories]}
@@ -80,17 +80,22 @@ export function StackSection() {
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
                     {items.map((item) => (
-                      <Badge
+                      <motion.div
                         key={item.id}
-                        variant="outline"
-                        className={cn(
-                          "text-sm py-1 px-3",
-                          stackColors[item.id] || "border-border"
-                        )}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
                       >
-                        <span className="mr-1">{item.icon}</span>
-                        {t.stack.items[item.id as keyof typeof t.stack.items]?.name || item.name}
-                      </Badge>
+                        <Badge
+                          variant="outline"
+                          className={cn(
+                            "text-sm py-1 px-3 cursor-pointer",
+                            stackColors[item.id] || "border-border"
+                          )}
+                        >
+                          <span className="mr-1">{item.icon}</span>
+                          {t.stack.items[item.id as keyof typeof t.stack.items]?.name || item.name}
+                        </Badge>
+                      </motion.div>
                     ))}
                   </div>
                 </CardContent>

@@ -37,9 +37,20 @@ export function ContactSection() {
 
   return (
     <section className="py-20 md:py-32 relative overflow-hidden">
-      {/* Background decoration */}
+      {/* Background decoration with pulse */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.05, 0.1, 0.05],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary rounded-full blur-3xl"
+        />
       </div>
 
       <div className="container mx-auto px-4 md:px-6">
@@ -53,11 +64,44 @@ export function ContactSection() {
           {/* Decorative coffee icon */}
           <div className="flex justify-center mb-6">
             <motion.div
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
-              className="text-4xl"
+              whileHover={{
+                rotate: [0, -5, 5, -5, 0],
+                scale: 1.1,
+              }}
+              transition={{ duration: 0.5 }}
+              className="text-4xl cursor-pointer relative"
             >
               ☕
+              {/* Steam particles */}
+              <motion.div
+                className="absolute -top-2 left-1/2 -translate-x-1/2 text-xs opacity-50"
+                animate={{
+                  y: [-5, -20],
+                  opacity: [0.5, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeOut",
+                }}
+              >
+                ~
+              </motion.div>
+              <motion.div
+                className="absolute -top-2 left-1/2 -translate-x-1/2 text-xs opacity-50"
+                animate={{
+                  y: [-5, -20],
+                  opacity: [0.5, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeOut",
+                  delay: 0.5,
+                }}
+              >
+                ~
+              </motion.div>
             </motion.div>
           </div>
 
@@ -75,6 +119,7 @@ export function ContactSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
                 >
                   <Button
                     asChild
@@ -89,7 +134,12 @@ export function ContactSection() {
                       target={link.external ? '_blank' : undefined}
                       rel={link.external ? 'noopener noreferrer' : undefined}
                     >
-                      <Icon className="h-6 w-6" />
+                      <motion.div
+                        animate={index === 1 ? { rotate: [0, 10, -10, 0] } : {}}
+                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 2 }}
+                      >
+                        <Icon className="h-6 w-6" />
+                      </motion.div>
                       <span className="text-sm font-medium">{link.label}</span>
                     </Link>
                   </Button>

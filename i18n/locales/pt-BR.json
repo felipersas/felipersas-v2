@@ -144,5 +144,10 @@
     "madeWith": "Feito com",
     "love": "e muito café",
     "theme": "Alternar tema"
+  },
+  "musicPlayer": {
+    "title": "Player Lo-Fi",
+    "noTracks": "Nenhuma música disponível",
+    "addMusic": "Adicione arquivos MP3 em /public/audio/"
   }
 }
