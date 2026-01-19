@@ -4,6 +4,7 @@ import { useTranslation } from '@/hooks/use-translation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { techStack } from '@/content/projects'
+import { techIcons } from '@/content/tech-icons'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
@@ -79,24 +80,27 @@ export function StackSection() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {items.map((item) => (
-                      <motion.div
-                        key={item.id}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <Badge
-                          variant="outline"
-                          className={cn(
-                            "text-sm py-1 px-3 cursor-pointer",
-                            stackColors[item.id] || "border-border"
-                          )}
+                    {items.map((item) => {
+                      const IconComponent = techIcons[item.id as keyof typeof techIcons]
+                      return (
+                        <motion.div
+                          key={item.id}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
                         >
-                          <span className="mr-1">{item.icon}</span>
-                          {t.stack.items[item.id as keyof typeof t.stack.items]?.name || item.name}
-                        </Badge>
-                      </motion.div>
-                    ))}
+                          <Badge
+                            variant="outline"
+                            className={cn(
+                              "text-sm py-1 px-3 cursor-pointer gap-1",
+                              stackColors[item.id] || "border-border"
+                            )}
+                          >
+                            {IconComponent && <IconComponent className="h-3.5 w-3.5" />}
+                            {t.stack.items[item.id as keyof typeof t.stack.items]?.name || item.name}
+                          </Badge>
+                        </motion.div>
+                      )
+                    })}
                   </div>
                 </CardContent>
               </Card>

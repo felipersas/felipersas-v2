@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { motion } from 'framer-motion'
 import { Code2, Database, Globe, Wrench } from 'lucide-react'
 import { getGreeting } from '@/lib/utils'
+import { skillIcons } from '@/lib/skill-icons'
 
 export default function AboutPage() {
   const { t, locale } = useTranslation()
@@ -139,11 +140,15 @@ export default function AboutPage() {
                     </CardHeader>
                     <CardContent>
                       <div className="flex flex-wrap gap-2">
-                        {skillGroup.items.map((skill) => (
-                          <Badge key={skill} variant="secondary">
-                            {skill}
-                          </Badge>
-                        ))}
+                        {skillGroup.items.map((skill) => {
+                          const IconComponent = skillIcons[skill]
+                          return (
+                            <Badge key={skill} variant="secondary" className="gap-1">
+                              {IconComponent && <IconComponent className="h-3.5 w-3.5" />}
+                              {skill}
+                            </Badge>
+                          )
+                        })}
                       </div>
                     </CardContent>
                   </Card>
