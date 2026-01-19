@@ -1,4 +1,4 @@
-import { SiTypescript, SiJavascript, SiRust, SiPython, SiNextdotjs, SiNestjs, SiReact, SiMysql, SiPostgresql, SiPrisma, SiDocker, SiGitlab, SiReactquery, SiPuppeteer, SiNodedotjs, SiTailwindcss } from 'react-icons/si'
+import { SiTypescript, SiJavascript, SiRust, SiPython, SiNextdotjs, SiNestjs, SiReact, SiMysql, SiPostgresql, SiPrisma, SiDocker, SiGitlab, SiReactquery, SiPuppeteer, SiNodedotjs, SiTailwindcss, SiNpm } from 'react-icons/si'
 import { RiCodeBoxLine } from 'react-icons/ri'
 
 export const skillIcons: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -25,4 +25,5 @@ export const skillIcons: Record<string, React.ComponentType<{ className?: string
   'Node': SiNodedotjs,
   'Tailwind CSS': SiTailwindcss,
   'Tailwind': SiTailwindcss,
+  'N-API': SiNpm,
 }

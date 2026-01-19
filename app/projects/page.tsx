@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { projects, techStack } from '@/content/projects'
+import { skillIcons } from '@/lib/skill-icons'
 import { motion } from 'framer-motion'
 import { ExternalLink, Github } from 'lucide-react'
 import Link from 'next/link'
@@ -104,16 +105,15 @@ export default function ProjectsPage() {
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {project.stack.slice(0, 4).map((tech) => {
-                        const techInfo = Object.values(techStack)
-                          .flat()
-                          .find(t => t.name === tech)
+                        const IconComponent = skillIcons[tech]
                         return (
                           <Badge
                             key={tech}
                             variant="outline"
-                            className="text-xs"
+                            className="text-xs gap-1"
                           >
-                            {techInfo?.icon || ''} {tech}
+                            {IconComponent && <IconComponent className="h-3 w-3" />}
+                            {tech}
                           </Badge>
                         )
                       })}
@@ -137,28 +137,35 @@ export default function ProjectsPage() {
                   </Badge>
                 </CardContent>
 
-                <CardFooter className="gap-2">
+                <CardFooter className="gap-2 flex-wrap">
                   {project.links.github && (
-                    <Button variant="outline" size="sm" className="flex-1 lofi-glow" asChild>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1 min-w-fit lofi-glow"
+                      asChild
+                    >
                       <Link
                         href={project.links.github}
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-1"
                       >
-                        <Github className="h-4 w-4 mr-1" />
-                        {t.common.viewSource}
+                        <Github className="h-4 w-4 shrink-0" />
+                        <span className="whitespace-nowrap">{t.common.viewSource}</span>
                       </Link>
                     </Button>
                   )}
                   {project.links.demo && (
-                    <Button size="sm" className="flex-1 lofi-glow" asChild>
+                    <Button size="sm" className="flex-1 min-w-fit lofi-glow" asChild>
                       <Link
                         href={project.links.demo}
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-1"
                       >
-                        <ExternalLink className="h-4 w-4 mr-1" />
-                        {t.common.viewProject}
+                        <ExternalLink className="h-4 w-4 shrink-0" />
+                        <span className="whitespace-nowrap">{t.common.viewProject}</span>
                       </Link>
                     </Button>
                   )}
