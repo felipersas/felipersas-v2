@@ -1,0 +1,148 @@
+{
+  "common": {
+    "loading": "Carregando...",
+    "readMore": "Ler mais",
+    "viewProject": "Ver projeto",
+    "viewSource": "Ver código",
+    "backToHome": "Voltar ao início",
+    "contact": "Contato"
+  },
+  "nav": {
+    "home": "Início",
+    "about": "Sobre",
+    "projects": "Projetos",
+    "blog": "Blog"
+  },
+  "hero": {
+    "greeting": "Olá, eu sou",
+    "name": "Felipe Marques",
+    "role": "Desenvolvedor Full Stack",
+    "tagline": "Construindo experiências digitais aconchegantes, um commit de cada vez",
+    "cta": {
+      "projects": "Ver meu trabalho",
+      "contact": "Entre em contato"
+    }
+  },
+  "about": {
+    "title": "Sobre Mim",
+    "subtitle": "Um pouco sobre minha jornada",
+    "description": "Sou um Desenvolvedor Full Stack apaixonado por criar experiências web confortáveis e amigáveis. Minha abordagem combina expertise técnica com foco em acessibilidade e estética.",
+    "skills": {
+      "title": "Habilidades e Tecnologias",
+      "backend": "Desenvolvimento Backend",
+      "frontend": "Desenvolvimento Frontend",
+      "tools": "Ferramentas e Outros"
+    }
+  },
+  "projects": {
+    "title": "Projetos",
+    "subtitle": "Coisas que construí",
+    "filter": {
+      "all": "Todos",
+      "featured": "Destaques",
+      "web": "Apps Web",
+      "api": "APIs"
+    },
+    "stack": "Stack Tecnológica",
+    "status": {
+      "completed": "Concluído",
+      "inProgress": "Em Progresso",
+      "planned": "Planejado"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Pensamentos, tutoriais e tudo o mais",
+    "readTime": "{{min}} min de leitura",
+    "publishedOn": "Publicado em {{date}}",
+    "allPosts": "Todas as Publicações",
+    "noPosts": "Ainda sem posts, mas estou escrevendo!",
+    "backToList": "Voltar aos posts"
+  },
+  "stack": {
+    "title": "Stack Tecnológica",
+    "subtitle": "Ferramentas e tecnologias com as quais trabalho",
+    "categories": {
+      "languages": "Linguagens",
+      "frameworks": "Frameworks",
+      "databases": "Bancos de Dados",
+      "tools": "Ferramentas & DevOps",
+      "libraries": "Bibliotecas"
+    },
+    "items": {
+      "nextjs": {
+        "name": "Next.js",
+        "description": "Framework React para produção"
+      },
+      "nestjs": {
+        "name": "NestJS",
+        "description": "Framework progressivo Node.js"
+      },
+      "typescript": {
+        "name": "TypeScript",
+        "description": "JavaScript type-safe"
+      },
+      "mysql": {
+        "name": "MySQL",
+        "description": "Banco de dados relacional"
+      },
+      "docker": {
+        "name": "Docker",
+        "description": "Conteinerização"
+      },
+      "git": {
+        "name": "Git",
+        "description": "Controle de versão"
+      },
+      "nextauth": {
+        "name": "NextAuth.js",
+        "description": "Autenticação para Next.js"
+      },
+      "tanstack": {
+        "name": "TanStack Query",
+        "description": "Busca de dados e gerenciamento de estado"
+      },
+      "puppeteer": {
+        "name": "Puppeteer",
+        "description": "Automação headless Chrome"
+      },
+      "prisma": {
+        "name": "Prisma ORM",
+        "description": "Toolkit moderno de banco de dados"
+      },
+      "react": {
+        "name": "React.js",
+        "description": "Biblioteca de UI"
+      },
+      "rust": {
+        "name": "Rust",
+        "description": "Programação de sistemas"
+      },
+      "python": {
+        "name": "Python",
+        "description": "Programação de propósito geral"
+      },
+      "n8n": {
+        "name": "n8n",
+        "description": "Automação de workflows"
+      }
+    }
+  },
+  "contact": {
+    "title": "Vamos Conversar",
+    "subtitle": "Sinta-se à vontade para entrar em contato",
+    "github": "Confira meu GitHub",
+    "linkedin": "Conecte-se no LinkedIn",
+    "email": "Me envie um e-mail",
+    "links": {
+      "github": "https://github.com/felipersas",
+      "linkedin": "https://www.linkedin.com/in/felipe-marques-a748b9299/",
+      "email": "mailto:felipemarques.computacao@gmail.com"
+    }
+  },
+  "footer": {
+    "madeWith": "Feito com",
+    "love": "e muito café",
+    "theme": "Alternar tema"
+  }
+}

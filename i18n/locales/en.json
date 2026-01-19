@@ -1,0 +1,148 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "readMore": "Read more",
+    "viewProject": "View project",
+    "viewSource": "View source",
+    "backToHome": "Back to home",
+    "contact": "Contact"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "blog": "Blog"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Felipe Marques",
+    "role": "Full Stack Developer",
+    "tagline": "Building cozy digital experiences, one commit at a time",
+    "cta": {
+      "projects": "See my work",
+      "contact": "Get in touch"
+    }
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "A bit about my journey",
+    "description": "I'm a passionate Full Stack Developer who loves creating comfortable, user-friendly web experiences. My approach combines technical expertise with a focus on accessibility and aesthetics.",
+    "skills": {
+      "title": "Skills & Technologies",
+      "backend": "Backend Development",
+      "frontend": "Frontend Development",
+      "tools": "Tools & Others"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Things I've built",
+    "filter": {
+      "all": "All",
+      "featured": "Featured",
+      "web": "Web Apps",
+      "api": "APIs"
+    },
+    "stack": "Tech Stack",
+    "status": {
+      "completed": "Completed",
+      "inProgress": "In Progress",
+      "planned": "Planned"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Thoughts, tutorials, and everything in between",
+    "readTime": "{{min}} min read",
+    "publishedOn": "Published on {{date}}",
+    "allPosts": "All Posts",
+    "noPosts": "No posts yet, but I'm writing!",
+    "backToList": "Back to posts"
+  },
+  "stack": {
+    "title": "Tech Stack",
+    "subtitle": "Tools and technologies I work with",
+    "categories": {
+      "languages": "Languages",
+      "frameworks": "Frameworks",
+      "databases": "Databases",
+      "tools": "Tools & DevOps",
+      "libraries": "Libraries"
+    },
+    "items": {
+      "nextjs": {
+        "name": "Next.js",
+        "description": "React framework for production"
+      },
+      "nestjs": {
+        "name": "NestJS",
+        "description": "A progressive Node.js framework"
+      },
+      "typescript": {
+        "name": "TypeScript",
+        "description": "Type-safe JavaScript"
+      },
+      "mysql": {
+        "name": "MySQL",
+        "description": "Relational database"
+      },
+      "docker": {
+        "name": "Docker",
+        "description": "Containerization"
+      },
+      "git": {
+        "name": "Git",
+        "description": "Version control"
+      },
+      "nextauth": {
+        "name": "NextAuth.js",
+        "description": "Authentication for Next.js"
+      },
+      "tanstack": {
+        "name": "TanStack Query",
+        "description": "Data fetching & state management"
+      },
+      "puppeteer": {
+        "name": "Puppeteer",
+        "description": "Headless Chrome automation"
+      },
+      "prisma": {
+        "name": "Prisma ORM",
+        "description": "Modern database toolkit"
+      },
+      "react": {
+        "name": "React.js",
+        "description": "UI library"
+      },
+      "rust": {
+        "name": "Rust",
+        "description": "Systems programming"
+      },
+      "python": {
+        "name": "Python",
+        "description": "General purpose programming"
+      },
+      "n8n": {
+        "name": "n8n",
+        "description": "Workflow automation"
+      }
+    }
+  },
+  "contact": {
+    "title": "Let's Connect",
+    "subtitle": "Feel free to reach out",
+    "github": "Check out my GitHub",
+    "linkedin": "Connect on LinkedIn",
+    "email": "Send me an email",
+    "links": {
+      "github": "https://github.com/felipersas",
+      "linkedin": "https://www.linkedin.com/in/felipe-marques-a748b9299/",
+      "email": "mailto:felipemarques.computacao@gmail.com"
+    }
+  },
+  "footer": {
+    "madeWith": "Made with",
+    "love": "and lots of coffee",
+    "theme": "Toggle theme"
+  }
+}
