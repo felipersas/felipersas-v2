@@ -1,9 +1,10 @@
 'use client'
 
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Environment, ContactShadows, PerspectiveCamera } from '@react-three/drei'
-import { Suspense } from 'react'
+import { Suspense, useRef } from 'react'
 import { Desk, Monitor, Keyboard, CoffeeMug, Plant } from './desk-elements'
+import { BlockyCharacter } from './character'
 import { useTheme } from '@/hooks/use-theme'
 
 /**
@@ -13,6 +14,15 @@ import { useTheme } from '@/hooks/use-theme'
 
 function SceneContent() {
   const { actualTheme } = useTheme()
+  const sceneRef = useRef<any>(null)
+
+  // Rotate the main scene group slowly for a gentle orbiting effect
+  useFrame((state, delta) => {
+    if (sceneRef.current) {
+      // adjust the multiplier for faster/slower rotation
+      sceneRef.current.rotation.y += delta * 0.2
+    }
+  })
 
   // Adjust colors based on theme
   const ambientIntensity = actualTheme === 'dark' ? 0.3 : 0.6
@@ -21,9 +31,24 @@ function SceneContent() {
   return (
     <>
       {/* Camera */}
-      <PerspectiveCamera makeDefault position={[4, 2, 6]} fov={50} />
+      <PerspectiveCamera makeDefault position={[-3, 4, -6]} fov={40} />
 
       {/* Soft, warm lighting for lo-fi feel */}
+      <directionalLight
+        position={[6, 10, 6]}
+        intensity={2}
+        color={spotlightColor}
+        castShadow
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-camera-left={-4}
+        shadow-camera-right={4}
+        shadow-camera-top={4}
+        shadow-camera-bottom={-4}
+        shadow-camera-near={0.5}
+        shadow-camera-far={50}
+        shadow-bias={-0.0001}
+      />
       <ambientLight intensity={ambientIntensity} color={spotlightColor} />
       <spotLight
         position={[5, 8, 5]}
@@ -41,21 +66,25 @@ function SceneContent() {
 
       {/* The Scene */}
       <Suspense fallback={null}>
-        {/* Desk setup */}
-        <Desk />
-        <Monitor />
-        <Keyboard />
-        <CoffeeMug />
-        <Plant />
+        {/* Rotating group containing main scene objects */}
+        <group ref={sceneRef}>
+          <Desk />
+          <Monitor />
+          <Keyboard />
+          <CoffeeMug />
+          <Plant />
 
+          {/* Blocky character typing at desk */}
+          <BlockyCharacter />
+        </group>
 
         {/* Soft shadows on floor */}
         <ContactShadows
-          position={[0, -2, 0]}
+          position={[0, -1.0, 0]}
           opacity={0.4}
-          scale={15}
+          scale={12}
           blur={2.5}
-          far={6}
+          far={4}
         />
 
         {/* Pleasant environment reflections */}
@@ -64,12 +93,12 @@ function SceneContent() {
 
       {/* Subtle user interaction */}
       <OrbitControls
-        enableZoom={false}
-        enablePan={false}
-        minPolarAngle={Math.PI / 3}
-        maxPolarAngle={Math.PI / 2.2}
-        minAzimuthAngle={-Math.PI / 6}
-        maxAzimuthAngle={Math.PI / 6}
+        enableZoom={true}
+        enablePan={true}
+        minPolarAngle={0}
+        maxPolarAngle={Math.PI}
+        minAzimuthAngle={-Math.PI}
+        maxAzimuthAngle={Math.PI}
         enableDamping
         dampingFactor={0.05}
         rotateSpeed={0.5}
@@ -78,10 +107,13 @@ function SceneContent() {
   )
 }
 
+
+
 export function AvatarScene() {
   return (
     <div className="w-full h-[400px] md:h-[500px] lg:h-[600px]">
       <Canvas
+        shadows
         gl={{
           preserveDrawingBuffer: true,
           antialias: true,

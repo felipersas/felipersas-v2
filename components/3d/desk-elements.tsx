@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
@@ -226,15 +226,15 @@ export function CoffeeMug() {
 
   return (
     <group position={[1.2, 0, 0]}>
-      {/* Mug body - slightly tapered */}
+      {/* Mug body - pixelated curved square style */}
       <mesh position={[0, 0.18, 0]} castShadow receiveShadow>
-        <cylinderGeometry args={[0.12, 0.1, 0.35, 12]} />
+        <cylinderGeometry args={[0.12, 0.1, 0.35, 8]} />
         <meshStandardMaterial color={0xF5F5F5} roughness={0.3} />
       </mesh>
 
-      {/* Coffee inside */}
-      <mesh position={[0, 0.34, 0]}>
-        <cylinderGeometry args={[0.1, 0.1, 0.02, 12]} />
+      {/* Coffee inside - filled more */}
+      <mesh position={[0, 0.26, 0]}>
+        <cylinderGeometry args={[0.1, 0.1, 0.2, 8]} />
         <meshStandardMaterial
           color={0x2A1810}
           roughness={0.9}
@@ -288,9 +288,9 @@ export function CoffeeMug() {
 export function Plant() {
   return (
     <group position={[-1.3, 0, 0]}>
-      {/* Pot - tapered terracotta style */}
+      {/* Pot - pixelated curved square style */}
       <mesh position={[0, 0.15, 0]} castShadow receiveShadow>
-        <cylinderGeometry args={[0.13, 0.1, 0.3, 12]} />
+        <cylinderGeometry args={[0.13, 0.1, 0.3, 8]} />
         <meshStandardMaterial color={0xC4876B} roughness={0.8} />
       </mesh>
 
@@ -347,4 +347,3 @@ export function Plant() {
   )
 }
 
-import { useMemo } from 'react'
