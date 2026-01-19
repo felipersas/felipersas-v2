@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/hooks/use-theme";
 import { TranslationProvider } from "@/hooks/use-translation";
 import { MusicPlayerProvider } from "@/hooks/use-music-player";
 import { defaultPlaylist } from "@/content/music-playlist";
@@ -41,25 +40,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground`}
       >
-        <ThemeProvider defaultTheme="system">
-          <TranslationProvider initialLocale="en">
-            <MusicPlayerProvider defaultPlaylist={defaultPlaylist}>
-              <ScrollProgress />
-              <div className="min-h-screen flex flex-col">
-                <Header />
-                <main className="flex-1">
-                  {children}
-                </main>
-                <Footer />
-              </div>
-              <MusicPlayer />
-            </MusicPlayerProvider>
-          </TranslationProvider>
-        </ThemeProvider>
+        <TranslationProvider initialLocale="pt-BR">
+          <MusicPlayerProvider defaultPlaylist={defaultPlaylist}>
+            <ScrollProgress />
+            <div className="min-h-screen flex flex-col">
+              <Header />
+              <main className="flex-1">
+                {children}
+              </main>
+              <Footer />
+            </div>
+            <MusicPlayer />
+          </MusicPlayerProvider>
+        </TranslationProvider>
       </body>
     </html>
   );

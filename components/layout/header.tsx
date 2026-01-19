@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslation } from '@/hooks/use-translation'
-import { ThemeToggle } from './theme-toggle'
 import { LanguageSwitcher } from './language-switcher'
 import { cn } from '@/lib/utils'
 
@@ -48,7 +47,6 @@ export function Header() {
           {/* Controls */}
           <div className="flex items-center space-x-2">
             <LanguageSwitcher />
-            <ThemeToggle />
           </div>
         </div>
       </div>

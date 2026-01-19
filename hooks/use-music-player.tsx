@@ -16,7 +16,7 @@ export function MusicPlayerProvider({ children, defaultPlaylist }: { children: R
   const [currentTrackIndex, setCurrentTrackIndex] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem(STORAGE_KEYS.TRACK_INDEX)
-      return saved ? parseInt(saved, 10) : 0
+      return saved ? Math.min(parseInt(saved, 10), defaultPlaylist.length - 1) : 0
     }
     return 0
   })
@@ -32,10 +32,12 @@ export function MusicPlayerProvider({ children, defaultPlaylist }: { children: R
   const [isMuted, setIsMuted] = useState(false)
   const [playlist, setPlaylistState] = useState<Track[]>(defaultPlaylist)
 
-  // Initialize audio element
+  // Initialize audio element ONCE
   useEffect(() => {
-    audioRef.current = new Audio()
-    audioRef.current.volume = volume
+    if (!audioRef.current) {
+      audioRef.current = new Audio()
+      audioRef.current.volume = isMuted ? 0 : volume
+    }
 
     const audio = audioRef.current
 
@@ -49,13 +51,14 @@ export function MusicPlayerProvider({ children, defaultPlaylist }: { children: R
 
     const handleEnded = () => {
       // Auto-play next track
-      nextTrack()
+      setCurrentTrackIndex(prev => (prev + 1) % playlist.length)
     }
 
     const handleError = () => {
       console.error('Audio error:', audio.error)
-      // Try next track on error
-      nextTrack()
+      // Don't auto-skip on error to prevent infinite loops
+      // Just stop playing
+      setIsPlaying(false)
     }
 
     audio.addEventListener('timeupdate', handleTimeUpdate)
@@ -73,7 +76,7 @@ export function MusicPlayerProvider({ children, defaultPlaylist }: { children: R
     }
   }, [])
 
-  // Load current track when index changes
+  // Load current track when index or playlist changes
   useEffect(() => {
     if (audioRef.current && playlist.length > 0) {
       const track = playlist[currentTrackIndex]
@@ -82,7 +85,10 @@ export function MusicPlayerProvider({ children, defaultPlaylist }: { children: R
         audioRef.current.src = track.src
         audioRef.current.load()
         if (wasPlaying) {
-          audioRef.current.play().catch(console.error)
+          audioRef.current.play().catch(err => {
+            console.error('Failed to play:', err)
+            setIsPlaying(false)
+          })
         }
         localStorage.setItem(STORAGE_KEYS.TRACK_INDEX, currentTrackIndex.toString())
       }
@@ -97,39 +103,41 @@ export function MusicPlayerProvider({ children, defaultPlaylist }: { children: R
     }
   }, [volume, isMuted])
 
-  const play = useCallback(() => {
-    if (audioRef.current && playlist.length > 0) {
-      audioRef.current.play().catch(console.error)
-      setIsPlaying(true)
+  // Control play/pause
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.play().catch(err => {
+          console.error('Failed to play:', err)
+          setIsPlaying(false)
+        })
+      } else {
+        audioRef.current.pause()
+      }
     }
-  }, [playlist])
+  }, [isPlaying])
+
+  const play = useCallback(() => {
+    setIsPlaying(true)
+  }, [])
 
   const pause = useCallback(() => {
-    if (audioRef.current) {
-      audioRef.current.pause()
-      setIsPlaying(false)
-    }
+    setIsPlaying(false)
   }, [])
 
   const togglePlay = useCallback(() => {
-    if (isPlaying) {
-      pause()
-    } else {
-      play()
-    }
-  }, [isPlaying, play, pause])
+    setIsPlaying(prev => !prev)
+  }, [])
 
   const nextTrack = useCallback(() => {
-    if (playlist.length === 0) return
-    const nextIndex = (currentTrackIndex + 1) % playlist.length
-    setCurrentTrackIndex(nextIndex)
-  }, [currentTrackIndex, playlist.length])
+    setCurrentTrackIndex(prev => (prev + 1) % playlist.length)
+    setIsPlaying(true)
+  }, [playlist.length])
 
   const prevTrack = useCallback(() => {
-    if (playlist.length === 0) return
-    const prevIndex = currentTrackIndex === 0 ? playlist.length - 1 : currentTrackIndex - 1
-    setCurrentTrackIndex(prevIndex)
-  }, [currentTrackIndex, playlist.length])
+    setCurrentTrackIndex(prev => prev === 0 ? playlist.length - 1 : prev - 1)
+    setIsPlaying(true)
+  }, [playlist.length])
 
   const seekTo = useCallback((time: number) => {
     if (audioRef.current) {

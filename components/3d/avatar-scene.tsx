@@ -5,7 +5,6 @@ import { OrbitControls, Environment, ContactShadows, PerspectiveCamera } from '@
 import { Suspense, useRef } from 'react'
 import { Desk, Monitor, Keyboard, CoffeeMug, Plant } from './desk-elements'
 import { BlockyCharacter } from './character'
-import { useTheme } from '@/hooks/use-theme'
 
 /**
  * Main 3D Scene with Blocky Avatar at Desk
@@ -13,7 +12,6 @@ import { useTheme } from '@/hooks/use-theme'
  */
 
 function SceneContent() {
-  const { actualTheme } = useTheme()
   const sceneRef = useRef<any>(null)
 
   // Rotate the main scene group slowly for a gentle orbiting effect
@@ -24,9 +22,9 @@ function SceneContent() {
     }
   })
 
-  // Adjust colors based on theme
-  const ambientIntensity = actualTheme === 'dark' ? 0.3 : 0.6
-  const spotlightColor = actualTheme === 'dark' ? '#FFE8C8' : '#FFF8F0'
+  // Tokyo Lo-fi themed lighting (dark theme)
+  const ambientIntensity = 0.3
+  const spotlightColor = '#ecdfbf' // Tokyo Lo-fi cream
 
   return (
     <>
@@ -62,7 +60,7 @@ function SceneContent() {
       />
 
       {/* Fill light for soft shadows */}
-      <pointLight position={[-5, 3, -5]} intensity={0.3} color="#E8DDD0" />
+      <pointLight position={[-5, 3, -5]} intensity={0.3} color="#df9a73" />
 
       {/* The Scene */}
       <Suspense fallback={null}>

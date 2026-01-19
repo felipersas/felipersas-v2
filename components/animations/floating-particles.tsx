@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
@@ -20,30 +20,31 @@ interface FloatingParticlesProps {
 }
 
 export function FloatingParticles({ className, count = 40 }: FloatingParticlesProps) {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(true)
+  const [particles, setParticles] = useState<Particle[]>([])
 
   useEffect(() => {
+    // Check for reduced motion preference
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     setPrefersReducedMotion(mediaQuery.matches)
+
+    // Generate particles only on client side
+    if (!mediaQuery.matches) {
+      setParticles(Array.from({ length: count }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 6 + 2,
+        duration: Math.random() * 20 + 15,
+        delay: Math.random() * 5,
+        opacity: Math.random() * 0.2 + 0.05
+      })))
+    }
 
     const handleChange = () => setPrefersReducedMotion(mediaQuery.matches)
     mediaQuery.addEventListener('change', handleChange)
     return () => mediaQuery.removeEventListener('change', handleChange)
-  }, [])
-
-  const particles = useMemo<Particle[]>(() => {
-    if (prefersReducedMotion) return []
-
-    return Array.from({ length: count }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 6 + 2,
-      duration: Math.random() * 20 + 15,
-      delay: Math.random() * 5,
-      opacity: Math.random() * 0.2 + 0.05
-    }))
-  }, [count, prefersReducedMotion])
+  }, [count])
 
   if (prefersReducedMotion || particles.length === 0) {
     return null
@@ -65,7 +66,7 @@ export function FloatingParticles({ className, count = 40 }: FloatingParticlesPr
           initial={{ opacity: 0 }}
           animate={{
             y: [0, -100, 0],
-            x: [0, Math.random() * 40 - 20, 0],
+            x: [0, particle.x % 40 - 20, 0],
             opacity: [particle.opacity, particle.opacity * 1.5, particle.opacity]
           }}
           transition={{

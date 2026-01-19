@@ -8,22 +8,22 @@ import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 const stackColors: Record<string, string> = {
-  typescript: 'bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-500/20',
-  javascript: 'bg-yellow-500/10 text-yellow-700 dark:text-yellow-300 border-yellow-500/20',
-  rust: 'bg-orange-500/10 text-orange-700 dark:text-orange-300 border-orange-500/20',
-  python: 'bg-green-500/10 text-green-700 dark:text-green-300 border-green-500/20',
-  nextjs: 'bg-gray-900/10 text-gray-900 dark:text-gray-100 border-gray-500/20',
-  nestjs: 'bg-red-500/10 text-red-700 dark:text-red-300 border-red-500/20',
-  react: 'bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-500/20',
-  mysql: 'bg-blue-600/10 text-blue-800 dark:text-blue-200 border-blue-600/20',
-  postgresql: 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-500/20',
-  prisma: 'bg-slate-500/10 text-slate-700 dark:text-slate-300 border-slate-500/20',
-  docker: 'bg-blue-400/10 text-blue-600 dark:text-blue-200 border-blue-400/20',
-  git: 'bg-orange-600/10 text-orange-800 dark:text-orange-200 border-orange-600/20',
-  nextauth: 'bg-pink-500/10 text-pink-700 dark:text-pink-300 border-pink-500/20',
-  tanstack: 'bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/20',
-  puppeteer: 'bg-green-600/10 text-green-800 dark:text-green-200 border-green-600/20',
-  n8n: 'bg-rose-500/10 text-rose-700 dark:text-rose-300 border-rose-500/20',
+  typescript: 'bg-primary/10 text-primary border-primary/20',
+  javascript: 'bg-primary/10 text-primary border-primary/20',
+  rust: 'bg-accent/10 text-accent border-accent/20',
+  python: 'bg-muted/20 text-secondary border-muted/30',
+  nextjs: 'bg-primary/15 text-primary border-primary/25',
+  nestjs: 'bg-destructive/10 text-destructive border-destructive/20',
+  react: 'bg-primary/10 text-primary border-primary/20',
+  mysql: 'bg-muted/20 text-secondary border-muted/30',
+  postgresql: 'bg-muted/20 text-secondary border-muted/30',
+  prisma: 'bg-primary/10 text-primary border-primary/20',
+  docker: 'bg-muted/20 text-secondary border-muted/30',
+  git: 'bg-accent/10 text-accent border-accent/20',
+  nextauth: 'bg-destructive/10 text-destructive border-destructive/20',
+  tanstack: 'bg-muted/20 text-secondary border-muted/30',
+  puppeteer: 'bg-accent/10 text-accent border-accent/20',
+  n8n: 'bg-destructive/10 text-destructive border-destructive/20',
 }
 
 export function StackSection() {

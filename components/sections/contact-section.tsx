@@ -17,21 +17,21 @@ export function ContactSection() {
       label: t.contact.github,
       href: t.contact.links.github,
       external: true,
-      color: 'hover:bg-gray-800 hover:text-white hover:border-gray-800 dark:hover:bg-gray-100 dark:hover:text-gray-900 dark:hover:border-gray-100'
+      color: 'hover:bg-muted hover:text-foreground hover:border-muted'
     },
     {
       icon: Linkedin,
       label: t.contact.linkedin,
       href: t.contact.links.linkedin,
       external: true,
-      color: 'hover:bg-[#0077b5] hover:text-white hover:border-[#0077b5] dark:hover:bg-[#0077b5] dark:hover:text-white dark:hover:border-[#0077b5]'
+      color: 'hover:bg-primary hover:text-primary-foreground hover:border-primary'
     },
     {
       icon: Mail,
       label: t.contact.email,
       href: t.contact.links.email,
       external: false,
-      color: 'hover:bg-orange-600 hover:text-white hover:border-orange-600 dark:hover:bg-orange-500 dark:hover:text-white dark:hover:border-orange-500'
+      color: 'hover:bg-destructive hover:text-destructive-foreground hover:border-destructive'
     },
   ]
 

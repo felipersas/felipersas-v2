@@ -3,78 +3,43 @@
 
 @import "tailwindcss";
 
-/* Lo-Fi Portfolio Theme - Gruvbox Light & Deep Blue Night */
+/* Tokyo Lo-fi 8 Palette - Inspired by LoFi Tokyo */
 
 :root {
-  /* Light Theme - "Gruvbox Lo-Fi" */
-  --background: 252 245 230; /* #FCF5E6 - Gruvbox-esque cream */
-  --foreground: 60 55 50;    /* #3C3732 - Soft charcoal brown */
+  /* Tokyo Lo-fi 8 - Dark Theme Only */
+  --background: 30 10 8;          /* #161412 - Deep black/brown */
+  --foreground: 44 54 84;         /* #ecdfbf - Cream white */
 
-  --card: 245 238 220;       /* #F5EEDC - Slightly darker cream */
-  --card-foreground: 60 55 50;
+  --card: 190 6 19;               /* #2e3334 - Dark gray-green */
+  --card-foreground: 44 54 84;    /* #ecdfbf - Cream white */
 
-  --popover: 252 245 230;
-  --popover-foreground: 60 55 50;
+  --popover: 190 6 19;            /* #2e3334 - Dark gray-green */
+  --popover-foreground: 44 54 84; /* #ecdfbf - Cream white */
 
-  --primary: 140 110 80;     /* #8C6E50 - Muted brown lo-fi */
-  --primary-foreground: 252 245 230;
+  --primary: 21 64 66;            /* #df9a73 - Peach/terracotta */
+  --primary-foreground: 30 10 8;  /* #161412 - Deep black/brown */
 
-  --secondary: 190 175 155;  /* #BEAF9B - Soft beige */
-  --secondary-foreground: 60 55 50;
+  --secondary: 38 33 70;          /* #ccba9b - Soft beige */
+  --secondary-foreground: 30 10 8; /* #161412 - Deep black/brown */
 
-  --muted: 215 205 190;      /* #D7CDBE - Aged lo-fi */
-  --muted-foreground: 110 100 90;
+  --muted: 153 10 47;             /* #6d8577 - Muted sage green */
+  --muted-foreground: 38 33 70;   /* #ccba9b - Soft beige */
 
-  --accent: 165 130 90;      /* #A5825A - Desaturated gold */
-  --accent-foreground: 252 245 230;
+  --accent: 9 26 47;              /* #976159 - Muted brown-purple */
+  --accent-foreground: 44 54 84;  /* #ecdfbf - Cream white */
 
-  --destructive: 160 70 70;
-  --destructive-foreground: 252 245 230;
+  --destructive: 17 60 38;        /* #9c4827 - Burnt orange/red */
+  --destructive-foreground: 44 54 84; /* #ecdfbf - Cream white */
 
-  --border: 205 195 180;     /* #CDC3B4 - Subtle border */
-  --input: 205 195 180;
-  --ring: 140 110 80;
+  --border: 190 6 19;             /* #2e3334 - Dark gray-green */
+  --input: 190 6 19;              /* #2e3334 - Dark gray-green */
+  --ring: 21 64 66;               /* #df9a73 - Peach/terracotta */
 
-  --success: 100 120 85;     /* #647855 - Muted sage */
-  --warning: 165 120 70;     /* #A57846 - Dull amber */
-  --error: 160 70 70;        /* #A04646 - Soft brick */
+  --success: 153 10 47;           /* #6d8577 - Sage green */
+  --warning: 17 60 38;            /* #9c4827 - Burnt orange */
+  --error: 17 60 38;              /* #9c4827 - Burnt orange */
 
   --radius: 0.75rem;
-}
-
-.dark {
-  /* Dark Theme - "Deep Blue Night" */
-  --background: 240 4 13;    /* hsl(240deg 4% 13%) - Blue-gray dark */
-  --foreground: 220 215 210; /* #DCD7D2 - Off-white */
-
-  --card: 240 5 18;          /* Slightly lighter - cards */
-  --card-foreground: 220 215 210;
-
-  --popover: 240 4 13;
-  --popover-foreground: 220 215 210;
-
-  --primary: 170 140 110;    /* #AA8C6E - Muted brown lo-fi */
-  --primary-foreground: 240 4 13;
-
-  --secondary: 45 42 50;     /* #2D2A32 - Dark gray-blue */
-  --secondary-foreground: 220 215 210;
-
-  --muted: 240 5 10;         /* Very dark blue-gray */
-  --muted-foreground: 140 135 130;
-
-  --accent: 185 155 120;     /* #B99B78 - Soft sand */
-  --accent-foreground: 240 4 13;
-
-  --destructive: 175 85 85;
-  --destructive-foreground: 240 4 13;
-
-  --border: 240 5 20;        /* Subtle border */
-  --input: 240 5 20;
-  --ring: 170 140 110;
-
-  --success: 115 145 100;    /* #739164 - Muted forest */
-  --warning: 175 135 80;     /* #AF8750 - Dull gold */
-  --error: 175 85 85;        /* #AF5555 - Muted red */
 }
 
 @theme inline {
