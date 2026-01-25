@@ -1,0 +1,170 @@
+---
+title: Getting Started with Next.js 16
+description: A comprehensive guide to building modern web applications with Next.js 16 and the new App Router.
+date: 2024-12-20
+readTime: 10
+tags: ['nextjs', 'react', 'tutorial', 'webdev']
+locale: en
+published: true
+---
+
+# Getting Started with Next.js 16 🎯
+
+Next.js 16 is here, and it brings some amazing features for building modern web applications. Let's explore what's new and how to get started.
+
+## What is Next.js?
+
+Next.js is a React framework that provides the building blocks to create fast web applications. With features like:
+
+- ⚡️ Server-Side Rendering (SSR)
+- 📄 Static Site Generation (SSG)
+- 🔀 API Routes
+- 🎨 File-based routing
+- 🌍 Internationalization support
+
+## What's New in Next.js 16
+
+### Turbopack
+
+Next.js 16 uses Turbopack by default in development, providing:
+- 700x faster updates
+- 10x faster server startup
+- Native modules support
+
+### App Router Improvements
+
+The App Router is now more stable with:
+- Better caching strategies
+- Improved partial prerendering
+- Enhanced metadata API
+
+## Getting Started
+
+### Installation
+
+Create a new Next.js app:
+
+```bash
+npx create-next-app@latest my-app
+```
+
+Or manually:
+
+```bash
+npm install next@latest react@latest react-dom@latest
+```
+
+### Project Structure
+
+```
+app/
+├── layout.tsx      # Root layout
+├── page.tsx        # Home page
+├── about/
+│   └── page.tsx    # About page
+└── blog/
+    ├── page.tsx    # Blog list
+    └── [slug]/
+        └── page.tsx # Blog post
+```
+
+## Key Concepts
+
+### Server Components
+
+By default, components in the App Router are Server Components:
+
+```tsx
+// Server Component (default)
+async function BlogPosts() {
+  const posts = await fetchPosts()
+  return <div>{/* ... */}</div>
+}
+```
+
+### Client Components
+
+Use `'use client'` for interactive components:
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+
+export function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(c => c + 1)}>{count}</button>
+}
+```
+
+### Data Fetching
+
+Server Components make data fetching simple:
+
+```tsx
+async function UserProfile({ id }: { id: string }) {
+  const user = await fetch(`https://api.example.com/users/${id}`).then(r => r.json())
+  
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <p>{user.email}</p>
+    </div>
+  )
+}
+```
+
+## Styling
+
+### Tailwind CSS
+
+Next.js pairs perfectly with Tailwind CSS:
+
+```bash
+npm install tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+### CSS Modules
+
+For component-scoped styling:
+
+```tsx
+import styles from './button.module.css'
+
+export function Button() {
+  return <button className={styles.btn}>Click me</button>
+}
+```
+
+## Deployment
+
+### Vercel (Recommended)
+
+Deploy with a single command:
+
+```bash
+vercel
+```
+
+### Other Platforms
+
+Build for any Node.js hosting:
+
+```bash
+npm run build
+npm start
+```
+
+## Tips for Success
+
+1. **Start Simple** - Don't overengineer your first project
+2. **Read the Docs** - [nextjs.org/docs](https://nextjs.org/docs) is excellent
+3. **Use TypeScript** - Catches errors early
+4. **Leverage Server Components** - Better performance by default
+
+## Conclusion
+
+Next.js 16 is a powerful framework for building modern web applications. Start small, iterate often, and don't be afraid to experiment!
+
+Happy coding! 🚀

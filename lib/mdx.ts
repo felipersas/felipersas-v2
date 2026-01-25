@@ -50,7 +50,7 @@ function parseMDXFile(slug: string): MDXPost | null {
       readTime: data.readTime || 5,
       tags: data.tags || [],
       locale: data.locale || 'pt-BR',
-      published: data.published !== false, // default to true
+      published: data.published !== false,
       content
     }
   } catch (error) {
