@@ -31,27 +31,45 @@ export default function AboutPage() {
 
   const timeline = [
     {
-      year: '2024',
+      year: '2026',
       title: locale === 'pt-BR' ? 'Desenvolvedor Full Stack' : 'Full Stack Developer',
       description: locale === 'pt-BR'
-        ? 'Construindo aplicações web modernas com Next.js e NestJS'
-        : 'Building modern web applications with Next.js and NestJS',
+        ? 'Em constante evolução e aprendizado, buscando sempre aprimorar minhas habilidades e contribuir com projetos inovadores, atualmente focado em estudar tópicos relacionados a Machine Learning e Inteligência Artificial'
+        : 'Constantly evolving and learning, always seeking to improve my skills and contribute to innovative projects, currently focused on studying topics related to Machine Learning and Artificial Intelligence',
+
       icon: '🚀'
     },
     {
-      year: '2023',
-      title: locale === 'pt-BR' ? 'Explorando Novas Tecnologias' : 'Exploring New Technologies',
+      year: '2025',
+      title: locale === 'pt-BR' ? 'Desenvolvedor Full Stack' : 'Full Stack Developer',
       description: locale === 'pt-BR'
-        ? 'Aprofundando conhecimentos em TypeScript, Rust e automação'
-        : 'Deepening knowledge in TypeScript, Rust, and automation',
+        ? 'Iniciando oficialmente a carreira como Desenvolvedor Full Stack, aplicando meus conhecimentos em projetos reais e colaborando com equipes de desenvolvimento'
+        : 'Starting my career officially as a Full Stack Developer, applying my knowledge to real projects and collaborating with development teams',
+
+      icon: '👨🏻‍💻'
+    },
+    {
+      year: '2024',
+      title: locale === 'pt-BR' ? 'Explorando mais a fundo' : 'Exploring More Deeply',
+      description: locale === 'pt-BR'
+        ? 'Inciando estudos mais aprofundados com foco em Estrutura de Dados, TypeScript, Next.js e NestJS e finalizando meu curso técnico no SENAI'
+        : 'Beginning more in-depth studies focusing on Data Structures, TypeScript, Next.js, and NestJS while completing my technical course at SENAI',
+      icon: '📚'
+    },
+    {
+      year: '2023',
+      title: locale === 'pt-BR' ? 'Iniciando Curso Técnico no SENAI' : 'Initiating Technical Course at SENAI',
+      description: locale === 'pt-BR'
+        ? 'Iniciando o curso técnico de Desenvolvimento de Sistemas, aprendendo fundamentos de programação e desenvolvimento web'
+        : 'Initiating the technical course in Systems Development, learning programming fundamentals and web development',
       icon: '🔧'
     },
     {
       year: '2022',
       title: locale === 'pt-BR' ? 'Início da Jornada' : 'Journey Begins',
       description: locale === 'pt-BR'
-        ? 'Começando a explorar o desenvolvimento web'
-        : 'Starting to explore web development',
+        ? 'Começando a entender o básico, pequenos projetos e estudos iniciais, por conta própria'
+        : 'Starting to learn the basics, small projects and initial studies, self-taught',
       icon: '🌱'
     }
   ]
@@ -59,7 +77,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-b from-background to-background/50">
+      <section className="py-10 md:py-20 bg-gradient-to-b from-background to-background/50">
         <div className="container mx-auto px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -77,7 +95,7 @@ export default function AboutPage() {
       </section>
 
       {/* Description */}
-      <section className="py-16">
+      <section className="pb-16">
         <div className="container mx-auto px-4 md:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -95,9 +113,11 @@ export default function AboutPage() {
               </CardHeader>
               <CardContent className="space-y-4 text-lg leading-relaxed">
                 <p>{t.about.description}</p>
-                <p className="text-muted-foreground">
-                  {t.about.text}
-                </p>
+                <div className="space-y-4 text-muted-foreground">
+                  {t.about.text.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
+                </div>
               </CardContent>
             </Card>
           </motion.div>
@@ -184,7 +204,7 @@ export default function AboutPage() {
                       <div className="text-4xl">{item.icon}</div>
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <Badge variant="outline">{item.year}</Badge>
+                          <Badge variant="default">{item.year}</Badge>
                           <h3 className="text-xl font-semibold">{item.title}</h3>
                         </div>
                         <p className="text-muted-foreground">{item.description}</p>

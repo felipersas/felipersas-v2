@@ -9,7 +9,6 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { formatDate } from '@/lib/utils'
 import { ArrowRight, Clock } from 'lucide-react'
-import { cn } from '@/lib/utils'
 
 export default function BlogPage() {
   const { t, locale } = useTranslation()

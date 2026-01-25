@@ -27,7 +27,11 @@
     "title": "About Me",
     "subtitle": "A bit about my journey",
     "description": "I'm a passionate Full Stack Developer who loves creating comfortable, user-friendly web experiences. My approach combines technical expertise with a focus on accessibility and aesthetics.",
-    "text": "I'm 19 years old and currently live in Sorocaba, São Paulo, Brazil. I've always enjoyed technology and programming, which led me to choose this field since high school, where I took a technical Systems Development course at SENAI. Since then, I've been continuously learning and evolving as a developer. I like to explore new technologies and stay tunned about the new cutting edge tools in the development world. When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or simply enjoying a good cup of coffee. I enjoy my free time playing video games and watching anime.",
+    "text": [
+      "I'm 19 years old and currently live in Sorocaba, São Paulo, Brazil. I've always enjoyed technology and programming, which led me to choose this field since high school, where I took a technical Systems Development course at SENAI.",
+      "Since then, I've been continuously learning and evolving as a developer. I like to explore new technologies and stay tuned about the new cutting edge tools in the development world.",
+      "When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or simply enjoying a good cup of coffee. I enjoy my free time playing video games and watching anime."
+    ],
     "skills": {
       "title": "Skills & Technologies",
       "backend": "Backend Development",

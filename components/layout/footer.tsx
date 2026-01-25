@@ -17,7 +17,7 @@ export function Footer() {
             <p className="handwritten text-lg">
               {t.footer.madeWith} ☕ {t.footer.love}
             </p>
-            <p className="text-xs mt-1">© 2024 Felipe Marques</p>
+            <p className="text-xs mt-1">© 2026 Felipe Marques</p>
           </div>
 
           {/* Social Links */}

@@ -10,7 +10,6 @@ import { formatDate } from '@/lib/utils'
 import { ArrowLeft, Clock, Share2 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { notFound } from 'next/navigation'
-import { Metadata } from 'next'
 
 // This would normally be a server component, but for simplicity we're making it client
 export default function BlogPostPage({ params }: { params: { slug: string } }) {

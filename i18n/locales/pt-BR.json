@@ -27,7 +27,11 @@
     "title": "Sobre Mim",
     "subtitle": "Um pouco sobre minha jornada",
     "description": "Sou um Desenvolvedor Full Stack apaixonado por criar experiências web confortáveis e amigáveis. Minha abordagem combina expertise técnica com foco em acessibilidade e estética.",
-    "text": "",
+    "text": [
+      "Tenho 19 anos e atualmente moro em Sorocaba, São Paulo, Brasil. Sempre gostei de tecnologia e programação, o que me levou a escolher essa área desde o ensino médio, onde fiz um curso técnico de Desenvolvimento de Sistemas no SENAI.",
+      "Desde então, venho me aperfeiçoando e evoluindo constantemente como desenvolvedor. Gosto de explorar novas tecnologias e ficar por dentro das ferramentas mais modernas do mundo do desenvolvimento.",
+      "Quando não estou codando, você pode me encontrar explorando novas tecnologias, contribuindo com projetos open-source ou simplesmente aproveitando uma boa xícara de café. Nas horas vagas, gosto de jogar videogames e assistir anime."
+    ],
     "skills": {
       "title": "Habilidades e Tecnologias",
       "backend": "Desenvolvimento Backend",
