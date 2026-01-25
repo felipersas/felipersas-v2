@@ -113,20 +113,6 @@ export function HeroSection() {
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.6 }}
-        className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-10"
-      >
-        <div className="animate-gentle-pulse">
-          <div className="w-5 h-8 md:w-6 md:h-10 border-2 border-muted-foreground rounded-full flex items-start justify-center p-1.5 md:p-2">
-            <div className="w-1 h-2 bg-muted-foreground rounded-full animate-float" />
-          </div>
-        </div>
-      </motion.div>
     </section>
   )
 }

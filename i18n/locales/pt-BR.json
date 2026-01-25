@@ -27,6 +27,7 @@
     "title": "Sobre Mim",
     "subtitle": "Um pouco sobre minha jornada",
     "description": "Sou um Desenvolvedor Full Stack apaixonado por criar experiências web confortáveis e amigáveis. Minha abordagem combina expertise técnica com foco em acessibilidade e estética.",
+    "text": "",
     "skills": {
       "title": "Habilidades e Tecnologias",
       "backend": "Desenvolvimento Backend",

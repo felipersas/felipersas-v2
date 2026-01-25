@@ -66,12 +66,12 @@ export const techStack = {
   tools: [
     { id: 'docker', name: 'Docker', icon: '🐳' },
     { id: 'git', name: 'Git', icon: '📦' },
-    { id: 'nextauth', name: 'NextAuth', icon: '🔐' },
   ],
   libraries: [
     { id: 'tanstack', name: 'TanStack', icon: '📊' },
     { id: 'puppeteer', name: 'Puppeteer', icon: '🎭' },
     { id: 'n8n', name: 'n8n', icon: '🔄' },
+    { id: 'nextauth', name: 'NextAuth', icon: '🔐' },
   ],
 }
 

@@ -96,10 +96,7 @@ export default function AboutPage() {
               <CardContent className="space-y-4 text-lg leading-relaxed">
                 <p>{t.about.description}</p>
                 <p className="text-muted-foreground">
-                  {locale === 'pt-BR'
-                    ? 'Acredito que código deve ser limpo, acessível e, acima de tudo, criar experiências agradáveis para quem usa. Quando não estou codando, você pode me encontrando explorando novas tecnologias, contribuindo com projetos open-source, ou simplesmente apreciando uma boa xícara de café.'
-                    : 'I believe code should be clean, accessible, and above all, create pleasant experiences for those who use it. When I\'m not coding, you can find me exploring new technologies, contributing to open-source projects, or simply enjoying a good cup of coffee.'
-                  }
+                  {t.about.text}
                 </p>
               </CardContent>
             </Card>
