@@ -1,27 +1,50 @@
-'use client'
-
-import { useTranslation } from '@/hooks/use-translation'
+import { getPostBySlug, getRelatedPosts, getPostsByLocale } from '@/lib/mdx'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { getPostBySlug, getRelatedPosts } from '@/content/blog-posts'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { formatDate } from '@/lib/utils'
 import { ArrowLeft, Clock, Share2 } from 'lucide-react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { notFound } from 'next/navigation'
+import { MDXRemote } from 'next-mdx-remote/rsc'
+import rehypeHighlight from 'rehype-highlight'
+import rehypeSlug from 'rehype-slug'
+import remarkGfm from 'remark-gfm'
 
-// This would normally be a server component, but for simplicity we're making it client
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const { t, locale } = useTranslation()
+const mdxComponents = {
+  // Add custom MDX components here if needed
+  // Example: a, img, pre, code, etc.
+}
+
+interface BlogPostPageProps {
+  params: { slug: string }
+}
+
+export async function generateMetadata({ params }: BlogPostPageProps) {
   const post = getPostBySlug(params.slug)
-  const relatedPosts = getRelatedPosts(params.slug)
 
   if (!post) {
+    return {
+      title: 'Post Not Found'
+    }
+  }
+
+  return {
+    title: post.title,
+    description: post.description
+  }
+}
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const post = getPostBySlug(params.slug)
+
+  if (!post || !post.published) {
     notFound()
   }
 
-  const dateFormatted = formatDate(new Date(post.date), locale === 'pt-BR' ? 'pt-BR' : 'en-US')
+  const relatedPosts = getRelatedPosts(params.slug)
+  const dateFormatted = formatDate(new Date(post.date), post.locale === 'pt-BR' ? 'pt-BR' : 'en-US')
 
   return (
     <div className="min-h-screen py-20 md:py-32">
@@ -36,7 +59,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           <Button variant="ghost" asChild className="lofi-glow">
             <Link href="/blog">
               <ArrowLeft className="h-4 w-4 mr-2" />
-              {t.blog.backToList}
+              {post.locale === 'pt-BR' ? 'Voltar aos posts' : 'Back to posts'}
             </Link>
           </Button>
         </motion.div>
@@ -55,17 +78,17 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               <time dateTime={post.date}>{dateFormatted}</time>
             </div>
             <span>•</span>
-            <span>{t.blog.readTime.replace('{{min}}', String(post.readTime))}</span>
+            <span>{post.readTime} {post.locale === 'pt-BR' ? 'min de leitura' : 'min read'}</span>
           </div>
 
           {/* Title */}
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            {post.title[locale]}
+            {post.title}
           </h1>
 
           {/* Description */}
           <p className="text-xl text-muted-foreground mb-6">
-            {post.description[locale]}
+            {post.description}
           </p>
 
           {/* Tags */}
@@ -80,7 +103,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           {/* Share Button */}
           <Button variant="outline" size="sm" className="lofi-glow">
             <Share2 className="h-4 w-4 mr-2" />
-            {locale === 'pt-BR' ? 'Compartilhar' : 'Share'}
+            {post.locale === 'pt-BR' ? 'Compartilhar' : 'Share'}
           </Button>
         </motion.header>
 
@@ -94,33 +117,16 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           <Card className="lofi-glow">
             <CardContent className="p-8 md:p-12">
               <div className="prose prose-lg dark:prose-invert max-w-none">
-                {/* Placeholder content - in production, this would render MDX */}
-                <p className="text-lg leading-relaxed text-muted-foreground handwritten">
-                  {locale === 'pt-BR'
-                    ? '🚧 Este artigo está sendo escrito. O conteúdo completo estará disponível em breve!'
-                    : '🚧 This article is being written. Full content coming soon!'
-                  }
-                </p>
-
-                <p className="mt-6">
-                  {locale === 'pt-BR'
-                    ? 'Por enquanto, aqui está um esboço do que vou cobrir:'
-                    : 'For now, here\'s a rough outline of what I\'ll cover:'
-                  }
-                </p>
-
-                <ul>
-                  {post.tags.map((tag) => (
-                    <li key={tag}>{tag}</li>
-                  ))}
-                </ul>
-
-                <p className="mt-6 text-muted-foreground">
-                  {locale === 'pt-BR'
-                    ? 'Fique tuned para updates! 📝'
-                    : 'Stay tuned for updates! 📝'
-                  }
-                </p>
+                <MDXRemote
+                  source={post.content}
+                  components={mdxComponents}
+                  options={{
+                    mdxOptions: {
+                      remarkPlugins: [remarkGfm],
+                      rehypePlugins: [rehypeHighlight, rehypeSlug]
+                    }
+                  }}
+                />
               </div>
             </CardContent>
           </Card>
@@ -136,24 +142,30 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             className="max-w-4xl mx-auto mt-16"
           >
             <h2 className="text-2xl font-bold mb-6">
-              {locale === 'pt-BR' ? 'Artigos Relacionados' : 'Related Articles'}
+              {post.locale === 'pt-BR' ? 'Artigos Relacionados' : 'Related Articles'}
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
               {relatedPosts.map((relatedPost) => (
                 <Card key={relatedPost.slug} className="lofi-glow">
-                  <CardHeader>
-                    <CardTitle className="text-lg">
-                      <Link
-                        href={`/blog/${relatedPost.slug}`}
-                        className="hover:text-primary transition-colors"
-                      >
-                        {relatedPost.title[locale]}
-                      </Link>
-                    </CardTitle>
-                    <CardDescription className="line-clamp-2">
-                      {relatedPost.description[locale]}
-                    </CardDescription>
-                  </CardHeader>
+                  <CardContent className="p-6">
+                    <Link
+                      href={`/blog/${relatedPost.slug}`}
+                      className="hover:text-primary transition-colors"
+                    >
+                      <h3 className="text-lg font-semibold mb-2">
+                        {relatedPost.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground line-clamp-2">
+                        {relatedPost.description}
+                      </p>
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground mt-3">
+                        <Clock className="h-3 w-3" />
+                        <time dateTime={relatedPost.date}>
+                          {formatDate(new Date(relatedPost.date), relatedPost.locale === 'pt-BR' ? 'pt-BR' : 'en-US')}
+                        </time>
+                      </div>
+                    </Link>
+                  </CardContent>
                 </Card>
               ))}
             </div>
@@ -162,4 +174,13 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       </article>
     </div>
   )
+}
+
+// Generate static params for all posts
+export async function generateStaticParams() {
+  const posts = getPostsByLocale('pt-BR').concat(getPostsByLocale('en'))
+
+  return posts.map((post) => ({
+    slug: post.slug
+  }))
 }
