@@ -1,78 +1,114 @@
-'use client'
+"use client";
 
-import { useTranslation } from '@/hooks/use-translation'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { motion } from 'framer-motion'
-import { Code2, Database, Globe, Wrench } from 'lucide-react'
-import { getGreeting } from '@/lib/utils'
-import { skillIcons } from '@/lib/skill-icons'
+import { useTranslation } from "@/hooks/use-translation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { Code2, Database, Globe, Wrench, BookMarked } from "lucide-react";
+import { getGreeting } from "@/lib/utils";
+import { skillIcons } from "@/lib/skill-icons";
+import { useProgressBookmark } from "@/hooks/use-progress-bookmark";
 
 export default function AboutPage() {
-  const { t, locale } = useTranslation()
+  const { t, locale } = useTranslation();
+  const { expand } = useProgressBookmark();
 
   const skills = [
     {
       category: t.about.skills.backend,
       icon: Database,
-      items: ['NestJS', 'Node.js', 'TypeScript', 'MySQL', 'PostgreSQL', 'Prisma ORM', 'Docker', 'Git']
+      items: [
+        "NestJS",
+        "Node.js",
+        "TypeScript",
+        "MySQL",
+        "PostgreSQL",
+        "Prisma ORM",
+        "Docker",
+        "Git",
+      ],
     },
     {
       category: t.about.skills.frontend,
       icon: Globe,
-      items: ['Next.js', 'React.js', 'TypeScript', 'Tailwind CSS', 'TanStack Query', 'NextAuth']
+      items: [
+        "Next.js",
+        "React.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "TanStack Query",
+        "NextAuth",
+      ],
     },
     {
       category: t.about.skills.tools,
       icon: Wrench,
-      items: ['Docker', 'Git', 'Puppeteer', 'n8n', 'Rust', 'Python']
-    }
-  ]
+      items: ["Docker", "Git", "Puppeteer", "n8n", "Rust", "Python"],
+    },
+  ];
 
   const timeline = [
     {
-      year: '2026',
-      title: locale === 'pt-BR' ? 'Desenvolvedor Full Stack' : 'Full Stack Developer',
-      description: locale === 'pt-BR'
-        ? 'Em constante evolução e aprendizado, buscando sempre aprimorar minhas habilidades e contribuir com projetos inovadores, atualmente focado em estudar tópicos relacionados a Machine Learning e Inteligência Artificial'
-        : 'Constantly evolving and learning, always seeking to improve my skills and contribute to innovative projects, currently focused on studying topics related to Machine Learning and Artificial Intelligence',
+      year: "2026",
+      title:
+        locale === "pt-BR"
+          ? "Desenvolvedor Full Stack"
+          : "Full Stack Developer",
+      description:
+        locale === "pt-BR"
+          ? "Em constante evolução e aprendizado, buscando sempre aprimorar minhas habilidades e contribuir com projetos inovadores, atualmente focado em estudar tópicos relacionados a Machine Learning e Inteligência Artificial"
+          : "Constantly evolving and learning, always seeking to improve my skills and contribute to innovative projects, currently focused on studying topics related to Machine Learning and Artificial Intelligence",
 
-      icon: '🚀'
+      icon: "🚀",
     },
     {
-      year: '2025',
-      title: locale === 'pt-BR' ? 'Desenvolvedor Full Stack' : 'Full Stack Developer',
-      description: locale === 'pt-BR'
-        ? 'Iniciando oficialmente a carreira como Desenvolvedor Full Stack, aplicando meus conhecimentos em projetos reais e colaborando com equipes de desenvolvimento'
-        : 'Starting my career officially as a Full Stack Developer, applying my knowledge to real projects and collaborating with development teams',
+      year: "2025",
+      title:
+        locale === "pt-BR"
+          ? "Desenvolvedor Full Stack"
+          : "Full Stack Developer",
+      description:
+        locale === "pt-BR"
+          ? "Iniciando oficialmente a carreira como Desenvolvedor Full Stack, aplicando meus conhecimentos em projetos reais e colaborando com equipes de desenvolvimento"
+          : "Starting my career officially as a Full Stack Developer, applying my knowledge to real projects and collaborating with development teams",
 
-      icon: '👨🏻‍💻'
+      icon: "👨🏻‍💻",
     },
     {
-      year: '2024',
-      title: locale === 'pt-BR' ? 'Explorando mais a fundo' : 'Exploring More Deeply',
-      description: locale === 'pt-BR'
-        ? 'Inciando estudos mais aprofundados com foco em Estrutura de Dados, TypeScript, Next.js e NestJS e finalizando meu curso técnico no SENAI'
-        : 'Beginning more in-depth studies focusing on Data Structures, TypeScript, Next.js, and NestJS while completing my technical course at SENAI',
-      icon: '📚'
+      year: "2024",
+      title:
+        locale === "pt-BR"
+          ? "Explorando mais a fundo"
+          : "Exploring More Deeply",
+      description:
+        locale === "pt-BR"
+          ? "Inciando estudos mais aprofundados com foco em Estrutura de Dados, TypeScript, Next.js e NestJS e finalizando meu curso técnico no SENAI"
+          : "Beginning more in-depth studies focusing on Data Structures, TypeScript, Next.js, and NestJS while completing my technical course at SENAI",
+      icon: "📚",
     },
     {
-      year: '2023',
-      title: locale === 'pt-BR' ? 'Iniciando Curso Técnico no SENAI' : 'Initiating Technical Course at SENAI',
-      description: locale === 'pt-BR'
-        ? 'Iniciando o curso técnico de Desenvolvimento de Sistemas, aprendendo fundamentos de programação e desenvolvimento web'
-        : 'Initiating the technical course in Systems Development, learning programming fundamentals and web development',
-      icon: '🔧'
+      year: "2023",
+      title:
+        locale === "pt-BR"
+          ? "Iniciando Curso Técnico no SENAI"
+          : "Initiating Technical Course at SENAI",
+      description:
+        locale === "pt-BR"
+          ? "Iniciando o curso técnico de Desenvolvimento de Sistemas, aprendendo fundamentos de programação e desenvolvimento web"
+          : "Initiating the technical course in Systems Development, learning programming fundamentals and web development",
+      icon: "🔧",
     },
     {
-      year: '2022',
-      title: locale === 'pt-BR' ? 'Início da Jornada' : 'Journey Begins',
-      description: locale === 'pt-BR'
-        ? 'Começando a entender o básico, pequenos projetos e estudos iniciais, por conta própria'
-        : 'Starting to learn the basics, small projects and initial studies, self-taught',
-      icon: '🌱'
-    }
-  ]
+      year: "2022",
+      title: locale === "pt-BR" ? "Início da Jornada" : "Journey Begins",
+      description:
+        locale === "pt-BR"
+          ? "Começando a entender o básico, pequenos projetos e estudos iniciais, por conta própria"
+          : "Starting to learn the basics, small projects and initial studies, self-taught",
+      icon: "🌱",
+    },
+  ];
 
   return (
     <div className="min-h-screen">
@@ -88,8 +124,12 @@ export default function AboutPage() {
             <p className="text-lg text-muted-foreground handwritten text-xl mb-4">
               {getGreeting(locale)}
             </p>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">{t.about.title}</h1>
-            <p className="text-xl text-muted-foreground mb-4">{t.about.subtitle}</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              {t.about.title}
+            </h1>
+            <p className="text-xl text-muted-foreground mb-4">
+              {t.about.subtitle}
+            </p>
           </motion.div>
         </div>
       </section>
@@ -108,7 +148,7 @@ export default function AboutPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Code2 className="h-6 w-6 text-primary" />
-                  {locale === 'pt-BR' ? 'Sobre Mim' : 'About Me'}
+                  {locale === "pt-BR" ? "Sobre Mim" : "About Me"}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 text-lg leading-relaxed">
@@ -117,6 +157,19 @@ export default function AboutPage() {
                   {t.about.text.map((paragraph, index) => (
                     <p key={index}>{paragraph}</p>
                   ))}
+                </div>
+                {/* Progress Button */}
+                <div className="pt-4">
+                  <Button
+                    onClick={expand}
+                    variant="outline"
+                    className="lofi-glow w-full"
+                  >
+                    <BookMarked className="h-4 w-4 mr-2" />
+                    {locale === "pt-BR"
+                      ? "Ver Progresso de Leitura"
+                      : "View Reading Progress"}
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -139,7 +192,7 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {skills.map((skillGroup, index) => {
-              const Icon = skillGroup.icon
+              const Icon = skillGroup.icon;
               return (
                 <motion.div
                   key={skillGroup.category}
@@ -158,19 +211,25 @@ export default function AboutPage() {
                     <CardContent>
                       <div className="flex flex-wrap gap-2">
                         {skillGroup.items.map((skill) => {
-                          const IconComponent = skillIcons[skill]
+                          const IconComponent = skillIcons[skill];
                           return (
-                            <Badge key={skill} variant="secondary" className="gap-1">
-                              {IconComponent && <IconComponent className="h-3.5 w-3.5" />}
+                            <Badge
+                              key={skill}
+                              variant="secondary"
+                              className="gap-1"
+                            >
+                              {IconComponent && (
+                                <IconComponent className="h-3.5 w-3.5" />
+                              )}
                               {skill}
                             </Badge>
-                          )
+                          );
                         })}
                       </div>
                     </CardContent>
                   </Card>
                 </motion.div>
-              )
+              );
             })}
           </div>
         </div>
@@ -186,7 +245,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="text-3xl font-bold text-center mb-12"
           >
-            {locale === 'pt-BR' ? 'Minha Jornada' : 'My Journey'}
+            {locale === "pt-BR" ? "Minha Jornada" : "My Journey"}
           </motion.h2>
 
           <div className="max-w-3xl mx-auto space-y-6">
@@ -205,9 +264,13 @@ export default function AboutPage() {
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
                           <Badge variant="default">{item.year}</Badge>
-                          <h3 className="text-xl font-semibold">{item.title}</h3>
+                          <h3 className="text-xl font-semibold">
+                            {item.title}
+                          </h3>
                         </div>
-                        <p className="text-muted-foreground">{item.description}</p>
+                        <p className="text-muted-foreground">
+                          {item.description}
+                        </p>
                       </div>
                     </div>
                   </CardContent>
@@ -218,5 +281,5 @@ export default function AboutPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

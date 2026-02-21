@@ -17,9 +17,9 @@
     "greeting": "Hi, I'm",
     "name": "Felipe Marques",
     "role": "Full Stack Developer",
-    "tagline": "Building cozy digital experiences, one commit at a time",
+    "tagline": "Building cozy and friendly digital experiences",
     "cta": {
-      "projects": "See my work",
+      "projects": "More about me",
       "contact": "Get in touch"
     }
   },
@@ -154,5 +154,22 @@
     "title": "Lo-Fi Player",
     "noTracks": "No tracks available",
     "addMusic": "Add MP3 files to /public/audio/"
+  },
+  "cozy": {
+    "coffee": {
+      "singular": "cup of coffee",
+      "plural": "cups of coffee",
+      "add": "Add coffee"
+    },
+    "progress": {
+      "title": "Reading Progress",
+      "overall": "Overall",
+      "all": "All",
+      "books": "Books",
+      "courses": "Courses",
+      "read": "Read",
+      "reading": "Reading",
+      "wantToRead": "Want to read"
+    }
   }
 }

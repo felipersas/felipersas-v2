@@ -3,11 +3,13 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { TranslationProvider } from "@/hooks/use-translation";
 import { MusicPlayerProvider } from "@/hooks/use-music-player";
+import { ProgressBookmarkProvider } from "@/hooks/use-progress-bookmark";
 import { defaultPlaylist } from "@/content/music-playlist";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { MusicPlayer } from "@/components/music-player/music-player";
 import { ScrollProgress } from "@/components/animations/scroll-progress";
+import { CoffeeCounter, ProgressBookmark, CozyCursor } from "@/components/cozy-elements";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -45,17 +47,22 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground`}
       >
         <TranslationProvider initialLocale="pt-BR">
-          <MusicPlayerProvider defaultPlaylist={defaultPlaylist}>
-            <ScrollProgress />
-            <div className="min-h-screen flex flex-col">
-              <Header />
-              <main className="flex-1">
-                {children}
-              </main>
-              <Footer />
-            </div>
-            <MusicPlayer />
-          </MusicPlayerProvider>
+          <ProgressBookmarkProvider>
+            <MusicPlayerProvider defaultPlaylist={defaultPlaylist}>
+              <ScrollProgress />
+              <CozyCursor />
+              <div className="min-h-screen flex flex-col">
+                <Header />
+                <main className="flex-1">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+              <MusicPlayer />
+              <ProgressBookmark />
+              <CoffeeCounter />
+            </MusicPlayerProvider>
+          </ProgressBookmarkProvider>
         </TranslationProvider>
       </body>
     </html>

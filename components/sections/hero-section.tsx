@@ -83,7 +83,7 @@ export function HeroSection() {
             >
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Button asChild size="lg" className="lofi-glow">
-                  <Link href="/projects">
+                  <Link href="/about" className='flex flex-row'>
                     {t.hero.cta.projects}
                     <motion.div
                       animate={{ x: [0, 5, 0] }}

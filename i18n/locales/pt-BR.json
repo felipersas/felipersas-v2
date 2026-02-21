@@ -17,9 +17,9 @@
     "greeting": "Olá, eu sou",
     "name": "Felipe Marques",
     "role": "Desenvolvedor Full Stack",
-    "tagline": "Construindo experiências digitais aconchegantes, um commit de cada vez",
+    "tagline": "Construindo experiências digitais aconchegantes e amigáveis",
     "cta": {
-      "projects": "Ver meu trabalho",
+      "projects": "Mais sobre mim",
       "contact": "Entre em contato"
     }
   },
@@ -154,5 +154,22 @@
     "title": "Player Lo-Fi",
     "noTracks": "Nenhuma música disponível",
     "addMusic": "Adicione arquivos MP3 em /public/audio/"
+  },
+  "cozy": {
+    "coffee": {
+      "singular": "xícara de café",
+      "plural": "xícaras de café",
+      "add": "Adicionar café"
+    },
+    "progress": {
+      "title": "Progresso de Leitura",
+      "overall": "Geral",
+      "all": "Tudo",
+      "books": "Livros",
+      "courses": "Cursos",
+      "read": "Lido",
+      "reading": "Lendo",
+      "wantToRead": "Quero ler"
+    }
   }
 }

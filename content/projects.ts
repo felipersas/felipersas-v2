@@ -44,6 +44,29 @@ export const projects: Project[] = [
     category: 'api',
     date: '2024-12'
   },
+  {
+    id: 'ml-engine-rust',
+    title: {
+      en: 'ML Engine Rust',
+      'pt-BR': 'ML Engine Rust'
+    },
+    description: {
+      en: 'Tiny ML engine built with Rust from scratch.',
+      'pt-BR': 'Pequeno engine de ML construído com Rust do zero.'
+    },
+    longDescription: {
+      en: 'A lightweight machine learning engine implemented in Rust, focusing on performance and memory safety. Built to understand the fundamentals of ML implementation in systems programming.',
+      'pt-BR': 'Um engine de machine learning leve implementado em Rust, focado em performance e segurança de memória. Construído para entender os fundamentos da implementação de ML em programação de sistemas.'
+    },
+    stack: ['Rust'],
+    links: {
+      github: 'https://github.com/felipersas/ml-engine-rust'
+    },
+    featured: false,
+    status: 'inProgress',
+    category: 'api',
+    date: '2026-02'
+  },
 ]
 
 export const techStack = {
