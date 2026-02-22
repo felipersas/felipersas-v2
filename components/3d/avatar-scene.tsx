@@ -1,7 +1,7 @@
 'use client'
 
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, Environment, ContactShadows, PerspectiveCamera } from '@react-three/drei'
+import { OrbitControls, Environment, PerspectiveCamera } from '@react-three/drei'
 import { Suspense, useRef } from 'react'
 import { Desk, Monitor, Keyboard, CoffeeMug, Plant } from './desk-elements'
 import { BlockyCharacter } from './character'
@@ -15,7 +15,7 @@ function SceneContent() {
   const sceneRef = useRef<any>(null)
 
   // Rotate the main scene group slowly for a gentle orbiting effect
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     if (sceneRef.current) {
       // adjust the multiplier for faster/slower rotation
       sceneRef.current.rotation.y += delta * 0.2
@@ -45,7 +45,8 @@ function SceneContent() {
         shadow-camera-bottom={-4}
         shadow-camera-near={0.5}
         shadow-camera-far={50}
-        shadow-bias={-0.0001}
+        shadow-bias={-0.0005}
+        shadow-normalBias={0.1}
       />
       <ambientLight intensity={ambientIntensity} color={spotlightColor} />
       <spotLight
@@ -54,9 +55,6 @@ function SceneContent() {
         penumbra={1}
         intensity={0.8}
         color={spotlightColor}
-        castShadow
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
       />
 
       {/* Fill light for soft shadows */}
@@ -75,15 +73,6 @@ function SceneContent() {
           {/* Blocky character typing at desk */}
           <BlockyCharacter />
         </group>
-
-        {/* Soft shadows on floor */}
-        <ContactShadows
-          position={[0, -1.0, 0]}
-          opacity={0.4}
-          scale={12}
-          blur={2.5}
-          far={4}
-        />
 
         {/* Pleasant environment reflections */}
         <Environment preset="city" />

@@ -28,6 +28,11 @@ export const metadata: Metadata = {
   description: "Building cozy digital experiences, one commit at a time. Full Stack Developer specializing in Next.js, NestJS, and TypeScript.",
   keywords: ["Full Stack Developer", "Next.js", "NestJS", "TypeScript", "Portfolio"],
   authors: [{ name: "Felipe Marques" }],
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
   openGraph: {
     title: "Felipe Marques | Full Stack Developer",
     description: "Building cozy digital experiences, one commit at a time.",
