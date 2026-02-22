@@ -1,0 +1,49 @@
+{
+  "lsp": {
+    "eslint": {
+      "command": "node_modules/.bin/eslint",
+      "arguments": ["--stdio"],
+      "target_language": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+      "initialization_options": {
+        "documentFormatting": false,
+        "codeActionOnSave": {
+          "enable": true
+        }
+      }
+    }
+  },
+  "languages": {
+    "JavaScript": {
+      "language_servers": ["typescript-language-server", "eslint"],
+      "formatter": "language_server",
+      "format_on_save": "on",
+      "tab_size": 2,
+      "preferred_line_length": 80,
+      "soft_wrap": "preferred_line_length"
+    },
+    "JSX": {
+      "language_servers": ["typescript-language-server", "eslint"],
+      "formatter": "language_server",
+      "format_on_save": "on",
+      "tab_size": 2,
+      "preferred_line_length": 80,
+      "soft_wrap": "preferred_line_length"
+    },
+    "TypeScript": {
+      "language_servers": ["typescript-language-server", "eslint"],
+      "formatter": "language_server",
+      "format_on_save": "on",
+      "tab_size": 2,
+      "preferred_line_length": 80,
+      "soft_wrap": "preferred_line_length"
+    },
+    "TSX": {
+      "language_servers": ["typescript-language-server", "eslint"],
+      "formatter": "language_server",
+      "format_on_save": "on",
+      "tab_size": 2,
+      "preferred_line_length": 80,
+      "soft_wrap": "preferred_line_length"
+    }
+  }
+}

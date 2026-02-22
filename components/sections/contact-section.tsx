@@ -36,7 +36,7 @@ export function ContactSection() {
   ]
 
   return (
-    <section className="py-20 md:py-32 relative overflow-hidden">
+    <section id="contact" className="py-20 md:py-32 relative overflow-hidden">
       {/* Background decoration with pulse */}
       <div className="absolute inset-0 -z-10">
         <motion.div

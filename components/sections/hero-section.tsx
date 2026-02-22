@@ -96,7 +96,7 @@ export function HeroSection() {
               </motion.div>
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Button asChild variant="outline" size="lg" className="lofi-glow">
-                  <Link href="/about">{t.hero.cta.contact}</Link>
+                  <Link href="#contact">{t.hero.cta.contact}</Link>
                 </Button>
               </motion.div>
             </motion.div>
