@@ -5,15 +5,18 @@ import { usePathname } from 'next/navigation'
 import { useTranslation } from '@/hooks/use-translation'
 import { LanguageSwitcher } from './language-switcher'
 import { cn } from '@/lib/utils'
+import { Menu, X, Home, User, Code } from 'lucide-react'
+import { useState } from 'react'
 
 export function Header() {
   const pathname = usePathname()
   const { t } = useTranslation()
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const navItems = [
-    { href: '/', label: t.nav.home },
-    { href: '/about', label: t.nav.about },
-    { href: '/projects', label: t.nav.projects },
+    { href: '/', label: t.nav.home, icon: Home },
+    { href: '/about', label: t.nav.about, icon: User },
+    { href: '/projects', label: t.nav.projects, icon: Code },
     // { href: '/blog', label: t.nav.blog },
   ]
 
@@ -46,9 +49,45 @@ export function Header() {
 
           {/* Controls */}
           <div className="flex items-center space-x-2">
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors lofi-glow"
+              aria-label={isMobileMenuOpen ? "Fechar menu" : "Abrir menu"}
+            >
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
             <LanguageSwitcher />
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <nav className="md:hidden py-4 border-t border-border mt-2">
+            <ul className="space-y-1">
+              {navItems.map((item) => {
+                const Icon = item.icon
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={cn(
+                        "flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200",
+                        pathname === item.href
+                          ? "bg-primary text-primary-foreground"
+                          : "hover:bg-accent hover:text-accent-foreground text-muted-foreground"
+                      )}
+                    >
+                      <Icon className="h-5 w-5" />
+                      <span className="font-medium">{item.label}</span>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </nav>
+        )}
       </div>
     </header>
   )
