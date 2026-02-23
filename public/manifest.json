@@ -1,0 +1,20 @@
+{
+  "name": "Felipe Marques - Full Stack Developer",
+  "short_name": "Felipe Marques",
+  "description": "Building cozy digital experiences, one commit at a time. Full Stack Developer specializing in Next.js, NestJS, and TypeScript.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#161412",
+  "theme_color": "#df9a73",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["portfolio", "developer", "technology"],
+  "lang": "pt-BR"
+}

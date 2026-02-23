@@ -10,22 +10,28 @@ const STORAGE_KEY = 'coffee-counter'
 
 export function CoffeeCounter() {
   const { t } = useTranslation()
-  const [count, setCount] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem(STORAGE_KEY)
-      return saved ? parseInt(saved, 10) : 1
-    }
-    return 1
-  })
-
+  const [count, setCount] = useState(1)
+  const [isMounted, setIsMounted] = useState(false)
   const coffeeLabel = count === 1 ? t.cozy.coffee.singular : t.cozy.coffee.plural
 
   const [showAnimation, setShowAnimation] = useState(false)
   const [showButton, setShowButton] = useState(false)
 
+  // Load from localStorage only after mount to prevent hydration mismatch
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, count.toString())
-  }, [count])
+    setIsMounted(true)
+    const saved = localStorage.getItem(STORAGE_KEY)
+    if (saved) {
+      setCount(parseInt(saved, 10))
+    }
+  }, [])
+
+  // Save to localStorage when count changes
+  useEffect(() => {
+    if (isMounted) {
+      localStorage.setItem(STORAGE_KEY, count.toString())
+    }
+  }, [count, isMounted])
 
   const addCoffee = () => {
     setCount(prev => prev + 1)
@@ -35,6 +41,8 @@ export function CoffeeCounter() {
 
   // Auto-increment every 5 minutes for ambient feeling
   useEffect(() => {
+    if (!isMounted) return
+
     const interval = setInterval(() => {
       setCount(prev => {
         const newCount = prev + 1
@@ -44,7 +52,7 @@ export function CoffeeCounter() {
     }, 5 * 60 * 1000) // 5 minutes
 
     return () => clearInterval(interval)
-  }, [])
+  }, [isMounted])
 
   return (
     <motion.div
@@ -78,7 +86,7 @@ export function CoffeeCounter() {
               >
                 {[1, 2, 3].map((i) => (
                   <motion.div
-                    key={i}
+                    key={`steam-${i}`}
                     className="w-1 h-4 bg-primary/30 rounded-full"
                     animate={{
                       height: [8, 16, 8],
