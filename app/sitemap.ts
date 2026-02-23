@@ -3,7 +3,7 @@ import { projects } from '@/content/projects'
 import { getPublishedPosts } from '@/content/blog-posts'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://felipersas-dev.vercel.app' // Update with your actual domain
+  const baseUrl = 'https://felipersas-dev.vercel.app'
   const currentDate = new Date().toISOString()
 
   // Static pages

@@ -39,7 +39,7 @@ export function WebVitals() {
         console.log(`[Web Vitals] ${name}: ${value.toFixed(2)}ms (${rating})`)
       }
 
-      // Send to analytics (uncomment and configure your analytics)
+      // Send to analytics (uncomment and configure)
       // if (typeof window !== 'undefined' && (window as any).gtag) {
       //   (window as any).gtag('event', name, {
       //     value: Math.round(name === 'CLS' ? value * 1000 : value),
