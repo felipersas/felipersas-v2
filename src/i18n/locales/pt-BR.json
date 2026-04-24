@@ -1,0 +1,37 @@
+{
+  "hero": {
+    "greeting": "Olá, eu sou"
+  },
+  "sections": {
+    "about": "Sobre",
+    "work": "Experiência Profissional",
+    "education": "Educação",
+    "skills": "Habilidades"
+  },
+  "projects": {
+    "badge": "Meus Projetos",
+    "title": "Confira meus trabalhos mais recentes",
+    "description": "Trabalhei em diversos projetos, de sites simples a aplicações web complexas. Aqui estão alguns dos meus favoritos."
+  },
+  "contact": {
+    "badge": "Contato",
+    "title": "Entre em Contato",
+    "beforeEmail": "Quer conversar? Me envie um ",
+    "email": "e-mail",
+    "betweenLinks": " ou me conecte no ",
+    "linkedin": "LinkedIn",
+    "afterLinkedin": ". Estou sempre aberto a novas oportunidades e conversas."
+  },
+  "work": {
+    "present": "Presente"
+  },
+  "navbar": {
+    "theme": "Tema",
+    "language": "Idioma"
+  },
+  "music": {
+    "title": "Lo-Fi Player",
+    "noTrack": "Nenhuma faixa selecionada",
+    "playlist": "Playlist"
+  }
+}
