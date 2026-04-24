@@ -14,6 +14,14 @@ import { Prisma } from "@/components/ui/svgs/prisma";
 import { Mysql } from "@/components/ui/svgs/mysql";
 import { Aws } from "@/components/ui/svgs/aws";
 import { TailwindCSS } from "@/components/ui/svgs/tailwindcss";
+import type { Locale } from "@/hooks/use-translation";
+
+export type LocalizedText = { en: string; "pt-BR": string };
+
+export function localize(text: LocalizedText | string, locale: Locale): string {
+  if (typeof text === "string") return text;
+  return text[locale] || text.en;
+}
 
 export const DATA = {
   name: "Felipe Marques",
@@ -21,10 +29,14 @@ export const DATA = {
   url: "https://felipersas.com",
   location: "Sorocaba, SP, Brazil",
   locationLink: "https://www.google.com/maps/place/Sorocaba",
-  description:
-    "Full Stack Developer passionate about building comfortable, user-friendly web experiences. I work with TypeScript, React, NestJS, and Rust.",
-  summary:
-    "I'm a 19-year-old Full Stack Developer from Sorocaba, São Paulo, Brazil. I started my journey in high school with a technical Systems Development course at SENAI, and I've been continuously evolving as a developer ever since.\n\nI enjoy exploring new technologies and staying up to date with cutting-edge tools in the development world. I'm passionate about open-source, building type-safe applications, and creating performant systems.\n\nWhen I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or simply enjoying a good cup of coffee. I enjoy my free time playing video games and watching anime.",
+  description: {
+    en: "Full Stack Developer passionate about building comfortable, user-friendly web experiences. I work with TypeScript, React, NestJS, and Rust.",
+    "pt-BR": "Desenvolvedor Full Stack apaixonado por construir experiencias web confortaveis e faceis de usar. Trabalho com TypeScript, React, NestJS e Rust.",
+  } as LocalizedText,
+  summary: {
+    en: "I'm a 19-year-old Full Stack Developer from Sorocaba, Sao Paulo, Brazil. I started my journey in high school with a technical Systems Development course at SENAI, and I've been continuously evolving as a developer ever since.\n\nI enjoy exploring new technologies and staying up to date with cutting-edge tools in the development world. I'm passionate about open-source, building type-safe applications, and creating performant systems.\n\nWhen I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or simply enjoying a good cup of coffee. I enjoy my free time playing video games and watching anime.",
+    "pt-BR": "Sou um Desenvolvedor Full Stack de 19 anos de Sorocaba, Sao Paulo, Brasil. Comecei minha jornada no ensino medio com um curso tecnico de Desenvolvimento de Sistemas no SENAI, e venho evoluindo continuamente como desenvolvedor desde entao.\n\nGosto de explorar novas tecnologias e me manter atualizado com ferramentas de ponta no mundo do desenvolvimento. Sou apaixonado por codigo aberto, construcao de aplicacoes type-safe e criacao de sistemas performaticos.\n\nQuando nao estou programando, voce pode me encontrar explorando novas tecnologias, contribuindo para projetos open-source, ou simplesmente aproveitando uma boa xicara de cafe. Aproveito meu tempo livre jogando video games e assistindo anime.",
+  } as LocalizedText,
   avatarUrl: "/me.png",
   skills: [
     { name: "React", icon: ReactLight },
@@ -43,8 +55,8 @@ export const DATA = {
     { name: "TailwindCSS", icon: TailwindCSS },
   ],
   navbar: [
-    { href: "/", icon: HomeIcon, label: "Home" },
-    { href: "/blog", icon: NotebookIcon, label: "Blog" },
+    { href: "/", icon: HomeIcon, label: { en: "Home", "pt-BR": "Inicio" } as LocalizedText },
+    { href: "/blog", icon: NotebookIcon, label: { en: "Blog", "pt-BR": "Blog" } as LocalizedText },
   ],
   contact: {
     email: "felipemarques.computacao@gmail.com",
@@ -82,39 +94,49 @@ export const DATA = {
       href: "https://mindgroup.com.br",
       badges: [],
       location: "Sorocaba, SP, Brazil",
-      title: "Full-Stack Developer",
+      title: { en: "Full-Stack Developer", "pt-BR": "Desenvolvedor Full-Stack" } as LocalizedText,
       logoUrl: "",
-      start: "Feb 2025",
-      end: "Present",
-      description:
-        "Developing and maintaining full-stack web applications using TypeScript, React, Next.js, and NestJS. Building RESTful APIs, managing databases with Prisma ORM and PostgreSQL, and deploying containerized applications with Docker.",
+      start: { en: "Feb 2025", "pt-BR": "Fev 2025" } as LocalizedText,
+      end: { en: "Present", "pt-BR": "Presente" } as LocalizedText,
+      description: {
+        en: "Developing and maintaining full-stack web applications using TypeScript, React, Next.js, and NestJS. Building RESTful APIs, managing databases with Prisma ORM and PostgreSQL, and deploying containerized applications with Docker.",
+        "pt-BR": "Desenvolvendo e mantendo aplicacoes web full-stack usando TypeScript, React, Next.js e NestJS. Construindo APIs RESTful, gerenciando bancos de dados com Prisma ORM e PostgreSQL, e implantando aplicacoes conteinerizadas com Docker.",
+      } as LocalizedText,
     },
     {
       company: "Freelance",
       href: "#",
       badges: [],
-      location: "Remote",
-      title: "Full-Stack Developer",
+      location: { en: "Remote", "pt-BR": "Remoto" } as LocalizedText,
+      title: { en: "Full-Stack Developer", "pt-BR": "Desenvolvedor Full-Stack" } as LocalizedText,
       logoUrl: "",
-      start: "Jun 2024",
-      end: "Present",
-      description:
-        "Building custom web applications and APIs for clients. Specializing in modern TypeScript stack with Next.js, NestJS, and PostgreSQL. Contributing to open-source projects and developing personal tools like Fasty-ORM.",
+      start: { en: "Jun 2024", "pt-BR": "Jun 2024" } as LocalizedText,
+      end: { en: "Present", "pt-BR": "Presente" } as LocalizedText,
+      description: {
+        en: "Building custom web applications and APIs for clients. Specializing in modern TypeScript stack with Next.js, NestJS, and PostgreSQL. Contributing to open-source projects and developing personal tools like Fasty-ORM.",
+        "pt-BR": "Construindo aplicacoes web e APIs personalizadas para clientes. Especializado no stack moderno de TypeScript com Next.js, NestJS e PostgreSQL. Contribuindo para projetos open-source e desenvolvendo ferramentas pessoais como Fasty-ORM.",
+      } as LocalizedText,
     },
   ],
   education: [
     {
       school: "SENAI Sorocaba",
       href: "https://www.sp.senai.br/unidade/sorocaba",
-      degree: "Associate Degree, Systems Analysis & Development",
+      degree: {
+        en: "Associate Degree, Systems Analysis & Development",
+        "pt-BR": "Tecnologo, Analise e Desenvolvimento de Sistemas",
+      } as LocalizedText,
       logoUrl: "",
       start: "2025",
-      end: "Present",
+      end: { en: "Present", "pt-BR": "Presente" } as LocalizedText,
     },
     {
       school: "SENAI Sorocaba",
       href: "https://www.sp.senai.br/unidade/sorocaba",
-      degree: "Technical Degree, Systems Development",
+      degree: {
+        en: "Technical Degree, Systems Development",
+        "pt-BR": "Tecnico, Desenvolvimento de Sistemas",
+      } as LocalizedText,
       logoUrl: "",
       start: "2023",
       end: "2024",
@@ -124,10 +146,12 @@ export const DATA = {
     {
       title: "Fasty-ORM",
       href: "https://github.com/felipersas/fasty-orm",
-      dates: "Dec 2024 - Present",
+      dates: { en: "Dec 2024 - Present", "pt-BR": "Dez 2024 - Presente" } as LocalizedText,
       active: true,
-      description:
-        "A type-safe ORM for Node.js featuring a Drizzle-inspired query builder, blazing-fast native caching with TTL, and a robust migration system. The Rust engine via N-API provides unmatched performance for query execution.",
+      description: {
+        en: "A type-safe ORM for Node.js featuring a Drizzle-inspired query builder, blazing-fast native caching with TTL, and a robust migration system. The Rust engine via N-API provides unmatched performance for query execution.",
+        "pt-BR": "Um ORM type-safe para Node.js com um query builder inspirado no Drizzle, cache nativo ultrarapido com TTL e um sistema robusto de migracoes. O engine em Rust via N-API fornece desempenho incomparavel para execucao de queries.",
+      } as LocalizedText,
       technologies: [
         "TypeScript",
         "Rust",
@@ -148,10 +172,12 @@ export const DATA = {
     {
       title: "ML Engine Rust",
       href: "https://github.com/felipersas/ml-engine-rust",
-      dates: "Feb 2026 - Present",
+      dates: { en: "Feb 2026 - Present", "pt-BR": "Fev 2026 - Presente" } as LocalizedText,
       active: true,
-      description:
-        "A lightweight machine learning engine implemented in Rust from scratch, focusing on performance and memory safety. Built to understand the fundamentals of ML implementation in systems programming.",
+      description: {
+        en: "A lightweight machine learning engine implemented in Rust from scratch, focusing on performance and memory safety. Built to understand the fundamentals of ML implementation in systems programming.",
+        "pt-BR": "Um engine de machine learning leve implementado em Rust do zero, com foco em desempenho e seguranca de memoria. Construido para entender os fundamentos da implementacao de ML em programacao de sistemas.",
+      } as LocalizedText,
       technologies: [
         "Rust",
       ],

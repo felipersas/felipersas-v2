@@ -1,13 +1,13 @@
 "use client"
 import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
-import { DATA } from "@/data/resume";
+import { DATA, localize } from "@/data/resume";
 import { useTranslation } from "@/hooks/use-translation";
 
 const BLUR_FADE_DELAY = 0.04;
 
 export default function ProjectsSection() {
-    const { t } = useTranslation()
+    const { t, locale } = useTranslation()
     return (
         <section id="projects">
             <div className="flex min-h-0 flex-col gap-y-8">
@@ -43,8 +43,8 @@ export default function ProjectsSection() {
                                 href={project.href}
                                 key={project.title}
                                 title={project.title}
-                                description={project.description}
-                                dates={project.dates}
+                                description={localize(project.description, locale)}
+                                dates={localize(project.dates, locale)}
                                 tags={project.technologies}
                                 image={project.image}
                                 video={project.video}

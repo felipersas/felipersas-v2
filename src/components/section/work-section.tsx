@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { DATA } from "@/data/resume";
+import { DATA, localize } from "@/data/resume";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/hooks/use-translation";
@@ -32,7 +32,7 @@ function LogoImage({ src, alt }: { src: string; alt: string }) {
 }
 
 export default function WorkSection() {
-  const { t } = useTranslation()
+  const { t, locale } = useTranslation()
   return (
     <Accordion type="single" collapsible className="w-full grid gap-6">
       {DATA.work.map((work) => (
@@ -67,19 +67,19 @@ export default function WorkSection() {
                     </span>
                   </div>
                   <div className="font-sans text-sm text-muted-foreground">
-                    {work.title}
+                    {localize(work.title, locale)}
                   </div>
                 </div>
               </div>
               <div className="flex items-center gap-1 text-xs tabular-nums text-muted-foreground text-right flex-none">
                 <span>
-                  {work.start} - {work.end ?? t('work.present')}
+                  {localize(work.start, locale)} - {localize(work.end, locale)}
                 </span>
               </div>
             </div>
           </AccordionTrigger>
           <AccordionContent className="p-0 ml-13 text-xs sm:text-sm text-muted-foreground">
-            {work.description}
+            {localize(work.description, locale)}
           </AccordionContent>
         </AccordionItem>
       ))}

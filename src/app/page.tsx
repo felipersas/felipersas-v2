@@ -3,7 +3,7 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DATA } from "@/data/resume";
+import { DATA, localize } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import ContactSection from "@/components/section/contact-section";
@@ -15,7 +15,7 @@ import { useTranslation } from "@/hooks/use-translation";
 const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
-  const { t } = useTranslation()
+  const { t, locale } = useTranslation()
   return (
     <main className="min-h-dvh flex flex-col gap-14 relative">
       <section id="hero">
@@ -31,7 +31,7 @@ export default function Page() {
               <BlurFadeText
                 className="text-muted-foreground max-w-[600px] md:text-lg lg:text-xl"
                 delay={BLUR_FADE_DELAY}
-                text={DATA.description}
+                text={localize(DATA.description, locale)}
               />
             </div>
             <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2">
@@ -51,7 +51,7 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 4}>
             <div className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
               <Markdown>
-                {DATA.summary}
+                {localize(DATA.summary, locale)}
               </Markdown>
             </div>
           </BlurFade>
@@ -100,13 +100,13 @@ export default function Page() {
                         <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" aria-hidden />
                       </div>
                       <div className="font-sans text-sm text-muted-foreground">
-                        {education.degree}
+                        {localize(education.degree, locale)}
                       </div>
                     </div>
                   </div>
                   <div className="flex items-center gap-1 text-xs tabular-nums text-muted-foreground text-right flex-none">
                     <span>
-                      {education.start} - {education.end}
+                      {localize(education.start, locale)} - {localize(education.end, locale)}
                     </span>
                   </div>
                 </Link>
