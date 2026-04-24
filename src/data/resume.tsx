@@ -14,6 +14,9 @@ import { Prisma } from "@/components/ui/svgs/prisma";
 import { Mysql } from "@/components/ui/svgs/mysql";
 import { Aws } from "@/components/ui/svgs/aws";
 import { TailwindCSS } from "@/components/ui/svgs/tailwindcss";
+import { Grafana } from "@/components/ui/svgs/grafana";
+import { Prometheus } from "@/components/ui/svgs/prometheus";
+import { Linux } from "@/components/ui/svgs/linux";
 import type { Locale } from "@/hooks/use-translation";
 
 export type LocalizedText = { en: string; "pt-BR": string };
@@ -53,6 +56,9 @@ export const DATA = {
     { name: "Docker", icon: Docker },
     { name: "AWS", icon: Aws },
     { name: "TailwindCSS", icon: TailwindCSS },
+    { name: "Grafana", icon: Grafana },
+    { name: "Prometheus", icon: Prometheus },
+    { name: "Linux", icon: Linux },
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: { en: "Home", "pt-BR": "Início" } as LocalizedText },
