@@ -93,7 +93,9 @@ export default function RootLayout({
                 {children}
               </div>
               <Navbar />
-              <MusicPlayer />
+              <div className="hidden md:block">
+                <MusicPlayer />
+              </div>
             </TooltipProvider>
           </MusicPlayerProvider>
           </TranslationProvider>

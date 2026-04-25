@@ -46,8 +46,6 @@ export default function ProjectsSection() {
                                 description={localize(project.description, locale)}
                                 dates={localize(project.dates, locale)}
                                 tags={project.technologies}
-                                image={project.image}
-                                video={project.video}
                                 links={project.links}
                             />
                         </BlurFade>

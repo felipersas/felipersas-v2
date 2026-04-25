@@ -197,6 +197,60 @@ export const DATA = {
       image: "",
       video: "",
     },
+    {
+      title: "PayFlow",
+      href: "https://github.com/felipersas/payflow",
+      dates: { en: "Apr 2026 - Present", "pt-BR": "Abr 2026 - Presente" } as LocalizedText,
+      active: true,
+      description: {
+        en: "A microservices-based financial transfer system built with Go, featuring saga pattern orchestration via RabbitMQ, DDD architecture, and distributed tracing. Comprises three services (user, account, transfer) with idempotent operations, circuit breaker, and OpenTelemetry integration.",
+        "pt-BR": "Sistema de transferências financeiras baseado em microsserviços construído com Go, com orquestração via saga pattern usando RabbitMQ, arquitetura DDD e distributed tracing. Composto por três serviços (user, account, transfer) com operações idempotentes, circuit breaker e integração com OpenTelemetry.",
+      } as LocalizedText,
+      technologies: [
+        "Go",
+        "PostgreSQL",
+        "RabbitMQ",
+        "Redis",
+        "Docker",
+        "OpenTelemetry",
+      ],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/felipersas/payflow",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "",
+    },
+    {
+      title: "Outage Detector",
+      href: "https://github.com/felipersas/outage-detector",
+      dates: { en: "Mar 2026 - Present", "pt-BR": "Mar 2026 - Presente" } as LocalizedText,
+      active: true,
+      description: {
+        en: "A serverless website monitoring platform on AWS using SST v4. Features real-time outage detection via Lambda cron jobs, Telegram bot notifications, DynamoDB state management, and a Next.js dashboard with Cognito authentication.",
+        "pt-BR": "Plataforma serverless de monitoramento de websites na AWS usando SST v4. Detecção de quedas em tempo real via Lambda cron jobs, notificações por bot do Telegram, gerenciamento de estado no DynamoDB e dashboard Next.js com autenticação Cognito.",
+      } as LocalizedText,
+      technologies: [
+        "TypeScript",
+        "AWS",
+        "SST",
+        "Next.js",
+        "DynamoDB",
+        "Lambda",
+      ],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/felipersas/outage-detector",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "",
+    },
   ],
   hackathons: [],
 } as const;
