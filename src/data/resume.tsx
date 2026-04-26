@@ -78,12 +78,6 @@ export const DATA = {
         icon: Icons.linkedin,
         navbar: true,
       },
-      X: {
-        name: "X",
-        url: "https://x.com/felipersas",
-        icon: Icons.x,
-        navbar: true,
-      },
       email: {
         name: "Send Email",
         url: "mailto:felipemarques.computacao@gmail.com",
