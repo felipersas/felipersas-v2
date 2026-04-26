@@ -33,12 +33,12 @@ export const DATA = {
   location: "Sorocaba, SP, Brazil",
   locationLink: "https://www.google.com/maps/place/Sorocaba",
   description: {
-    en: "Full Stack Developer passionate about building comfortable, user-friendly web experiences. I work with TypeScript, React, NestJS, and Go.",
-    "pt-BR": "Desenvolvedor Full Stack apaixonado por construir experiências web confortáveis e fáceis de usar. Trabalho com TypeScript, React, NestJS e Go.",
+    en: "Full Stack Developer from Sorocaba, Brazil. I build web applications with TypeScript, Next.js, NestJS, and Go.",
+    "pt-BR": "Desenvolvedor Full Stack de Sorocaba, SP. Construo aplicações web com TypeScript, Next.js, NestJS e Go.",
   } as LocalizedText,
   summary: {
-    en: "I'm a 19-year-old Full Stack Developer from Sorocaba, Sao Paulo, Brazil. I started my journey in high school with a technical Systems Development course at SENAI, and I've been continuously evolving as a developer ever since.\n\nI enjoy exploring new technologies and staying up to date with cutting-edge tools in the development world. I'm passionate about open-source, building type-safe applications, and creating performant systems.\n\nWhen I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or simply enjoying a good cup of coffee. I enjoy my free time playing video games and watching anime.",
-    "pt-BR": "Sou um Desenvolvedor Full Stack de 19 anos de Sorocaba, São Paulo, Brasil. Comecei minha jornada no ensino médio com um curso técnico de Desenvolvimento de Sistemas no SENAI, e venho evoluindo continuamente como desenvolvedor desde então.\n\nGosto de explorar novas tecnologias e me manter atualizado com ferramentas de ponta no mundo do desenvolvimento. Sou apaixonado por código aberto, construção de aplicações type-safe e criação de sistemas performáticos.\n\nQuando não estou programando, você pode me encontrar explorando novas tecnologias, contribuindo para projetos open-source, ou simplesmente aproveitando uma boa xícara de café. Aproveito meu tempo livre jogando vídeo games e assistindo anime.",
+    en: "I'm from Sorocaba, Brazil. Started coding in high school through a technical program at SENAI, and it stuck — now I do it for work and for fun. Currently pursuing a degree in Systems Analysis & Development.\n\nMy daily stack is TypeScript, Next.js, NestJS, React, and Go, building systems from scratch to production. I like branching out too — I built a Rust ORM for Node.js (Fasty-ORM), an ML engine from scratch, and a Go microservices system, among other open-source projects.\n\nFree time: video games, anime, and way too much coffee.",
+    "pt-BR": "Sou de Sorocaba, SP. Comecei a programar no ensino médio fazendo o técnico no SENAI, e desde então é o que faço — tanto no trabalho quanto nos meus projetos pessoais. Atualmente curso Análise e Desenvolvimento de Sistemas.\n\nNo dia a dia trabalho com TypeScript, Next.js, NestJS, React e Go, construindo sistemas do zero até produção. Mas gosto de explorar outras paradas também — montei um ORM em Rust pro Node.js (Fasty-ORM), um engine de ML do zero e um sistema de microsserviços em Go, entre outros projetos open-source.\n\nNo tempo livre: vídeo game, anime e café demais.",
   } as LocalizedText,
   avatarUrl: "/me.png",
   skills: [
