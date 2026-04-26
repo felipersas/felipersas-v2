@@ -33,8 +33,8 @@ export const DATA = {
   location: "Sorocaba, SP, Brazil",
   locationLink: "https://www.google.com/maps/place/Sorocaba",
   description: {
-    en: "Full Stack Developer passionate about building comfortable, user-friendly web experiences. I work with TypeScript, React, NestJS, and Rust.",
-    "pt-BR": "Desenvolvedor Full Stack apaixonado por construir experiências web confortáveis e fáceis de usar. Trabalho com TypeScript, React, NestJS e Rust.",
+    en: "Full Stack Developer passionate about building comfortable, user-friendly web experiences. I work with TypeScript, React, NestJS, and Go.",
+    "pt-BR": "Desenvolvedor Full Stack apaixonado por construir experiências web confortáveis e fáceis de usar. Trabalho com TypeScript, React, NestJS e Go.",
   } as LocalizedText,
   summary: {
     en: "I'm a 19-year-old Full Stack Developer from Sorocaba, Sao Paulo, Brazil. I started my journey in high school with a technical Systems Development course at SENAI, and I've been continuously evolving as a developer ever since.\n\nI enjoy exploring new technologies and staying up to date with cutting-edge tools in the development world. I'm passionate about open-source, building type-safe applications, and creating performant systems.\n\nWhen I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or simply enjoying a good cup of coffee. I enjoy my free time playing video games and watching anime.",
@@ -104,10 +104,36 @@ export const DATA = {
       logoUrl: "/icons/LOGOTIPO-Mind-Group-2.png",
       start: { en: "Feb 2025", "pt-BR": "Fev 2025" } as LocalizedText,
       end: { en: "Present", "pt-BR": "Presente" } as LocalizedText,
-      description: {
-        en: "Developing and maintaining full-stack web applications using TypeScript, React, Next.js, and NestJS. Building RESTful APIs, managing databases with Prisma ORM and PostgreSQL, and deploying containerized applications with Docker.",
-        "pt-BR": "Desenvolvendo e mantendo aplicações web full-stack usando TypeScript, React, Next.js e NestJS. Construindo APIs RESTful, gerenciando bancos de dados com Prisma ORM e PostgreSQL, e implantando aplicações conteinerizadas com Docker.",
-      } as LocalizedText,
+      bullets: [
+        {
+          en: "Built 3 full-stack systems from scratch to production using TypeScript, Next.js, NestJS, MySQL, Docker, and Prisma ORM",
+          "pt-BR": "Desenvolvimento de 3 sistemas completos do zero ao deploy em produção com TypeScript, Next.js, NestJS, MySQL, Docker e Prisma ORM",
+        } as LocalizedText,
+        {
+          en: "Automated 40+ monthly hours of manual work in a legal system with bulk import, bank processing, and invoice generation",
+          "pt-BR": "Automação de 40+ horas mensais de trabalho manual em sistema jurídico com importação em massa, processamento bancário e emissão de notas fiscais",
+        } as LocalizedText,
+        {
+          en: "Optimized aggregation query from 5s to 2s (60% improvement) using views and MySQL indexing",
+          "pt-BR": "Otimização de query de agregação de 5s para 2s (60% de melhoria) usando views e indexação MySQL",
+        } as LocalizedText,
+        {
+          en: "Reduced dashboard load time from 3s to 1.4s (53%) using memoization, lazy loading, and dynamic imports",
+          "pt-BR": "Redução do tempo de carregamento de dashboard de 3s para 1.4s (53%) com memoização, lazy loading e imports dinâmicos",
+        } as LocalizedText,
+        {
+          en: "Implemented modular monolith architecture with NestJS, DDD, JWT authentication, granular permissions, and CI/CD with Docker",
+          "pt-BR": "Arquitetura de monolito modular com NestJS, DDD, autenticação JWT, permissões granulares e CI/CD com Docker",
+        } as LocalizedText,
+        {
+          en: "Developed 2 mobile apps with React Native and Expo, including full payment flow implementation",
+          "pt-BR": "Desenvolvimento de 2 apps mobile com React Native e Expo, incluindo fluxo completo de pagamentos",
+        } as LocalizedText,
+        {
+          en: "Integrated payment gateways — Stripe (credit card) and eRede (credit card and Pix) — in web and mobile applications",
+          "pt-BR": "Integração de gateways de pagamento — Stripe (cartão) e eRede (cartão e Pix) — em aplicações web e mobile",
+        } as LocalizedText,
+      ],
     },
     {
       company: "Freelance",
@@ -118,10 +144,20 @@ export const DATA = {
       logoUrl: "",
       start: { en: "Jun 2024", "pt-BR": "Jun 2024" } as LocalizedText,
       end: { en: "Present", "pt-BR": "Presente" } as LocalizedText,
-      description: {
-        en: "Building custom web applications and APIs for clients. Specializing in modern TypeScript stack with Next.js, NestJS, and PostgreSQL. Contributing to open-source projects and developing personal tools like Fasty-ORM.",
-        "pt-BR": "Construindo aplicações web e APIs personalizadas para clientes. Especializado no stack moderno de TypeScript com Next.js, NestJS e PostgreSQL. Contribuindo para projetos open-source e desenvolvendo ferramentas pessoais como Fasty-ORM.",
-      } as LocalizedText,
+      bullets: [
+        {
+          en: "Developed responsive landing pages with SEO and production deployment",
+          "pt-BR": "Desenvolvimento de landing pages responsivas com SEO e deploy em produção",
+        } as LocalizedText,
+        {
+          en: "Built GoHighLevel integration system using Mastra AI and MCP server for a specialized agent — answers questions, processes forms, sends WhatsApp messages, and displays property catalogs",
+          "pt-BR": "Sistema de integração com GoHighLevel usando Mastra AI e MCP server para agente especializado — responde perguntas, processa formulários, envia WhatsApp e exibe catálogos de imóveis",
+        } as LocalizedText,
+        {
+          en: "Integrated qualification AI with property catalogs for intelligent property recommendations, unifying the ecosystem within GHL",
+          "pt-BR": "Integração entre IA de qualificação e catálogos de imóveis para recomendação inteligente de propriedades, unificando o ecossistema dentro do GHL",
+        } as LocalizedText,
+      ],
     },
   ],
   education: [

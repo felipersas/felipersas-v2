@@ -79,7 +79,11 @@ export default function WorkSection() {
             </div>
           </AccordionTrigger>
           <AccordionContent className="p-0 ml-13 text-xs sm:text-sm text-muted-foreground">
-            {localize(work.description, locale)}
+            <ul className="list-disc ml-4 space-y-1.5">
+              {work.bullets.map((bullet, i) => (
+                <li key={i}>{localize(bullet, locale)}</li>
+              ))}
+            </ul>
           </AccordionContent>
         </AccordionItem>
       ))}
