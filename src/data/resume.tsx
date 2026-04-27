@@ -179,6 +179,88 @@ export const DATA = {
   ],
   projects: [
     {
+      title: "PayFlow",
+      href: "https://github.com/felipersas/payflow",
+      dates: { en: "Apr 2026 - Present", "pt-BR": "Abr 2026 - Presente" } as LocalizedText,
+      active: true,
+      description: {
+        en: "A microservices-based financial transfer system built with Go, featuring saga pattern orchestration via RabbitMQ, DDD architecture, and distributed tracing. Comprises three services (user, account, transfer) with idempotent operations, circuit breaker, and OpenTelemetry integration.",
+        "pt-BR": "Sistema de transferências financeiras baseado em microsserviços construído com Go, com orquestração via saga pattern usando RabbitMQ, arquitetura DDD e distributed tracing. Composto por três serviços (user, account, transfer) com operações idempotentes, circuit breaker e integração com OpenTelemetry.",
+      } as LocalizedText,
+      technologies: [
+        "Go",
+        "PostgreSQL",
+        "RabbitMQ",
+        "Redis",
+        "Docker",
+        "OpenTelemetry",
+      ],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/felipersas/payflow",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "",
+    },
+     {
+      title: "Outage Detector",
+      href: "https://github.com/felipersas/outage-detector",
+      dates: { en: "Mar 2026 - Present", "pt-BR": "Mar 2026 - Presente" } as LocalizedText,
+      active: true,
+      description: {
+        en: "A serverless website monitoring platform on AWS using SST v4. Features real-time outage detection via Lambda cron jobs, Telegram bot notifications, DynamoDB state management, and a Next.js dashboard with Cognito authentication.",
+        "pt-BR": "Plataforma serverless de monitoramento de websites na AWS usando SST v4. Detecção de quedas em tempo real via Lambda cron jobs, notificações por bot do Telegram, gerenciamento de estado no DynamoDB e dashboard Next.js com autenticação Cognito.",
+      } as LocalizedText,
+      technologies: [
+        "TypeScript",
+        "AWS",
+        "SST",
+        "Next.js",
+        "DynamoDB",
+        "Lambda",
+      ],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/felipersas/outage-detector",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "",
+    },
+    {
+      title: "Finance",
+      href: "https://github.com/felipersas/finance",
+      dates: { en: "Jan 2025 - Present", "pt-BR": "Jan 2025 - Presente" } as LocalizedText,
+      active: true,
+      description: {
+        en: "Full-stack personal finance management platform with AI. Features CSV bank statement import, automatic transaction categorization, financial analytics dashboard, and an AI chatbot with SSE streaming. Built as a monorepo with a NestJS API (hexagonal architecture), Next.js 15 web app (Turborepo + tRPC), and an Expo mobile app — all orchestrated with Docker Swarm and Traefik.",
+        "pt-BR": "Plataforma full-stack de gestão financeira pessoal com inteligência artificial. Importação de extratos bancários via CSV, categorização automática de transações, dashboard de analytics financeiro e chatbot com IA via SSE streaming. Monorepo com API NestJS (arquitetura hexagonal), web app Next.js 15 (Turborepo + tRPC) e app mobile Expo — tudo orquestrado com Docker Swarm e Traefik.",
+      } as LocalizedText,
+      technologies: [
+        "TypeScript",
+        "NestJS",
+        "Next.js",
+        "React Native",
+        "PostgreSQL",
+        "Prisma",
+        "Docker",
+      ],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/felipersas/finance",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "",
+    },
+    {
       title: "Fasty-ORM",
       href: "https://github.com/felipersas/fasty-orm",
       dates: { en: "Dec 2024 - Present", "pt-BR": "Dez 2024 - Presente" } as LocalizedText,
@@ -220,60 +302,6 @@ export const DATA = {
         {
           type: "Source",
           href: "https://github.com/felipersas/ml-engine-rust",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "",
-    },
-    {
-      title: "PayFlow",
-      href: "https://github.com/felipersas/payflow",
-      dates: { en: "Apr 2026 - Present", "pt-BR": "Abr 2026 - Presente" } as LocalizedText,
-      active: true,
-      description: {
-        en: "A microservices-based financial transfer system built with Go, featuring saga pattern orchestration via RabbitMQ, DDD architecture, and distributed tracing. Comprises three services (user, account, transfer) with idempotent operations, circuit breaker, and OpenTelemetry integration.",
-        "pt-BR": "Sistema de transferências financeiras baseado em microsserviços construído com Go, com orquestração via saga pattern usando RabbitMQ, arquitetura DDD e distributed tracing. Composto por três serviços (user, account, transfer) com operações idempotentes, circuit breaker e integração com OpenTelemetry.",
-      } as LocalizedText,
-      technologies: [
-        "Go",
-        "PostgreSQL",
-        "RabbitMQ",
-        "Redis",
-        "Docker",
-        "OpenTelemetry",
-      ],
-      links: [
-        {
-          type: "Source",
-          href: "https://github.com/felipersas/payflow",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "",
-    },
-    {
-      title: "Outage Detector",
-      href: "https://github.com/felipersas/outage-detector",
-      dates: { en: "Mar 2026 - Present", "pt-BR": "Mar 2026 - Presente" } as LocalizedText,
-      active: true,
-      description: {
-        en: "A serverless website monitoring platform on AWS using SST v4. Features real-time outage detection via Lambda cron jobs, Telegram bot notifications, DynamoDB state management, and a Next.js dashboard with Cognito authentication.",
-        "pt-BR": "Plataforma serverless de monitoramento de websites na AWS usando SST v4. Detecção de quedas em tempo real via Lambda cron jobs, notificações por bot do Telegram, gerenciamento de estado no DynamoDB e dashboard Next.js com autenticação Cognito.",
-      } as LocalizedText,
-      technologies: [
-        "TypeScript",
-        "AWS",
-        "SST",
-        "Next.js",
-        "DynamoDB",
-        "Lambda",
-      ],
-      links: [
-        {
-          type: "Source",
-          href: "https://github.com/felipersas/outage-detector",
           icon: <Icons.github className="size-3" />,
         },
       ],
