@@ -27,7 +27,8 @@
   },
   "navbar": {
     "theme": "Theme",
-    "language": "Language"
+    "language": "Language",
+    "resume": "Resume"
   },
   "music": {
     "title": "Lo-Fi Player",
