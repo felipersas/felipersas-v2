@@ -27,7 +27,8 @@
   },
   "navbar": {
     "theme": "Tema",
-    "language": "Idioma"
+    "language": "Idioma",
+    "resume": "Currículo"
   },
   "music": {
     "title": "Lo-Fi Player",
