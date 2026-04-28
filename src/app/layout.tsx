@@ -11,6 +11,7 @@ import { MusicPlayerProvider } from "@/hooks/use-music-player";
 import { MusicPlayer } from "@/components/music-player/music-player";
 import { playlist } from "@/data/playlist";
 import { TranslationProvider } from "@/hooks/use-translation";
+import { Analytics } from "@vercel/analytics/next"
 
 const geist = Geist({
   subsets: ["latin"],
@@ -50,10 +51,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  twitter: {
-    title: `${DATA.name}`,
-    card: "summary_large_image",
-  },
   verification: {
     google: "",
     yandex: "",
@@ -74,6 +71,7 @@ export default function RootLayout({
           geistMono.variable
         )}
       >
+        <Analytics />
         <ThemeProvider attribute="class" defaultTheme="light">
           <TranslationProvider>
             <MusicPlayerProvider defaultPlaylist={playlist}>
