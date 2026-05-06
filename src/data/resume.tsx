@@ -179,6 +179,34 @@ export const DATA = {
   ],
   projects: [
     {
+      title: "Food Delivery Microservices",
+      href: "https://github.com/felipersas/food-delivery-microservices",
+      dates: { en: "May 2026 - Present", "pt-BR": "Mai 2026 - Presente" } as LocalizedText,
+      active: true,
+      description: {
+        en: "A comprehensive food delivery platform built as distributed microservices with NestJS. Implements DDD architecture with TypeORM, PostgreSQL, and Redis. Features six independent services (customer, restaurant, order, kitchen, payment, gateway) with role-based authentication, resource ownership validation, and complete domain modeling including aggregates, value objects, and domain events. Orchestrated via Docker Compose with production-ready configuration.",
+        "pt-BR": "Plataforma completa de delivery de comida construída como microsserviços distribuídos com NestJS. Implementa arquitetura DDD com TypeORM, PostgreSQL e Redis. Seis serviços independentes (customer, restaurant, order, kitchen, payment, gateway) com autenticação baseada em roles, validação de ownership de recursos e modelagem completa de domínio incluindo agregados, value objects e domain events. Orquestrado via Docker Compose com configuração production-ready.",
+      } as LocalizedText,
+      technologies: [
+        "TypeScript",
+        "NestJS",
+        "TypeORM",
+        "PostgreSQL",
+        "Redis",
+        "RabbitMQ",
+        "Docker",
+      ],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/felipersas/food-delivery-microservices",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "",
+    },
+    {
       title: "PayFlow",
       href: "https://github.com/felipersas/payflow",
       dates: { en: "Apr 2026 - Present", "pt-BR": "Abr 2026 - Presente" } as LocalizedText,
@@ -205,7 +233,7 @@ export const DATA = {
       image: "",
       video: "",
     },
-     {
+    {
       title: "Outage Detector",
       href: "https://github.com/felipersas/outage-detector",
       dates: { en: "Mar 2026 - Present", "pt-BR": "Mar 2026 - Presente" } as LocalizedText,
@@ -254,6 +282,30 @@ export const DATA = {
         {
           type: "Source",
           href: "https://github.com/felipersas/finance",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "",
+    },
+    {
+      title: "DevBridge",
+      href: "https://github.com/felipersas/devbridge",
+      dates: { en: "Apr 2026 - Present", "pt-BR": "Abr 2026 - Presente" } as LocalizedText,
+      active: true,
+      description: {
+        en: "A Go CLI tool for seamless remote development bridging. Enables SSH session management with tmux integration, Termux support for mobile development, and push notifications for long-running commands. Features shell completion (bash, zsh, fish, PowerShell), notifier wait mechanisms, and intent-based session management for Android devices.",
+        "pt-BR": "Ferramenta CLI em Go para ponte de desenvolvimento remoto. Permite gerenciamento de sessões SSH com integração tmux, suporte Termux para desenvolvimento mobile e notificações push para comandos de longa duração. Features incluem completion de shell (bash, zsh, fish, PowerShell), mecanismos de wait para notificadores e gerenciamento de sessões baseado em intents para Android.",
+      } as LocalizedText,
+      technologies: [
+        "Go",
+        "SSH",
+        "Termux",
+      ],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/felipersas/devbridge",
           icon: <Icons.github className="size-3" />,
         },
       ],
