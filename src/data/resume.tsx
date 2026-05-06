@@ -16,6 +16,7 @@ import { Aws } from "@/components/ui/svgs/aws";
 import { TailwindCSS } from "@/components/ui/svgs/tailwindcss";
 import { Grafana } from "@/components/ui/svgs/grafana";
 import { Prometheus } from "@/components/ui/svgs/prometheus";
+import { RabbitMQ } from "@/components/ui/svgs/rabbitmq";
 import { Linux } from "@/components/ui/svgs/linux";
 import type { Locale } from "@/hooks/use-translation";
 
@@ -58,6 +59,7 @@ export const DATA = {
     { name: "TailwindCSS", icon: TailwindCSS },
     { name: "Grafana", icon: Grafana },
     { name: "Prometheus", icon: Prometheus },
+    { name: "RabbitMQ", icon: RabbitMQ },
     { name: "Linux", icon: Linux },
   ],
   navbar: [
