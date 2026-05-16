@@ -101,32 +101,28 @@ export const DATA = {
       end: { en: "Present", "pt-BR": "Presente" } as LocalizedText,
       bullets: [
         {
-          en: "Built 3 full-stack systems from scratch to production using TypeScript, Next.js, NestJS, MySQL, Docker, and Prisma ORM",
-          "pt-BR": "Desenvolvimento de 3 sistemas completos do zero ao deploy em produção com TypeScript, Next.js, NestJS, MySQL, Docker e Prisma ORM",
+          en: "Architected 3 systems with modular monolith (NestJS, DDD), Next.js, CI/CD, and Docker",
+          "pt-BR": "Arquitetura de 3 sistemas com monolito modular (NestJS, DDD), Next.js, CI/CD e Docker",
         } as LocalizedText,
         {
-          en: "Automated 40+ monthly hours of manual work in a legal system with bulk import, bank processing, and invoice generation",
-          "pt-BR": "Automação de 40+ horas mensais de trabalho manual em sistema jurídico com importação em massa, processamento bancário e emissão de notas fiscais",
+          en: "REST APIs with NestJS, JWT authentication, and customizable granular permissions per module",
+          "pt-BR": "APIs REST com NestJS, autenticação JWT e permissões granulares customizáveis por módulo",
         } as LocalizedText,
         {
-          en: "Optimized aggregation query from 5s to 2s (60% improvement) using views and MySQL indexing",
-          "pt-BR": "Otimização de query de agregação de 5s para 2s (60% de melhoria) usando views e indexação MySQL",
+          en: "Next.js front-end with code splitting, Server Components, memoization, lazy loading, and TanStack Query — avg 250ms load time",
+          "pt-BR": "Desenvolvimento de front-end com Next.js: code splitting, Server Components, memoização, lazy loading e TanStack Query — carregamento médio de 250ms",
         } as LocalizedText,
         {
-          en: "Reduced dashboard load time from 3s to 1.4s (53%) using memoization, lazy loading, and dynamic imports",
-          "pt-BR": "Redução do tempo de carregamento de dashboard de 3s para 1.4s (53%) com memoização, lazy loading e imports dinâmicos",
+          en: "Database optimization: 95% query time reduction (5s to 240ms) with MySQL views, indexing, and pagination",
+          "pt-BR": "Otimização de banco de dados: redução de 95% no tempo de query (5s para 240ms) com MySQL views, indexação e paginação",
         } as LocalizedText,
         {
-          en: "Implemented modular monolith architecture with NestJS, DDD, JWT authentication, granular permissions, and CI/CD with Docker",
-          "pt-BR": "Arquitetura de monolito modular com NestJS, DDD, autenticação JWT, permissões granulares e CI/CD com Docker",
+          en: "Automated 40+ monthly hours in legal system via bulk import, bank processing, and invoice generation",
+          "pt-BR": "Automação de 40+ horas mensais em sistema jurídico via importação em massa, processamento bancário e emissão de notas fiscais",
         } as LocalizedText,
         {
-          en: "Developed 2 mobile apps with React Native and Expo, including full payment flow implementation",
-          "pt-BR": "Desenvolvimento de 2 apps mobile com React Native e Expo, incluindo fluxo completo de pagamentos",
-        } as LocalizedText,
-        {
-          en: "Integrated payment gateways — Stripe (credit card) and eRede (credit card and Pix) — in web and mobile applications",
-          "pt-BR": "Integração de gateways de pagamento — Stripe (cartão) e eRede (cartão e Pix) — em aplicações web e mobile",
+          en: "Developed and maintained 2 React Native/Expo apps with Stripe and eRede/Pix payment gateways",
+          "pt-BR": "Desenvolvimento e manutenção de 2 apps React Native/Expo com gateways Stripe e eRede/Pix integrados",
         } as LocalizedText,
       ],
     },
@@ -141,16 +137,16 @@ export const DATA = {
       end: { en: "Present", "pt-BR": "Presente" } as LocalizedText,
       bullets: [
         {
-          en: "Developed responsive landing pages with SEO and production deployment",
-          "pt-BR": "Desenvolvimento de landing pages responsivas com SEO e deploy em produção",
+          en: "AI real estate agent in GoHighLevel using Mastra AI and MCP, automating lead qualification, WhatsApp, and property recommendations — replaced multiple SaaSs",
+          "pt-BR": "Agente imobiliário com IA em GoHighLevel usando Mastra AI e MCP, automatizando qualificação de leads, WhatsApp e recomendação de imóveis — substituiu múltiplos SaaSs",
         } as LocalizedText,
         {
-          en: "Built GoHighLevel integration system using Mastra AI and MCP server for a specialized agent — answers questions, processes forms, sends WhatsApp messages, and displays property catalogs",
-          "pt-BR": "Sistema de integração com GoHighLevel usando Mastra AI e MCP server para agente especializado — responde perguntas, processa formulários, envia WhatsApp e exibe catálogos de imóveis",
+          en: "Responsive landing pages deployed to production for clients",
+          "pt-BR": "Landing pages responsivas com deploy em produção para clientes",
         } as LocalizedText,
         {
-          en: "Integrated qualification AI with property catalogs for intelligent property recommendations, unifying the ecosystem within GHL",
-          "pt-BR": "Integração entre IA de qualificação e catálogos de imóveis para recomendação inteligente de propriedades, unificando o ecossistema dentro do GHL",
+          en: "Monitoring with Grafana and Prometheus for production metrics and alerts",
+          "pt-BR": "Monitoramento com Grafana e Prometheus para métricas e alertas em produção",
         } as LocalizedText,
       ],
     },
