@@ -177,6 +177,36 @@ export const DATA = {
   ],
   projects: [
     {
+      title: "Real Time Crash Game",
+      href: "https://github.com/felipersas/crash-game",
+      dates: { en: "May 2026 - Present", "pt-BR": "Mai 2026 - Presente" } as LocalizedText,
+      active: true,
+      description: {
+        en: "Distributed real-time crash game built with a microservices architecture using NestJS, RabbitMQ, PostgreSQL, and Next.js. Implements event-driven communication, Saga-based distributed transactions, Inbox/Outbox patterns, and database-per-service isolation for reliable multiplayer betting flows. Features low-latency WebSocket synchronization, provably fair gameplay, centralized authentication with Kong + Keycloak, full observability with Prometheus and Grafana, and automated CI pipelines with 330+ unit, integration, and E2E tests using Playwright and Testcontainers.",
+        "pt-BR": "Crash game multiplayer em tempo real construído com arquitetura de microsserviços utilizando NestJS, RabbitMQ, PostgreSQL e Next.js. Implementa comunicação orientada a eventos, transações distribuídas com Saga Pattern, Inbox/Outbox patterns e isolamento database-per-service para fluxos de apostas confiáveis. Possui sincronização WebSocket de baixa latência, mecanismo provably fair, autenticação centralizada com Kong + Keycloak, observabilidade completa com Prometheus e Grafana, além de pipelines de CI automatizados com mais de 330 testes entre unitários, integração e E2E utilizando Playwright e Testcontainers.",
+      } as LocalizedText,
+      technologies: [
+        "TypeScript",
+        "NestJS",
+        "TypeORM",
+        "PostgreSQL",
+        "Redis",
+        "Grafana",
+        "Prometheus",
+        "RabbitMQ",
+        "Docker",
+      ],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/felipersas/food-delivery-microservices",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "",
+    },
+    {
       title: "Food Delivery Microservices",
       href: "https://github.com/felipersas/food-delivery-microservices",
       dates: { en: "May 2026 - Present", "pt-BR": "Mai 2026 - Presente" } as LocalizedText,
