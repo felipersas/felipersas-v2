@@ -1,5 +1,3 @@
-"use client";
-
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
@@ -44,7 +42,6 @@ export function ProjectCard({
               key={idx}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
             >
               <Badge
                 className="flex items-center gap-1.5 text-xs bg-black text-white hover:bg-black/90"

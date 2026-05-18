@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect } from 'react'
 
 import en from '@/i18n/locales/en.json'
 import ptBR from '@/i18n/locales/pt-BR.json'
@@ -39,19 +39,22 @@ function getNestedValue(obj: Record<string, unknown>, path: string): string {
   return typeof current === 'string' ? current : path
 }
 
-export function TranslationProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(DEFAULT_LOCALE)
+export function TranslationProvider({ 
+  children, 
+  initialLocale = DEFAULT_LOCALE 
+}: { 
+  children: React.ReactNode;
+  initialLocale?: Locale;
+}) {
+  const [locale, setLocaleState] = useState<Locale>(initialLocale)
 
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY) as Locale | null
-    if (saved && translations[saved]) {
-      setLocaleState(saved)
-    }
-  }, [])
+    setLocaleState(initialLocale)
+  }, [initialLocale])
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale)
-    localStorage.setItem(STORAGE_KEY, newLocale)
+    document.cookie = `${STORAGE_KEY}=${newLocale}; path=/; max-age=31536000`
   }, [])
 
   const t = useCallback((key: string): string => {

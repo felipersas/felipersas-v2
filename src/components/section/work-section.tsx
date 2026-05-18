@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
+import Image from "next/image";
 import { useState } from "react";
 import {
   Accordion,
@@ -22,12 +23,16 @@ function LogoImage({ src, alt }: { src: string; alt: string }) {
   }
 
   return (
-    <img
-      src={src}
-      alt={alt}
-      className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border overflow-hidden object-contain flex-none"
-      onError={() => setImageError(true)}
-    />
+    <div className="size-8 md:size-10 flex-none relative">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 768px) 32px, 40px"
+        className="p-1 border rounded-full shadow ring-2 ring-border overflow-hidden object-contain"
+        onError={() => setImageError(true)}
+      />
+    </div>
   );
 }
 

@@ -28,7 +28,6 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  const [isInView, setIsInView] = useState(false)
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 })
   const [resolvedColor, setResolvedColor] = useState<string>("rgb(0, 0, 0)")
 
@@ -114,17 +113,6 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
     [squareSize, gridGap, maxOpacity]
   )
 
-  const updateSquares = useCallback(
-    (squares: Float32Array, deltaTime: number) => {
-      for (let i = 0; i < squares.length; i++) {
-        if (Math.random() < flickerChance * deltaTime) {
-          squares[i] = Math.random() * maxOpacity
-        }
-      }
-    },
-    [flickerChance, maxOpacity]
-  )
-
   const drawGrid = useCallback(
     (
       ctx: CanvasRenderingContext2D,
@@ -163,7 +151,6 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    let animationFrameId: number
     let gridParams: ReturnType<typeof setupCanvas>
 
     const updateCanvasSize = () => {
@@ -171,18 +158,7 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
       const newHeight = height || container.clientHeight
       setCanvasSize({ width: newWidth, height: newHeight })
       gridParams = setupCanvas(canvas, newWidth, newHeight)
-    }
 
-    updateCanvasSize()
-
-    let lastTime = 0
-    const animate = (time: number) => {
-      if (!isInView) return
-
-      const deltaTime = (time - lastTime) / 1000
-      lastTime = time
-
-      updateSquares(gridParams.squares, deltaTime)
       drawGrid(
         ctx,
         canvas.width,
@@ -192,8 +168,9 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
         gridParams.squares,
         gridParams.dpr
       )
-      animationFrameId = requestAnimationFrame(animate)
     }
+
+    updateCanvasSize()
 
     const resizeObserver = new ResizeObserver(() => {
       updateCanvasSize()
@@ -201,25 +178,10 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
 
     resizeObserver.observe(container)
 
-    const intersectionObserver = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting)
-      },
-      { threshold: 0 }
-    )
-
-    intersectionObserver.observe(canvas)
-
-    if (isInView) {
-      animationFrameId = requestAnimationFrame(animate)
-    }
-
     return () => {
-      cancelAnimationFrame(animationFrameId)
       resizeObserver.disconnect()
-      intersectionObserver.disconnect()
     }
-  }, [setupCanvas, updateSquares, drawGrid, width, height, isInView])
+  }, [setupCanvas, drawGrid, width, height])
 
   return (
     <div
