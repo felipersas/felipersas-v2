@@ -1,18 +1,10 @@
-import { cookies } from 'next/headers'
 import en from '@/i18n/locales/en.json'
 import ptBR from '@/i18n/locales/pt-BR.json'
 import { Locale } from '@/hooks/use-translation'
 
 const translations: Record<Locale, typeof en> = { en, 'pt-BR': ptBR }
 
-export async function getLocaleServer(): Promise<Locale> {
-  const cookieStore = await cookies()
-  const locale = cookieStore.get('portfolio-locale')?.value as Locale
-  return locale === 'en' || locale === 'pt-BR' ? locale : 'pt-BR'
-}
-
-export async function getTranslationsServer() {
-  const locale = await getLocaleServer()
+export async function getTranslationsServer(locale: Locale) {
   return {
     locale,
     t: (key: string) => {

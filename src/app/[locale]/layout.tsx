@@ -5,14 +5,14 @@ import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 import { MusicPlayerProvider } from "@/hooks/use-music-player";
 import { MusicPlayer } from "@/components/music-player/music-player";
 import { playlist } from "@/data/playlist";
 import { TranslationProvider } from "@/hooks/use-translation";
-import { getLocaleServer } from "@/lib/i18n-server";
 import { Analytics } from "@vercel/analytics/next"
+import { Locale } from "@/hooks/use-translation";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -66,12 +66,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
-  children,
-}: Readonly<{
+export default async function RootLayout(props: {
   children: React.ReactNode;
-}>) {
-  const locale = await getLocaleServer();
+  params: Promise<{ locale: string }>;
+}) {
+  const { children } = props;
+  const params = await props.params;
+  const locale = params.locale as Locale;
 
   return (
     <html lang={locale} suppressHydrationWarning>
