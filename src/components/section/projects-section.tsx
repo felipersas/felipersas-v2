@@ -1,10 +1,7 @@
-import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
 import { DATA, localize } from "@/data/resume";
 import { getTranslationsServer } from "@/lib/i18n-server";
 import { Locale } from "@/hooks/use-translation";
-
-const BLUR_FADE_DELAY = 0.04;
 
 export default async function ProjectsSection({ locale }: { locale: Locale }) {
     const { t } = await getTranslationsServer(locale)
@@ -32,24 +29,21 @@ export default async function ProjectsSection({ locale }: { locale: Locale }) {
                         </p>
                     </div>
                 </div>
-                <BlurFade delay={BLUR_FADE_DELAY * 12}>
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto auto-rows-fr">
-                        {DATA.projects.map((project, id) => (
-                            <ProjectCard
-                                href={project.href}
-                                key={project.title}
-                                title={project.title}
-                                description={localize(project.description, locale)}
-                                dates={localize(project.dates, locale)}
-                                tags={project.technologies}
-                                links={project.links}
-                                className="h-full"
-                            />
-                        ))}
-                    </div>
-                </BlurFade>
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto auto-rows-fr">
+                    {DATA.projects.map((project) => (
+                        <ProjectCard
+                            href={project.href}
+                            key={project.title}
+                            title={project.title}
+                            description={localize(project.description, locale)}
+                            dates={localize(project.dates, locale)}
+                            tags={project.technologies}
+                            links={project.links}
+                            className="h-full"
+                        />
+                    ))}
+                </div>
             </div>
         </section>
     );
 }
-
