@@ -28,17 +28,25 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   title: {
-    default: DATA.name,
+    default: `${DATA.name} | Desenvolvedor Full Stack em Sorocaba, SP`,
     template: `%s | ${DATA.name}`,
   },
-  description: DATA.description.en,
+  description: DATA.description["pt-BR"],
   openGraph: {
-    title: `${DATA.name}`,
-    description: DATA.description.en,
+    title: `${DATA.name} | Desenvolvedor Full Stack em Sorocaba, SP`,
+    description: DATA.description["pt-BR"],
     url: DATA.url,
     siteName: `${DATA.name}`,
-    locale: "en_US",
+    locale: "pt_BR",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${DATA.name} | Desenvolvedor Full Stack em Sorocaba, SP`,
+    description: DATA.description["pt-BR"],
+  },
+  alternates: {
+    canonical: DATA.url,
   },
   robots: {
     index: true,
@@ -71,6 +79,26 @@ export default function RootLayout({
           geistMono.variable
         )}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: DATA.name,
+              jobTitle: "Desenvolvedor Full Stack",
+              url: DATA.url,
+              sameAs: [
+                "https://github.com/felipersas",
+                "https://linkedin.com/in/felipe-marques-a748b9299",
+              ],
+              worksFor: {
+                "@type": "Organization",
+                name: "MindGroup Consulting",
+              },
+            }),
+          }}
+        />
         <Analytics />
         <ThemeProvider attribute="class" defaultTheme="light">
           <TranslationProvider>
