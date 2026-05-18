@@ -11,15 +11,18 @@ import {
 import { DATA, localize } from "@/data/resume";
 import { useTranslation } from "@/hooks/use-translation";
 import { FileDown, Languages } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const { locale, setLocale, t } = useTranslation()
   const router = useRouter()
+  const pathname = usePathname()
 
   const toggleLocale = () => {
-    setLocale(locale === 'en' ? 'pt-BR' : 'en')
-    router.refresh()
+    const newLocale = locale === 'en' ? 'pt-BR' : 'en'
+    setLocale(newLocale)
+    const newPathname = pathname.replace(`/${locale}`, `/${newLocale}`)
+    router.push(newPathname)
   }
 
   return (

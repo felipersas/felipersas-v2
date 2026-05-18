@@ -11,11 +11,18 @@ import ProjectsSection from "@/components/section/projects-section";
 import WorkSection from "@/components/section/work-section";
 import { ArrowUpRight } from "lucide-react";
 import { getTranslationsServer } from "@/lib/i18n-server";
+import { Locale } from "@/hooks/use-translation";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default async function Page() {
-  const { t, locale } = await getTranslationsServer()
+export async function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'pt-BR' }];
+}
+
+export default async function Page(props: { params: Promise<{ locale: string }> }) {
+  const params = await props.params;
+  const locale = params.locale as Locale;
+  const { t } = await getTranslationsServer(locale)
   return (
     <main className="min-h-dvh flex flex-col gap-14 relative">
       <section id="hero">
@@ -137,12 +144,12 @@ export default async function Page() {
       </section>
       <section id="projects">
         <BlurFade delay={BLUR_FADE_DELAY * 11}>
-          <ProjectsSection />
+          <ProjectsSection locale={locale} />
         </BlurFade>
       </section>
       <section id="contact">
         <BlurFade delay={BLUR_FADE_DELAY * 13}>
-          <ContactSection />
+          <ContactSection locale={locale} />
         </BlurFade>
       </section>
     </main>

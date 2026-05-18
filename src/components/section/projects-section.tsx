@@ -2,11 +2,12 @@ import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
 import { DATA, localize } from "@/data/resume";
 import { getTranslationsServer } from "@/lib/i18n-server";
+import { Locale } from "@/hooks/use-translation";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default async function ProjectsSection() {
-    const { t, locale } = await getTranslationsServer()
+export default async function ProjectsSection({ locale }: { locale: Locale }) {
+    const { t } = await getTranslationsServer(locale)
     return (
         <section id="projects">
             <div className="flex min-h-0 flex-col gap-y-8">
