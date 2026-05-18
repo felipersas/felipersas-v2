@@ -34,7 +34,7 @@ function LogoImage({ src, alt }: { src: string; alt: string }) {
 export default function WorkSection() {
   const { t, locale } = useTranslation()
   return (
-    <Accordion type="single" collapsible className="w-full grid gap-6">
+    <Accordion type="multiple" className="w-full grid gap-6" defaultValue={DATA.work.map((work) => work.company)}>
       {DATA.work.map((work) => (
         <AccordionItem
           key={work.company}
@@ -90,4 +90,3 @@ export default function WorkSection() {
     </Accordion>
   );
 }
-
