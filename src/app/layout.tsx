@@ -11,6 +11,7 @@ import { MusicPlayerProvider } from "@/hooks/use-music-player";
 import { MusicPlayer } from "@/components/music-player/music-player";
 import { playlist } from "@/data/playlist";
 import { TranslationProvider } from "@/hooks/use-translation";
+import { getLocaleServer } from "@/lib/i18n-server";
 import { Analytics } from "@vercel/analytics/next"
 
 const geist = Geist({
@@ -65,13 +66,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocaleServer();
+
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased relative",
@@ -101,7 +104,7 @@ export default function RootLayout({
         />
         <Analytics />
         <ThemeProvider attribute="class" defaultTheme="light">
-          <TranslationProvider>
+          <TranslationProvider initialLocale={locale}>
             <MusicPlayerProvider defaultPlaylist={playlist}>
               <TooltipProvider delayDuration={0}>
                 <div className="absolute inset-0 top-0 left-0 right-0 h-[100px] overflow-hidden z-0">

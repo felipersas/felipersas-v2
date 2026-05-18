@@ -1,13 +1,12 @@
-"use client"
 import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
 import { DATA, localize } from "@/data/resume";
-import { useTranslation } from "@/hooks/use-translation";
+import { getTranslationsServer } from "@/lib/i18n-server";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default function ProjectsSection() {
-    const { t, locale } = useTranslation()
+export default async function ProjectsSection() {
+    const { t, locale } = await getTranslationsServer()
     return (
         <section id="projects">
             <div className="flex min-h-0 flex-col gap-y-8">
@@ -32,13 +31,9 @@ export default function ProjectsSection() {
                         </p>
                     </div>
                 </div>
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto auto-rows-fr">
-                    {DATA.projects.map((project, id) => (
-                        <BlurFade
-                            key={project.title}
-                            delay={BLUR_FADE_DELAY * 12 + id * 0.05}
-                            className="h-full"
-                        >
+                <BlurFade delay={BLUR_FADE_DELAY * 12}>
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto auto-rows-fr">
+                        {DATA.projects.map((project, id) => (
                             <ProjectCard
                                 href={project.href}
                                 key={project.title}
@@ -47,10 +42,11 @@ export default function ProjectsSection() {
                                 dates={localize(project.dates, locale)}
                                 tags={project.technologies}
                                 links={project.links}
+                                className="h-full"
                             />
-                        </BlurFade>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                </BlurFade>
             </div>
         </section>
     );

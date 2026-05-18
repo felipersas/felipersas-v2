@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-"use client"
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Image from "next/image";
 import { DATA, localize } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
@@ -10,12 +10,12 @@ import ContactSection from "@/components/section/contact-section";
 import ProjectsSection from "@/components/section/projects-section";
 import WorkSection from "@/components/section/work-section";
 import { ArrowUpRight } from "lucide-react";
-import { useTranslation } from "@/hooks/use-translation";
+import { getTranslationsServer } from "@/lib/i18n-server";
 
 const BLUR_FADE_DELAY = 0.04;
 
-export default function Page() {
-  const { t, locale } = useTranslation()
+export default async function Page() {
+  const { t, locale } = await getTranslationsServer()
   return (
     <main className="min-h-dvh flex flex-col gap-14 relative">
       <section id="hero">
@@ -73,13 +73,11 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 7}>
             <h2 className="text-xl font-bold">{t('sections.education')}</h2>
           </BlurFade>
-          <div className="flex flex-col gap-8">
-            {DATA.education.map((education, index) => (
-              <BlurFade
-                key={education.school}
-                delay={BLUR_FADE_DELAY * 8 + index * 0.05}
-              >
+          <BlurFade delay={BLUR_FADE_DELAY * 8}>
+            <div className="flex flex-col gap-8">
+              {DATA.education.map((education, index) => (
                 <Link
+                  key={education.school}
                   href={education.href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -87,11 +85,15 @@ export default function Page() {
                 >
                   <div className="flex items-center gap-x-3 flex-1 min-w-0">
                     {education.logoUrl ? (
-                      <img
-                        src={education.logoUrl}
-                        alt={education.school}
-                        className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border overflow-hidden object-contain flex-none"
-                      />
+                      <div className="size-8 md:size-10 flex-none relative">
+                        <Image
+                          src={education.logoUrl}
+                          alt={education.school}
+                          fill
+                          sizes="(max-width: 768px) 32px, 40px"
+                          className="p-1 border rounded-full shadow ring-2 ring-border overflow-hidden object-contain"
+                        />
+                      </div>
                     ) : (
                       <div className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border bg-muted flex-none" />
                     )}
@@ -111,9 +113,9 @@ export default function Page() {
                     </span>
                   </div>
                 </Link>
-              </BlurFade>
-            ))}
-          </div>
+              ))}
+            </div>
+          </BlurFade>
         </div>
       </section>
       <section id="skills">
@@ -121,16 +123,16 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
             <h2 className="text-xl font-bold">{t('sections.skills')}</h2>
           </BlurFade>
-          <div className="flex flex-wrap gap-2">
-            {DATA.skills.map((skill, id) => (
-              <BlurFade key={skill.name} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                <div className="border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center gap-2">
+          <BlurFade delay={BLUR_FADE_DELAY * 10}>
+            <div className="flex flex-wrap gap-2">
+              {DATA.skills.map((skill, id) => (
+                <div key={skill.name} className="border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center gap-2">
                   {skill.icon && <skill.icon className="size-4 rounded overflow-hidden object-contain" />}
                   <span className="text-foreground text-sm font-medium">{skill.name}</span>
                 </div>
-              </BlurFade>
-            ))}
-          </div>
+              ))}
+            </div>
+          </BlurFade>
         </div>
       </section>
       <section id="projects">
