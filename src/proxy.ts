@@ -18,12 +18,12 @@ export function proxy(request: NextRequest) {
   const cookieLocale = request.cookies.get('portfolio-locale')?.value as Locale | undefined
   if (cookieLocale && locales.includes(cookieLocale)) {
     request.nextUrl.pathname = `/${cookieLocale}${pathname}`
-    return NextResponse.redirect(request.nextUrl)
+    return NextResponse.rewrite(request.nextUrl)
   }
 
-  // Redirect to default locale if none found
+  // Rewrite to default locale if none found
   request.nextUrl.pathname = `/${defaultLocale}${pathname}`
-  return NextResponse.redirect(request.nextUrl)
+  return NextResponse.rewrite(request.nextUrl)
 }
 
 export const config = {

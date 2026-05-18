@@ -21,7 +21,14 @@ export default function Navbar() {
   const toggleLocale = () => {
     const newLocale = locale === 'en' ? 'pt-BR' : 'en'
     setLocale(newLocale)
-    const newPathname = pathname.replace(`/${locale}`, `/${newLocale}`)
+    
+    let newPathname = pathname
+    if (pathname.startsWith(`/${locale}`)) {
+      newPathname = pathname.replace(`/${locale}`, `/${newLocale}`)
+    } else {
+      newPathname = `/${newLocale}${pathname === '/' ? '' : pathname}`
+    }
+    
     router.push(newPathname)
   }
 
