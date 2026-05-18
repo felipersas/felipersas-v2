@@ -30,7 +30,7 @@ export function localize(text: LocalizedText | string, locale: Locale): string {
 export const DATA = {
   name: "Felipe Marques",
   initials: "FM",
-  url: "https://felipersas.com",
+  url: "https://felipersas-dev.vercel.app",
   location: "Sorocaba, SP, Brazil",
   locationLink: "https://www.google.com/maps/place/Sorocaba",
   description: {
