@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { DATA, localize } from "@/data/resume";
 import Link from "next/link";
@@ -43,10 +42,17 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
               />
             </div>
             <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2">
-              <Avatar className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted">
-                <AvatarImage alt={`${DATA.name} — Desenvolvedor Full Stack`} src={DATA.avatarUrl} />
-                <AvatarFallback>{DATA.initials}</AvatarFallback>
-              </Avatar>
+              <div className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted overflow-hidden relative flex-shrink-0">
+                <Image
+                  src={DATA.avatarUrl}
+                  alt={`${DATA.name} — Full Stack Developer`}
+                  fill
+                  sizes="(max-width: 768px) 96px, 128px"
+                  className="object-cover rounded-full"
+                  priority
+                  fetchPriority="high"
+                />
+              </div>
             </BlurFade>
           </div>
         </div>

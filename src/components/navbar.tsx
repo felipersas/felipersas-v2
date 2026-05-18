@@ -42,11 +42,12 @@ export default function Navbar() {
               <TooltipTrigger asChild>
                 <a
                   href={item.href}
+                  aria-label={typeof item.label === 'string' ? item.label : item.label[locale] || item.label['en']}
                   target={isExternal ? "_blank" : undefined}
                   rel={isExternal ? "noopener noreferrer" : undefined}
                 >
                   <DockIcon className="rounded-3xl cursor-pointer size-full bg-background p-0 text-muted-foreground hover:text-foreground hover:bg-muted backdrop-blur-3xl border border-border transition-colors">
-                    <item.icon className="size-full rounded-sm overflow-hidden object-contain" />
+                    <item.icon className="size-full rounded-sm overflow-hidden object-contain" aria-hidden="true" />
                   </DockIcon>
                 </a>
               </TooltipTrigger>
@@ -75,11 +76,12 @@ export default function Navbar() {
                 <TooltipTrigger asChild>
                   <a
                     href={social.url}
+                    aria-label={name}
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
                   >
                     <DockIcon className="rounded-3xl cursor-pointer size-full bg-background p-0 text-muted-foreground hover:text-foreground hover:bg-muted backdrop-blur-3xl border border-border transition-colors">
-                      <IconComponent className="size-full rounded-sm overflow-hidden object-contain" />
+                      <IconComponent className="size-full rounded-sm overflow-hidden object-contain" aria-hidden="true" />
                     </DockIcon>
                   </a>
                 </TooltipTrigger>
@@ -100,9 +102,13 @@ export default function Navbar() {
         />
         <Tooltip>
           <TooltipTrigger asChild>
-            <a href={locale === 'en' ? '/resume_en.pdf' : '/curriculo.pdf'} download>
+            <a
+              href={locale === 'en' ? '/resume_en.pdf' : '/curriculo.pdf'}
+              aria-label={t('navbar.resume')}
+              download
+            >
               <DockIcon className="rounded-3xl cursor-pointer size-full bg-background p-0 text-muted-foreground hover:text-foreground hover:bg-muted backdrop-blur-3xl border border-border transition-colors">
-                <FileDown className="size-5" />
+                <FileDown className="size-5" aria-hidden="true" />
               </DockIcon>
             </a>
           </TooltipTrigger>
@@ -117,9 +123,12 @@ export default function Navbar() {
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
-            <button onClick={toggleLocale}>
+            <button
+              onClick={toggleLocale}
+              aria-label={locale === 'en' ? 'Switch to Portuguese' : 'Mudar para Inglês'}
+            >
               <DockIcon className="rounded-3xl cursor-pointer size-full bg-background p-0 text-muted-foreground hover:text-foreground hover:bg-muted backdrop-blur-3xl border border-border transition-colors">
-                <Languages className="size-5" />
+                <Languages className="size-5" aria-hidden="true" />
               </DockIcon>
             </button>
           </TooltipTrigger>
