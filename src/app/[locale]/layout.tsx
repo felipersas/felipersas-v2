@@ -6,65 +6,82 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
-import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 import { MusicPlayerProvider } from "@/hooks/use-music-player";
 import { MusicPlayer } from "@/components/music-player/music-player";
 import { playlist } from "@/data/playlist";
-import { TranslationProvider } from "@/hooks/use-translation";
-import { Analytics } from "@vercel/analytics/next"
-import { Locale } from "@/hooks/use-translation";
+import { TranslationProvider, Locale } from "@/hooks/use-translation";
+import { Analytics } from "@vercel/analytics/next";
+import { FlickeringGridClient } from "@/components/flickering-grid-client";
 
 const geist = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500"],
   variable: "--font-mono",
+  display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(DATA.url),
-  title: {
-    default: `${DATA.name} | Desenvolvedor Full Stack em Sorocaba, SP`,
-    template: `%s | ${DATA.name}`,
-  },
-  description: DATA.description["pt-BR"],
-  openGraph: {
-    title: `${DATA.name} | Desenvolvedor Full Stack em Sorocaba, SP`,
-    description: DATA.description["pt-BR"],
-    url: DATA.url,
-    siteName: `${DATA.name}`,
-    locale: "pt_BR",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${DATA.name} | Desenvolvedor Full Stack em Sorocaba, SP`,
-    description: DATA.description["pt-BR"],
-  },
-  alternates: {
-    canonical: DATA.url,
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+export async function generateMetadata(
+  props: { params: Promise<{ locale: string }> }
+): Promise<Metadata> {
+  const { locale } = await props.params;
+  const isPtBR = locale === "pt-BR";
+
+  const title = isPtBR
+    ? `${DATA.name} | Desenvolvedor Full Stack em Sorocaba, SP`
+    : `${DATA.name} | Full Stack Developer — Sorocaba, Brazil`;
+  const description = isPtBR
+    ? DATA.description["pt-BR"]
+    : DATA.description["en"];
+  const canonicalUrl = `${DATA.url}/${locale}`;
+
+  return {
+    metadataBase: new URL(DATA.url),
+    title: {
+      default: title,
+      template: `%s | ${DATA.name}`,
+    },
+    description,
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: DATA.name,
+      locale: isPtBR ? "pt_BR" : "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        "pt-BR": `${DATA.url}/pt-BR`,
+        "en": `${DATA.url}/en`,
+        "x-default": `${DATA.url}/pt-BR`,
+      },
+    },
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
-  },
-  verification: {
-    google: "",
-    yandex: "",
-  },
-};
+  };
+}
 
 export default async function RootLayout(props: {
   children: React.ReactNode;
@@ -109,7 +126,7 @@ export default async function RootLayout(props: {
             <MusicPlayerProvider defaultPlaylist={playlist}>
               <TooltipProvider delayDuration={0}>
                 <div className="absolute inset-0 top-0 left-0 right-0 h-[100px] overflow-hidden z-0">
-                  <FlickeringGrid
+                <FlickeringGridClient
                     className="h-full w-full"
                     squareSize={2}
                     gridGap={2}
