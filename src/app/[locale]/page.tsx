@@ -1,6 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import BlurFade from "@/components/magicui/blur-fade";
-import BlurFadeText from "@/components/magicui/blur-fade-text";
 import Image from "next/image";
 import { DATA, localize } from "@/data/resume";
 import Link from "next/link";
@@ -11,8 +9,6 @@ import WorkSection from "@/components/section/work-section";
 import { ArrowUpRight } from "lucide-react";
 import { getTranslationsServer } from "@/lib/i18n-server";
 import { Locale } from "@/hooks/use-translation";
-
-const BLUR_FADE_DELAY = 0.04;
 
 export async function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'pt-BR' }];
@@ -28,20 +24,14 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
         <div className="mx-auto w-full max-w-2xl space-y-8">
           <div className="gap-2 gap-y-6 flex flex-col md:flex-row justify-between">
             <div className="gap-2 flex flex-col order-2 md:order-1">
-              <BlurFadeText
-                as="h1"
-                delay={BLUR_FADE_DELAY}
-                className="text-3xl font-semibold tracking-tighter sm:text-4xl lg:text-5xl"
-                yOffset={8}
-                text={`${t('hero.greeting')} ${DATA.name.split(" ")[0]}`}
-              />
-              <BlurFadeText
-                className="text-muted-foreground max-w-[600px] md:text-lg lg:text-xl"
-                delay={BLUR_FADE_DELAY}
-                text={localize(DATA.description, locale)}
-              />
+              <h1 className="anim-in anim-d1 text-3xl font-semibold tracking-tighter sm:text-4xl lg:text-5xl">
+                {t('hero.greeting')} {DATA.name.split(" ")[0]}
+              </h1>
+              <p className="anim-in anim-d2 text-muted-foreground max-w-[600px] md:text-lg lg:text-xl">
+                {localize(DATA.description, locale)}
+              </p>
             </div>
-            <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2">
+            <div className="anim-in anim-d1 order-1 md:order-2">
               <div className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted overflow-hidden relative flex-shrink-0">
                 <Image
                   src={DATA.avatarUrl}
@@ -53,42 +43,42 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
                   fetchPriority="high"
                 />
               </div>
-            </BlurFade>
+            </div>
           </div>
         </div>
       </section>
       <section id="about">
         <div className="flex min-h-0 flex-col gap-y-4">
-          <BlurFade delay={BLUR_FADE_DELAY * 3}>
+          <div className="anim-in anim-d3">
             <h2 className="text-xl font-bold">{t('sections.about')}</h2>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 4}>
+          </div>
+          <div className="anim-in anim-d4">
             <div className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
               <Markdown>
                 {localize(DATA.summary, locale)}
               </Markdown>
             </div>
-          </BlurFade>
+          </div>
         </div>
       </section>
       <section id="work">
         <div className="flex min-h-0 flex-col gap-y-6">
-          <BlurFade delay={BLUR_FADE_DELAY * 5}>
+          <div className="anim-in anim-d5">
             <h2 className="text-xl font-bold">{t('sections.work')}</h2>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 6}>
+          </div>
+          <div className="anim-in anim-d6">
             <WorkSection />
-          </BlurFade>
+          </div>
         </div>
       </section>
       <section id="education">
         <div className="flex min-h-0 flex-col gap-y-6">
-          <BlurFade delay={BLUR_FADE_DELAY * 7}>
+          <div className="anim-in anim-d7">
             <h2 className="text-xl font-bold">{t('sections.education')}</h2>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 8}>
+          </div>
+          <div className="anim-in anim-d8">
             <div className="flex flex-col gap-8">
-              {DATA.education.map((education, index) => (
+              {DATA.education.map((education) => (
                 <Link
                   key={education.school}
                   href={education.href}
@@ -128,35 +118,35 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
                 </Link>
               ))}
             </div>
-          </BlurFade>
+          </div>
         </div>
       </section>
       <section id="skills">
         <div className="flex min-h-0 flex-col gap-y-4">
-          <BlurFade delay={BLUR_FADE_DELAY * 9}>
+          <div className="anim-in anim-d9">
             <h2 className="text-xl font-bold">{t('sections.skills')}</h2>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 10}>
+          </div>
+          <div className="anim-in anim-d10">
             <div className="flex flex-wrap gap-2">
-              {DATA.skills.map((skill, id) => (
+              {DATA.skills.map((skill) => (
                 <div key={skill.name} className="border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center gap-2">
                   {skill.icon && <skill.icon className="size-4 rounded overflow-hidden object-contain" />}
                   <span className="text-foreground text-sm font-medium">{skill.name}</span>
                 </div>
               ))}
             </div>
-          </BlurFade>
+          </div>
         </div>
       </section>
       <section id="projects">
-        <BlurFade delay={BLUR_FADE_DELAY * 11}>
+        <div className="anim-in anim-d11">
           <ProjectsSection locale={locale} />
-        </BlurFade>
+        </div>
       </section>
       <section id="contact">
-        <BlurFade delay={BLUR_FADE_DELAY * 13}>
+        <div className="anim-in anim-d13">
           <ContactSection locale={locale} />
-        </BlurFade>
+        </div>
       </section>
     </main>
   );
