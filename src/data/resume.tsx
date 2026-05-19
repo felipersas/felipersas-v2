@@ -18,6 +18,7 @@ import { Grafana } from "@/components/ui/svgs/grafana";
 import { Prometheus } from "@/components/ui/svgs/prometheus";
 import { RabbitMQ } from "@/components/ui/svgs/rabbitmq";
 import { Linux } from "@/components/ui/svgs/linux";
+import { Java } from "@/components/ui/svgs/java";
 import type { Locale } from "@/hooks/use-translation";
 
 export type LocalizedText = { en: string; "pt-BR": string };
@@ -34,12 +35,12 @@ export const DATA = {
   location: "Sorocaba, SP, Brazil",
   locationLink: "https://www.google.com/maps/place/Sorocaba",
   description: {
-    en: "Full Stack Developer from Sorocaba, Brazil. I build web applications with TypeScript, Next.js, NestJS, and Go.",
-    "pt-BR": "Desenvolvedor Full Stack de Sorocaba, SP. Construo aplicações web com TypeScript, Next.js, NestJS e Go.",
+    en: "Software Engineer building scalable systems with NestJS, Next.js, and AWS. Focused on backend architecture, DDD, and AI-driven automation.",
+    "pt-BR": "Engenheiro de Software construindo sistemas escaláveis com NestJS, Next.js e AWS. Focado em arquitetura backend, DDD e automação com IA.",
   } as LocalizedText,
   summary: {
-    en: "I'm from Sorocaba, Brazil. Started coding in high school through a technical program at SENAI, and it stuck — now I do it for work and for fun. Currently pursuing a degree in Systems Analysis & Development.\n\nMy daily stack is TypeScript, Next.js, NestJS, React, and Go, building systems from scratch to production. I like branching out too — I built a Rust ORM for Node.js (Fasty-ORM), an ML engine from scratch, and a Go microservices system, among other open-source projects.\n\nFree time: video games, anime, and way too much coffee.",
-    "pt-BR": "Sou de Sorocaba, SP. Comecei a programar no ensino médio fazendo o técnico no SENAI, e desde então é o que faço — tanto no trabalho quanto nos meus projetos pessoais. Atualmente curso Análise e Desenvolvimento de Sistemas.\n\nNo dia a dia trabalho com TypeScript, Next.js, NestJS, React e Go, construindo sistemas do zero até produção. Mas gosto de explorar outras paradas também — montei um ORM em Rust pro Node.js (Fasty-ORM), um engine de ML do zero e um sistema de microsserviços em Go, entre outros projetos open-source.\n\nNo tempo livre: vídeo game, anime e café demais.",
+    "en": "Software Engineer from Sorocaba, Brazil. Started coding in high school through a technical program at SENAI — now I build production systems for work and maintain open-source projects for fun. Currently pursuing a degree in Systems Analysis & Development.\n\nMy core stack is TypeScript, Next.js, NestJS, React, and Go, building systems from the ground up. I also built a real-time crash game for iGaming, using a microservices architecture. Distributed microservices in Go, Fasty-ORM (a Rust ORM for Node.js), among other open-source projects.\n\nFree time: video games, filmes, anime, and coffee.",
+    "pt-BR": "Engenheiro de Software de Sorocaba, SP. Comecei a programar no ensino médio pelo técnico do SENAI — hoje construo sistemas em produção no trabalho e mantenho projetos open-source por diversão. Atualmente curso Análise e Desenvolvimento de Sistemas.\n\nMinha stack principal é TypeScript, Next.js, NestJS, React e Go, construindo sistemas do zero. Também desenvolvi um crash game em tempo real para iGaming usando arquitetura de microsserviços. Microsserviços distribuídos em Go, além do Fasty-ORM (ORM em Rust para Node.js), entre outros projetos open-source.\n\nTempo livre: vídeo game, filmes, anime e café."
   } as LocalizedText,
   avatarUrl: "/me.png",
   skills: [
@@ -51,6 +52,7 @@ export const DATA = {
     { name: "Python", icon: Python },
     { name: "Go", icon: Golang },
     { name: "Rust", icon: Rust },
+    { name: "Java", icon: Java },
     { name: "Postgres", icon: Postgresql },
     { name: "MySQL", icon: Mysql },
     { name: "Prisma", icon: Prisma },
@@ -91,7 +93,7 @@ export const DATA = {
 
   work: [
     {
-      company: "MindGroup Consulting",
+      company: "MindGroup Consulting e Marketing",
       href: "https://mindgroup.com.br",
       badges: [],
       location: "Sorocaba, SP, Brazil",
@@ -101,28 +103,28 @@ export const DATA = {
       end: { en: "Present", "pt-BR": "Presente" } as LocalizedText,
       bullets: [
         {
-          en: "Architected 3 systems with modular monolith (NestJS, DDD), Next.js, CI/CD, and Docker",
-          "pt-BR": "Arquitetura de 3 sistemas com monolito modular (NestJS, DDD), Next.js, CI/CD e Docker",
+          en: "Architected and shipped 3 production systems using a modular monolith approach with NestJS, DDD, Next.js, Docker, and CI/CD — consolidating business operations into unified platforms",
+          "pt-BR": "Arquitetou e entregou 3 sistemas em produção com monolito modular (NestJS, DDD, Next.js, Docker) e CI/CD automatizado — consolidando operações de negócio em plataformas unificadas",
         } as LocalizedText,
         {
-          en: "REST APIs with NestJS, JWT authentication, and customizable granular permissions per module",
-          "pt-BR": "APIs REST com NestJS, autenticação JWT e permissões granulares customizáveis por módulo",
+          en: "Designed RESTful APIs with NestJS implementing JWT authentication and granular role-based access control — enabling secure, self-service permission management across modules",
+          "pt-BR": "Projetou APIs RESTful com NestJS implementando autenticação JWT e controle de acesso granular por papéis — viabilizando gestão autônoma e segura de permissões em aplicações multi-módulo",
         } as LocalizedText,
         {
-          en: "Next.js front-end with code splitting, Server Components, memoization, lazy loading, and TanStack Query — avg 250ms load time",
-          "pt-BR": "Desenvolvimento de front-end com Next.js: code splitting, Server Components, memoização, lazy loading e TanStack Query — carregamento médio de 250ms",
+          en: "Automated legal and financial workflows — bulk data imports, bank transaction processing, and invoice generation — eliminating 40+ hours of manual work per month",
+          "pt-BR": "Automatizou fluxos judiciais e financeiros — importação em massa, processamento bancário e emissão de notas fiscais — eliminando 40+ horas de trabalho manual por mês",
         } as LocalizedText,
         {
-          en: "Database optimization: 95% query time reduction (5s to 240ms) with MySQL views, indexing, and pagination",
-          "pt-BR": "Otimização de banco de dados: redução de 95% no tempo de query (5s para 240ms) com MySQL views, indexação e paginação",
+          en: "Optimized database performance by 95%, reducing query execution from 5s to 240ms through MySQL views, composite indexing strategies, and cursor-based pagination",
+          "pt-BR": "Otimizou performance de banco de dados em 95%, reduzindo queries de 5s para 240ms através de views MySQL, indexação composta e paginação baseada em cursor",
         } as LocalizedText,
         {
-          en: "Automated 40+ monthly hours in legal system via bulk import, bank processing, and invoice generation",
-          "pt-BR": "Automação de 40+ horas mensais em sistema jurídico via importação em massa, processamento bancário e emissão de notas fiscais",
+          en: "Built performant Next.js frontends leveraging Server Components, code splitting, memoization, and TanStack Query — achieving 250ms average page loads across production applications",
+          "pt-BR": "Construiu frontends performáticos em Next.js com Server Components, code splitting, memoização e TanStack Query — carregamento médio de 250ms em produção",
         } as LocalizedText,
         {
-          en: "Developed and maintained 2 React Native/Expo apps with Stripe and eRede/Pix payment gateways",
-          "pt-BR": "Desenvolvimento e manutenção de 2 apps React Native/Expo com gateways Stripe e eRede/Pix integrados",
+          en: "Developed and maintained 2 React Native/Expo mobile applications with Stripe and eRede/Pix integrations — enabling mobile-first payment processing in production",
+          "pt-BR": "Desenvolveu e manteve 2 apps mobile em React Native/Expo com integração aos gateways Stripe e eRede/Pix — viabilizando processamento de pagamentos mobile-first em produção",
         } as LocalizedText,
       ],
     },
@@ -131,22 +133,26 @@ export const DATA = {
       href: "#",
       badges: [],
       location: { en: "Remote", "pt-BR": "Remoto" } as LocalizedText,
-      title: { en: "Full-Stack Developer", "pt-BR": "Desenvolvedor Full-Stack" } as LocalizedText,
+      title: { en: "Freelance Full-Stack Developer", "pt-BR": "Desenvolvedor Full-Stack Autônomo" } as LocalizedText,
       logoUrl: "",
       start: { en: "Jun 2024", "pt-BR": "Jun 2024" } as LocalizedText,
       end: { en: "Present", "pt-BR": "Presente" } as LocalizedText,
       bullets: [
         {
-          en: "AI real estate agent in GoHighLevel using Mastra AI and MCP, automating lead qualification, WhatsApp, and property recommendations — replaced multiple SaaSs",
-          "pt-BR": "Agente imobiliário com IA em GoHighLevel usando Mastra AI e MCP, automatizando qualificação de leads, WhatsApp e recomendação de imóveis — substituiu múltiplos SaaSs",
+          en: "Architected modular back-end solutions using Domain-Driven Design (DDD) and CQRS with NestJS, enabling scalable AI workflows, clear domain boundaries, and maintainable business logic",
+          "pt-BR": "Arquitetou soluções back-end modulares com Domain-Driven Design (DDD) e CQRS em NestJS, viabilizando fluxos de IA escaláveis, limites de domínio claros e lógica de negócio mantentível",
         } as LocalizedText,
         {
-          en: "Responsive landing pages deployed to production for clients",
-          "pt-BR": "Landing pages responsivas com deploy em produção para clientes",
+          en: "Developed an AI-powered real estate agent integrated with GoHighLevel via Mastra AI and MCP, orchestrating asynchronous lead qualification, WhatsApp messaging, and property recommendations — consolidating multiple SaaS workflows into a unified automated pipeline",
+          "pt-BR": "Desenvolveu agente imobiliário com IA integrado ao GoHighLevel via Mastra AI e MCP, orquestrando qualificação assíncrona de leads, mensagens no WhatsApp e recomendação de imóveis — consolidando múltiplos fluxos SaaS em um pipeline automatizado unificado",
         } as LocalizedText,
         {
-          en: "Monitoring with Grafana and Prometheus for production metrics and alerts",
-          "pt-BR": "Monitoramento com Grafana e Prometheus para métricas e alertas em produção",
+          en: "Built and deployed conversion-oriented web applications with production-grade SEO optimization, performance tuning, and continuous delivery — improving search visibility and client acquisition",
+          "pt-BR": "Construiu e publicou landing pages orientadas a conversão com SEO otimizado para produção, tuning de performance e entrega contínua — melhorando indexação e aquisição de clientes",
+        } as LocalizedText,
+        {
+          en: "Implemented observability with Grafana and Prometheus for production metrics, alerting, and health monitoring — improving operational visibility and incident response across deployments",
+          "pt-BR": "Estruturou monitoramento com Grafana e Prometheus para métricas e alertas em produção — melhorando a visibilidade operacional e detecção proativa de incidentes nos sistemas dos clientes",
         } as LocalizedText,
       ],
     },
@@ -156,12 +162,16 @@ export const DATA = {
       school: "SENAI Sorocaba",
       href: "https://www.sp.senai.br/unidade/sorocaba",
       degree: {
-        en: "Associate Degree, Systems Analysis & Development",
-        "pt-BR": "Tecnólogo, Análise e Desenvolvimento de Sistemas",
+        en: "Associate Degree, Systems Analysis and Development",
+        "pt-BR": "Superior, Análise e Desenvolvimento de Sistemas",
       } as LocalizedText,
       logoUrl: "/icons/logo-senai1.png",
-      start: "2025",
+      start: "Jan 2025",
       end: { en: "Present", "pt-BR": "Presente" } as LocalizedText,
+      courses: {
+        en: "Data Science, Data Analysis, Java, Algorithms, Machine Learning, Software Engineering, Networks",
+        "pt-BR": "Ciência de Dados, Análise de Dados, Java, Algoritmos, Machine Learning, Engenharia de Software, Redes",
+      } as LocalizedText,
     },
     {
       school: "SENAI Sorocaba",
@@ -171,8 +181,24 @@ export const DATA = {
         "pt-BR": "Técnico, Desenvolvimento de Sistemas",
       } as LocalizedText,
       logoUrl: "/icons/logo-senai1.png",
-      start: "2023",
-      end: "2024",
+      start: "Jan 2023",
+      end: { en: "Dec 2024", "pt-BR": "Dez 2024" } as LocalizedText,
+      courses: {
+        en: "MySQL Database, Networks, TypeScript, Java, OOP, Algorithms",
+        "pt-BR": "Banco de Dados MySQL, Redes, TypeScript, Java, POO, Algoritmos",
+      } as LocalizedText,
+    },
+  ],
+  certifications: [
+    {
+      institution: "DeepLearning.AI",
+      name: "Supervised Machine Learning: Regression and Classification",
+      date: "Jan 2026",
+      credentialId: "L2MYYHXMHCPD",
+      skills: {
+        en: "Linear, Multiple & Polynomial Regression, Gradient Descent, Regularization (L1/L2), Logistic Classification, Neural Networks, Practical ML Development",
+        "pt-BR": "Regressão Linear, Múltipla e Polinomial, Gradient Descent, Regularização (L1/L2), Classificação Logística, Redes Neurais, Desenvolvimento Prático de ML",
+      } as LocalizedText,
     },
   ],
   projects: [
