@@ -78,17 +78,17 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
           </div>
           <div className="anim-in anim-d8">
             <div className="flex flex-col gap-8">
-              {DATA.education.map((education) => (
+              {DATA.education.map((education, i) => (
                 <Link
-                  key={education.school}
+                  key={i}
                   href={education.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-x-3 justify-between group"
+                  className="flex items-start gap-x-3 justify-between group"
                 >
-                  <div className="flex items-center gap-x-3 flex-1 min-w-0">
+                  <div className="flex items-start gap-x-3 flex-1 min-w-0">
                     {education.logoUrl ? (
-                      <div className="size-8 md:size-10 flex-none relative">
+                      <div className="size-8 md:size-10 flex-none relative mt-0.5">
                         <Image
                           src={education.logoUrl}
                           alt={education.school}
@@ -108,9 +108,14 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
                       <div className="font-sans text-sm text-muted-foreground">
                         {localize(education.degree, locale)}
                       </div>
+                      {"courses" in education && education.courses && (
+                        <div className="font-sans text-xs text-muted-foreground/70 mt-1">
+                          {localize(education.courses, locale)}
+                        </div>
+                      )}
                     </div>
                   </div>
-                  <div className="flex items-center gap-1 text-xs tabular-nums text-muted-foreground text-right flex-none">
+                  <div className="flex items-center gap-1 text-xs tabular-nums text-muted-foreground text-right flex-none mt-0.5">
                     <span>
                       {localize(education.start, locale)} - {localize(education.end, locale)}
                     </span>
@@ -118,6 +123,34 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
                 </Link>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+      <section id="certifications">
+        <div className="flex min-h-0 flex-col gap-y-6">
+          <h2 className="text-xl font-bold">{t('sections.certifications')}</h2>
+          <div className="flex flex-col gap-6">
+            {DATA.certifications.map((cert, i) => (
+              <div key={i} className="flex flex-col gap-1">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex flex-col gap-0.5">
+                    <span className="font-semibold leading-none">{cert.institution}</span>
+                    <span className="font-sans text-sm text-muted-foreground">{cert.name}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs tabular-nums text-muted-foreground flex-none">
+                    <span>{localize(cert.date, locale)}</span>
+                  </div>
+                </div>
+                <div className="font-sans text-xs text-muted-foreground/70">
+                  {localize(cert.skills, locale)}
+                </div>
+                {cert.credentialId && (
+                  <div className="font-sans text-xs text-muted-foreground/50">
+                    Credential ID: {cert.credentialId}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
