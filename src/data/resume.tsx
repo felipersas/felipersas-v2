@@ -38,10 +38,12 @@ export const DATA = {
     en: "Software Engineer building scalable systems with NestJS, Next.js, and AWS. Focused on backend architecture, DDD, and AI-driven automation.",
     "pt-BR": "Engenheiro de Software construindo sistemas escaláveis com NestJS, Next.js e AWS. Focado em arquitetura backend, DDD e automação com IA.",
   } as LocalizedText,
-  summary: {
-    "en": "Software Engineer from Sorocaba, Brazil. Started coding in high school through a technical program at SENAI — now I build production systems for work and maintain open-source projects for fun. Currently pursuing a degree in Systems Analysis & Development.\n\nMy core stack is TypeScript, Next.js, NestJS, React, and Go, building systems from the ground up. I also built a real-time crash game for iGaming, using a microservices architecture. Distributed microservices in Go, Fasty-ORM (a Rust ORM for Node.js), among other open-source projects.\n\nFree time: video games, filmes, anime, and coffee.",
-    "pt-BR": "Engenheiro de Software de Sorocaba, SP. Comecei a programar no ensino médio pelo técnico do SENAI — hoje construo sistemas em produção no trabalho e mantenho projetos open-source por diversão. Atualmente curso Análise e Desenvolvimento de Sistemas.\n\nMinha stack principal é TypeScript, Next.js, NestJS, React e Go, construindo sistemas do zero. Também desenvolvi um crash game em tempo real para iGaming usando arquitetura de microsserviços. Microsserviços distribuídos em Go, além do Fasty-ORM (ORM em Rust para Node.js), entre outros projetos open-source.\n\nTempo livre: vídeo game, filmes, anime e café."
-  } as LocalizedText,
+  whoami: [
+    { key: "role", value: { en: "full-stack engineer", "pt-BR": "engenheiro full-stack" } as LocalizedText },
+    { key: "location", value: "sorocaba, BR" },
+    { key: "stack", value: "typescript · next.js · nestjs · react · go · rust" },
+    { key: "interests", value: { en: "games, anime, coffee", "pt-BR": "games, anime, café" } as LocalizedText },
+  ] as { key: string; value: string | LocalizedText }[],
   avatarUrl: "/me.png",
   skills: [
     { name: "React", icon: ReactLight },

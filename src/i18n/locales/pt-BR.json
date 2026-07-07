@@ -11,8 +11,7 @@
   },
   "projects": {
     "badge": "Meus Projetos",
-    "title": "Confira meus trabalhos mais recentes",
-    "description": "Trabalhei em diversos projetos, de sites simples a aplicações web complexas. Aqui estão alguns dos meus favoritos."
+    "title": "Confira meus projetos"
   },
   "contact": {
     "badge": "Contato",
@@ -30,10 +29,5 @@
     "theme": "Tema",
     "language": "Idioma",
     "resume": "Currículo"
-  },
-  "music": {
-    "title": "Lo-Fi Player",
-    "noTrack": "Nenhuma faixa selecionada",
-    "playlist": "Playlist"
   }
 }
