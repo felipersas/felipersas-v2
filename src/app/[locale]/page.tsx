@@ -6,6 +6,7 @@ import ContactSection from "@/components/section/contact-section";
 import ProjectsSection from "@/components/section/projects-section";
 import WorkSection from "@/components/section/work-section";
 import { TuiPanel } from "@/components/tui-panel";
+import { HyperText } from "@/components/magicui/hyper-text";
 import { ArrowUpRight } from "lucide-react";
 import { getTranslationsServer } from "@/lib/i18n-server";
 import { Locale } from "@/hooks/use-translation";
@@ -37,9 +38,18 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
           </div>
           <div className="gap-2 flex flex-col flex-1 min-w-0">
             <div className="font-mono text-xs text-muted-foreground/70">$ felipe@portfolio:~$ whoami</div>
-            <h1 className="font-mono text-3xl font-semibold tracking-tighter sm:text-4xl lg:text-5xl">
-              {t('hero.greeting')} {DATA.name.split(" ")[0]}<span className="tui-cursor" aria-hidden="true" />
-            </h1>
+            <div className="flex items-baseline">
+              <HyperText
+                as="h1"
+                className="font-mono text-3xl font-semibold tracking-tighter sm:text-4xl lg:text-5xl"
+                duration={600}
+                delay={300}
+                animateOnHover={true}
+              >
+                {`${t('hero.greeting')} ${DATA.name.split(" ")[0]}`}
+              </HyperText>
+              <span className="tui-cursor" aria-hidden="true" />
+            </div>
           </div>
         </div>
       </section>
