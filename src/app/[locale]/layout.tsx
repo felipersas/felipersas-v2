@@ -6,12 +6,10 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
-import { MusicPlayerProvider } from "@/hooks/use-music-player";
-import { MusicPlayer } from "@/components/music-player/music-player";
-import { playlist } from "@/data/playlist";
 import { TranslationProvider, Locale } from "@/hooks/use-translation";
 import { Analytics } from "@vercel/analytics/next";
-import { FlickeringGridClient } from "@/components/flickering-grid-client";
+import { GlyphMatrix } from "@/components/magicui/glyph-matrix";
+import { TuiStatusBar } from "@/components/tui-status-bar";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -95,7 +93,7 @@ export default async function RootLayout(props: {
     <html lang={locale} suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased relative",
+          "min-h-screen bg-background font-mono antialiased relative",
           geist.variable,
           geistMono.variable
         )}
@@ -121,30 +119,22 @@ export default async function RootLayout(props: {
           }}
         />
         <Analytics />
-        <ThemeProvider attribute="class" defaultTheme="light">
+        <ThemeProvider attribute="class" defaultTheme="dark">
           <TranslationProvider initialLocale={locale}>
-            <MusicPlayerProvider defaultPlaylist={playlist}>
-              <TooltipProvider delayDuration={0}>
-                <div className="absolute inset-0 top-0 left-0 right-0 h-[100px] overflow-hidden z-0">
-                <FlickeringGridClient
-                    className="h-full w-full"
-                    squareSize={2}
-                    gridGap={2}
-                    style={{
-                      maskImage: "linear-gradient(to bottom, black, transparent)",
-                      WebkitMaskImage: "linear-gradient(to bottom, black, transparent)",
-                    }}
-                  />
-                </div>
-                <div className="relative z-10 max-w-2xl mx-auto py-12 pb-24 sm:py-24 px-6">
-                  {children}
-                </div>
-                <Navbar />
-                <div className="hidden md:block">
-                  <MusicPlayer />
-                </div>
-              </TooltipProvider>
-            </MusicPlayerProvider>
+            <TooltipProvider delayDuration={0}>
+              <div className="fixed inset-0 z-0 pointer-events-none">
+                <GlyphMatrix
+                  className="h-full w-full opacity-60"
+                  cellSize={18}
+                  color="#8a6fb5"
+                />
+              </div>
+              <div className="relative z-10 max-w-2xl mx-auto py-12 pb-28 sm:py-24 px-6 flex flex-col gap-6">
+                {children}
+              </div>
+              <Navbar />
+              <TuiStatusBar />
+            </TooltipProvider>
           </TranslationProvider>
         </ThemeProvider>
       </body>

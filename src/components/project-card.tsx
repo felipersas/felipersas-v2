@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
@@ -28,64 +27,48 @@ export function ProjectCard({
   className,
 }: Props) {
   return (
-    <div
-      className={cn(
-        "flex flex-col h-full border border-border rounded-xl overflow-hidden hover:ring-2 cursor-pointer hover:ring-muted transition-all duration-200",
-        className
-      )}
-    >
-      {links && links.length > 0 && (
-        <div className="flex flex-wrap gap-2 px-6 pt-6">
-          {links.map((link, idx) => (
-            <Link
-              href={link.href}
-              key={idx}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Badge
-                className="flex items-center gap-1.5 text-xs bg-black text-white hover:bg-black/90"
-                variant="default"
-              >
-                {link.icon}
-                {link.type}
-              </Badge>
-            </Link>
-          ))}
+    <div className={cn("group", className)}>
+      <div className="flex items-baseline justify-between gap-3 mb-1.5">
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="text-accent shrink-0" aria-hidden>›</span>
+          <h3 className="font-semibold group-hover:text-accent transition-colors truncate">{title}</h3>
         </div>
-      )}
-      <div className="p-6 flex flex-col gap-3 flex-1">
-        <div className="flex items-start justify-between gap-2">
-          <div className="flex flex-col gap-1">
-            <h3 className="font-semibold">{title}</h3>
-            <time className="text-xs text-muted-foreground">{dates}</time>
-          </div>
+        <div className="flex items-center gap-2 shrink-0">
+          <time className="text-xs text-muted-foreground tabular-nums">{dates}</time>
           <Link
             href={href || "#"}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
+            className="text-muted-foreground hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
             aria-label={`Open ${title}`}
           >
-            <ArrowUpRight className="h-4 w-4" aria-hidden />
+            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
           </Link>
         </div>
-        <div className="text-xs flex-1 prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
-          <Markdown>{description}</Markdown>
-        </div>
-        {tags && tags.length > 0 && (
-          <div className="flex flex-wrap gap-1 mt-auto">
-            {tags.map((tag) => (
-              <Badge
-                key={tag}
-                className="text-[11px] font-medium border border-border h-6 w-fit px-2"
-                variant="outline"
-              >
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        )}
+      </div>
+      <div className="text-xs prose prose-sm max-w-full text-pretty leading-relaxed text-muted-foreground dark:prose-invert pl-5">
+        <Markdown>{description}</Markdown>
+      </div>
+      <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3 pl-5 text-[11px] text-muted-foreground">
+        {links?.map((link, idx) => (
+          <Link
+            href={link.href}
+            key={idx}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors inline-flex items-center gap-1"
+          >
+            <span className="text-accent">[{link.type.toLowerCase()}]</span>
+            {link.icon && <span className="size-3 inline-flex">{link.icon}</span>}
+          </Link>
+        ))}
+        {tags?.map((tag) => (
+          <span key={tag}>
+            <span className="text-accent">[</span>
+            {tag}
+            <span className="text-accent">]</span>
+          </span>
+        ))}
       </div>
     </div>
   );
