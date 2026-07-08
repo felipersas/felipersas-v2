@@ -24,33 +24,33 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
       <TuiPanel
         id="hero"
         title="intro"
-        className="anim-in anim-d1 border-accent/50 bg-background/90 shadow-[inset_3px_0_0_var(--accent)]"
+        className="anim-in anim-d1 border-accent/50 bg-background/90 p-4 pt-6 sm:p-6 sm:pt-7 shadow-[inset_3px_0_0_var(--accent)]"
       >
-        <div className="flex flex-col md:flex-row gap-6 justify-between items-start">
-          <div className="size-24 md:size-32 border border-border rounded-md overflow-hidden relative flex-shrink-0">
+        <div className="flex items-center gap-4 sm:gap-6">
+          <div className="size-20 sm:size-24 md:size-32 border border-border rounded-md overflow-hidden relative flex-shrink-0">
             <Image
               src={DATA.avatarUrl}
               alt={`${DATA.name} — Full Stack Developer`}
               fill
-              sizes="(max-width: 768px) 96px, 128px"
+              sizes="(max-width: 640px) 80px, (max-width: 768px) 96px, 128px"
               className="object-cover"
               priority
               fetchPriority="high"
             />
           </div>
-          <div className="gap-2 flex flex-col flex-1 min-w-0">
-            <div className="font-mono text-xs text-muted-foreground">$ felipe@portfolio:~$ whoami</div>
+          <div className="gap-1.5 sm:gap-2 flex flex-col flex-1 min-w-0">
+            <div className="font-mono text-[10px] sm:text-xs text-muted-foreground truncate">$ felipe@portfolio:~$ whoami</div>
             <div className="flex items-baseline">
               <HyperText
                 as="h1"
-                className="font-mono text-3xl font-semibold tracking-tighter sm:text-4xl lg:text-5xl"
+                className="font-mono text-2xl font-semibold leading-tight tracking-tighter sm:text-4xl lg:text-5xl"
                 duration={600}
                 delay={300}
                 animateOnHover={true}
               >
                 {`${t('hero.greeting')} ${DATA.name.split(" ")[0]}`}
               </HyperText>
-              <span className="tui-cursor" aria-hidden="true" />
+              <span className="tui-cursor hidden sm:inline-block" aria-hidden="true" />
             </div>
           </div>
         </div>
