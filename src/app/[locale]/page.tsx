@@ -21,23 +21,25 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
   const { t } = await getTranslationsServer(locale);
   return (
     <main className="min-h-dvh flex flex-col gap-6 relative">
-      <section id="hero" className="anim-in anim-d1">
-        <div className="w-full flex flex-col md:flex-row gap-6 justify-between items-start">
-          <div>
-            <div className="size-24 md:size-32 border border-border rounded-md overflow-hidden relative flex-shrink-0">
-              <Image
-                src={DATA.avatarUrl}
-                alt={`${DATA.name} — Full Stack Developer`}
-                fill
-                sizes="(max-width: 768px) 96px, 128px"
-                className="object-cover"
-                priority
-                fetchPriority="high"
-              />
-            </div>
+      <TuiPanel
+        id="hero"
+        title="intro"
+        className="anim-in anim-d1 border-accent/50 bg-background/90 shadow-[inset_3px_0_0_var(--accent)]"
+      >
+        <div className="flex flex-col md:flex-row gap-6 justify-between items-start">
+          <div className="size-24 md:size-32 border border-border rounded-md overflow-hidden relative flex-shrink-0">
+            <Image
+              src={DATA.avatarUrl}
+              alt={`${DATA.name} — Full Stack Developer`}
+              fill
+              sizes="(max-width: 768px) 96px, 128px"
+              className="object-cover"
+              priority
+              fetchPriority="high"
+            />
           </div>
           <div className="gap-2 flex flex-col flex-1 min-w-0">
-            <div className="font-mono text-xs text-muted-foreground/70">$ felipe@portfolio:~$ whoami</div>
+            <div className="font-mono text-xs text-muted-foreground">$ felipe@portfolio:~$ whoami</div>
             <div className="flex items-baseline">
               <HyperText
                 as="h1"
@@ -52,7 +54,7 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
             </div>
           </div>
         </div>
-      </section>
+      </TuiPanel>
 
       <TuiPanel id="about" title={t('sections.about')} className="anim-in anim-d3">
         <div className="font-mono text-sm">
