@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, useCallback, useEffect } from 'react'
+import { createContext, useContext, useState, useCallback } from 'react'
 
 import en from '@/i18n/locales/en.json'
 import ptBR from '@/i18n/locales/pt-BR.json'
@@ -47,10 +47,6 @@ export function TranslationProvider({
   initialLocale?: Locale;
 }) {
   const [locale, setLocaleState] = useState<Locale>(initialLocale)
-
-  useEffect(() => {
-    setLocaleState(initialLocale)
-  }, [initialLocale])
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale)

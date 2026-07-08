@@ -8,7 +8,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import { TranslationProvider, Locale } from "@/hooks/use-translation";
 import { Analytics } from "@vercel/analytics/next";
-import { GlyphMatrix } from "@/components/magicui/glyph-matrix";
+import { Dither } from "@/components/magicui/dither";
 import { TuiStatusBar } from "@/components/tui-status-bar";
 
 const geist = Geist({
@@ -120,13 +120,17 @@ export default async function RootLayout(props: {
         />
         <Analytics />
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <TranslationProvider initialLocale={locale}>
+          <TranslationProvider key={locale} initialLocale={locale}>
             <TooltipProvider delayDuration={0}>
               <div className="fixed inset-0 z-0 pointer-events-none">
-                <GlyphMatrix
-                  className="h-full w-full opacity-60"
-                  cellSize={18}
-                  color="#8a6fb5"
+                <Dither
+                  waveColor={[0.36, 0.25, 0.52]}
+                  waveAmplitude={0.18}
+                  waveFrequency={2.2}
+                  waveSpeed={0.025}
+                  colorNum={4}
+                  pixelSize={3}
+                  mouseRadius={0.3}
                 />
               </div>
               <div className="relative z-10 max-w-2xl mx-auto py-12 pb-28 sm:py-24 px-6 flex flex-col gap-6">

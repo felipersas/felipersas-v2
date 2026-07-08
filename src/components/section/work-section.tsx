@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 import Image from "next/image";
 import { useState } from "react";
@@ -47,13 +46,13 @@ export default function WorkSection() {
           className="w-full border-b-0 grid gap-2"
         >
           <AccordionTrigger className="hover:no-underline p-0 cursor-pointer transition-colors rounded-none group [&>svg]:hidden">
-            <div className="flex items-center gap-x-3 justify-between w-full text-left">
-              <div className="flex items-center gap-x-3 flex-1 min-w-0">
-                <LogoImage src={work.logoUrl} alt={work.company} />
-                <div className="flex-1 min-w-0 gap-0.5 flex flex-col">
-                  <div className="font-semibold leading-none flex items-center gap-2">
-                    {work.company}
-                    <span className="relative inline-flex items-center w-3.5 h-3.5">
+            <div className="grid w-full grid-cols-[auto_minmax(0,1fr)] gap-x-3 text-left sm:flex sm:items-center sm:justify-between">
+              <LogoImage src={work.logoUrl} alt={work.company} />
+              <div className="min-w-0 sm:flex sm:flex-1 sm:items-center sm:justify-between sm:gap-4">
+                <div className="min-w-0 gap-0.5 flex flex-col">
+                  <div className="font-semibold leading-tight flex items-start gap-2">
+                    <span className="min-w-0 break-words">{work.company}</span>
+                    <span className="relative mt-0.5 inline-flex h-3.5 w-3.5 shrink-0 items-center">
                       <ChevronRight
                         className={cn(
                           "absolute h-3.5 w-3.5 shrink-0 text-muted-foreground stroke-2 transition-all duration-300 ease-out",
@@ -75,11 +74,11 @@ export default function WorkSection() {
                     {localize(work.title, locale)}
                   </div>
                 </div>
-              </div>
-              <div className="flex items-center gap-1 text-xs tabular-nums text-muted-foreground text-right flex-none">
-                <span>
-                  {localize(work.start, locale)} - {localize(work.end, locale)}
-                </span>
+                <div className="mt-1 flex items-center gap-1 text-xs tabular-nums text-muted-foreground sm:mt-0 sm:flex-none sm:text-right">
+                  <span>
+                    {localize(work.start, locale)} - {localize(work.end, locale)}
+                  </span>
+                </div>
               </div>
             </div>
           </AccordionTrigger>
