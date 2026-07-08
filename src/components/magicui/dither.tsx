@@ -1,7 +1,7 @@
 "use client"
 
 /* eslint-disable react-hooks/immutability */
-import { forwardRef, useEffect, useMemo, useRef } from "react"
+import { forwardRef, useEffect, useMemo, useRef, useState } from "react"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import { EffectComposer, wrapEffect } from "@react-three/postprocessing"
 import { Effect } from "postprocessing"
@@ -16,6 +16,7 @@ interface DitherProps {
   waveFrequency?: number
   waveAmplitude?: number
   waveColor?: Rgb
+  baseColor?: Rgb
   colorNum?: number
   pixelSize?: number
   disableAnimation?: boolean
@@ -42,6 +43,7 @@ uniform float waveSpeed;
 uniform float waveFrequency;
 uniform float waveAmplitude;
 uniform vec3 waveColor;
+uniform vec3 baseColor;
 uniform vec2 mousePos;
 uniform int enableMouseInteraction;
 uniform float mouseRadius;
@@ -109,7 +111,7 @@ void main() {
     float effect = 1.0 - smoothstep(0.0, mouseRadius, dist);
     f -= 0.5 * effect;
   }
-  vec3 col = mix(vec3(0.0), waveColor, f);
+  vec3 col = mix(baseColor, waveColor, f);
   gl_FragColor = vec4(col, 1.0);
 }
 `
@@ -186,11 +188,35 @@ const RetroEffect = forwardRef<
 ))
 RetroEffect.displayName = "RetroEffect"
 
+function cssColorToRgb(value: string): Rgb | null {
+  const probe = document.createElement("canvas")
+  const ctx = probe.getContext("2d")
+  if (!ctx) return null
+
+  probe.width = 1
+  probe.height = 1
+  ctx.fillStyle = "#000"
+  ctx.fillStyle = value
+  ctx.fillRect(0, 0, 1, 1)
+
+  const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data
+  return [r / 255, g / 255, b / 255]
+}
+
+function getThemeColor(variable: string, fallback: Rgb): Rgb {
+  const value = getComputedStyle(document.documentElement)
+    .getPropertyValue(variable)
+    .trim()
+
+  return cssColorToRgb(value) ?? fallback
+}
+
 function DitheredWaves({
   waveSpeed,
   waveFrequency,
   waveAmplitude,
   waveColor,
+  baseColor,
   colorNum,
   pixelSize,
   disableAnimation,
@@ -209,12 +235,14 @@ function DitheredWaves({
       waveFrequency: new THREE.Uniform(waveFrequency),
       waveAmplitude: new THREE.Uniform(waveAmplitude),
       waveColor: new THREE.Uniform(new THREE.Color(...waveColor)),
+      baseColor: new THREE.Uniform(new THREE.Color(...baseColor)),
       mousePos: new THREE.Uniform(new THREE.Vector2(0, 0)),
       enableMouseInteraction: new THREE.Uniform(enableMouseInteraction ? 1 : 0),
       mouseRadius: new THREE.Uniform(mouseRadius),
     }),
     [
       enableMouseInteraction,
+      baseColor,
       mouseRadius,
       waveAmplitude,
       waveColor,
@@ -267,6 +295,7 @@ function DitheredWaves({
       uniforms.waveColor.value.set(...waveColor)
       prevColor.current = [...waveColor]
     }
+    uniforms.baseColor.value.set(...baseColor)
 
     uniforms.enableMouseInteraction.value = enableMouseInteraction ? 1 : 0
     uniforms.mouseRadius.value = mouseRadius
@@ -296,13 +325,38 @@ export function Dither({
   waveSpeed = 0.05,
   waveFrequency = 3,
   waveAmplitude = 0.3,
-  waveColor = [0.5, 0.5, 0.5],
+  waveColor,
+  baseColor,
   colorNum = 4,
   pixelSize = 2,
   disableAnimation = false,
   enableMouseInteraction = true,
   mouseRadius = 1,
 }: DitherProps) {
+  const [themeColors, setThemeColors] = useState({
+    baseColor: baseColor ?? ([0, 0, 0] as Rgb),
+    waveColor: waveColor ?? ([0.5, 0.5, 0.5] as Rgb),
+  })
+
+  useEffect(() => {
+    const updateThemeColors = () => {
+      setThemeColors({
+        baseColor: baseColor ?? getThemeColor("--background", [0, 0, 0]),
+        waveColor: waveColor ?? getThemeColor("--accent", [0.5, 0.5, 0.5]),
+      })
+    }
+
+    updateThemeColors()
+
+    const observer = new MutationObserver(updateThemeColors)
+    observer.observe(document.documentElement, {
+      attributeFilter: ["class", "style"],
+      attributes: true,
+    })
+
+    return () => observer.disconnect()
+  }, [baseColor, waveColor])
+
   return (
     <Canvas
       className={styles.ditherContainer}
@@ -314,7 +368,8 @@ export function Dither({
         waveSpeed={waveSpeed}
         waveFrequency={waveFrequency}
         waveAmplitude={waveAmplitude}
-        waveColor={waveColor}
+        waveColor={themeColors.waveColor}
+        baseColor={themeColors.baseColor}
         colorNum={colorNum}
         pixelSize={pixelSize}
         disableAnimation={disableAnimation}

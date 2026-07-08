@@ -124,7 +124,6 @@ export default async function RootLayout(props: {
             <TooltipProvider delayDuration={0}>
               <div className="fixed inset-0 z-0 pointer-events-none">
                 <Dither
-                  waveColor={[0.36, 0.25, 0.52]}
                   waveAmplitude={0.18}
                   waveFrequency={2.2}
                   waveSpeed={0.025}
