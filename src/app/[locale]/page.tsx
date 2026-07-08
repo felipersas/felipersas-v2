@@ -6,7 +6,6 @@ import ContactSection from "@/components/section/contact-section";
 import ProjectsSection from "@/components/section/projects-section";
 import WorkSection from "@/components/section/work-section";
 import { TuiPanel } from "@/components/tui-panel";
-import { HyperText } from "@/components/magicui/hyper-text";
 import { ArrowUpRight } from "lucide-react";
 import { getTranslationsServer } from "@/lib/i18n-server";
 import { Locale } from "@/hooks/use-translation";
@@ -19,52 +18,42 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
   const params = await props.params;
   const locale = params.locale as Locale;
   const { t } = await getTranslationsServer(locale);
+  const isPtBR = locale === "pt-BR";
+  const aboutLabels: Record<string, string> = isPtBR
+    ? { role: "Função", location: "Local", stack: "Stack", interests: "Interesses" }
+    : { role: "Role", location: "Location", stack: "Stack", interests: "Interests" };
+
   return (
     <main className="min-h-dvh flex flex-col gap-6 relative">
-      <TuiPanel
-        id="hero"
-        title="intro"
-        className="anim-in anim-d1 border-accent/50 bg-background/90 p-4 pt-6 sm:p-6 sm:pt-7 shadow-[inset_3px_0_0_var(--accent)]"
-      >
-        <div className="flex items-center gap-4 sm:gap-6">
-          <div className="size-20 sm:size-24 md:size-32 border border-border rounded-md overflow-hidden relative flex-shrink-0">
-            <Image
-              src={DATA.avatarUrl}
-              alt={`${DATA.name} — Full Stack Developer`}
-              fill
-              sizes="(max-width: 640px) 80px, (max-width: 768px) 96px, 128px"
-              className="object-cover"
-              priority
-              fetchPriority="high"
-            />
-          </div>
-          <div className="gap-1.5 sm:gap-2 flex flex-col flex-1 min-w-0">
-            <div className="font-mono text-[10px] sm:text-xs text-muted-foreground truncate">$ felipe@portfolio:~$ whoami</div>
-            <div className="flex items-baseline">
-              <HyperText
-                as="h1"
-                className="font-mono text-2xl font-semibold leading-tight tracking-tighter sm:text-4xl lg:text-5xl"
-                duration={600}
-                delay={300}
-                animateOnHover={true}
-              >
-                {`${t('hero.greeting')} ${DATA.name.split(" ")[0]}`}
-              </HyperText>
-              <span className="tui-cursor hidden sm:inline-block" aria-hidden="true" />
+      <TuiPanel id="about" title={t('sections.about')} className="anim-in anim-d1">
+        <div className="font-mono text-sm space-y-5">
+          <div className="flex items-start gap-4 sm:gap-5">
+            <div className="size-16 sm:size-20 border border-border rounded-md overflow-hidden relative flex-shrink-0">
+              <Image
+                src={DATA.avatarUrl}
+                alt={`${DATA.name} — Full Stack Developer`}
+                fill
+                sizes="(max-width: 640px) 64px, 80px"
+                className="object-cover"
+                priority
+                fetchPriority="high"
+              />
             </div>
-          </div>
-        </div>
-      </TuiPanel>
-
-      <TuiPanel id="about" title={t('sections.about')} className="anim-in anim-d3">
-        <div className="font-mono text-sm">
-          <div className="text-muted-foreground mb-3">
-            <span className="text-accent">$</span> whoami
+            <div className="min-w-0 space-y-2">
+              <h1 className="text-2xl sm:text-3xl font-semibold leading-tight text-foreground">
+                {DATA.name}
+              </h1>
+              <p className="max-w-prose text-muted-foreground leading-relaxed">
+                {localize(DATA.description, locale)}
+              </p>
+            </div>
           </div>
           <div className="space-y-1.5">
             {DATA.whoami.map((entry) => (
               <div key={entry.key} className="flex gap-3 items-baseline">
-                <span className="text-accent shrink-0 min-w-[80px]">{entry.key}:</span>
+                <span className="text-muted-foreground shrink-0 min-w-[80px]">
+                  {aboutLabels[entry.key] ?? entry.key}
+                </span>
                 <span className="text-foreground/90">{localize(entry.value, locale)}</span>
               </div>
             ))}
@@ -100,8 +89,8 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
                   </div>
                   <div className="text-sm text-muted-foreground">{localize(education.degree, locale)}</div>
                   {"courses" in education && education.courses && (
-                    <div className="text-xs text-muted-foreground/70 mt-0.5">
-                      <span className="text-accent">{"//"}</span> {localize(education.courses, locale)}
+                    <div className="text-xs text-muted-foreground/70 mt-0.5 flex gap-2">
+                      <span>{localize(education.courses, locale)}</span>
                     </div>
                   )}
                 </Link>
@@ -126,12 +115,13 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
                     </div>
                     <span className="text-xs text-muted-foreground tabular-nums">{localize(cert.date, locale)}</span>
                   </div>
-                  <div className="text-xs text-muted-foreground/70 mt-0.5">
-                    <span className="text-accent">{"//"}</span> {localize(cert.skills, locale)}
+                  <div className="text-xs text-muted-foreground/70 mt-0.5 flex gap-2">
+                    <span>{localize(cert.skills, locale)}</span>
                   </div>
                   {cert.credentialId && (
-                    <div className="text-xs text-muted-foreground/50">
-                      <span className="text-accent">credential:</span> {cert.credentialId}
+                    <div className="text-xs text-muted-foreground/50 flex gap-2">
+                      <span>{isPtBR ? "Credencial" : "Credential"}</span>
+                      <span>{cert.credentialId}</span>
                     </div>
                   )}
                 </div>

@@ -95,6 +95,22 @@ export const DATA = {
 
   work: [
     {
+      company: "Keeper",
+      href: "https://www.keeper.com.br/",
+      badges: [],
+      location: "Sorocaba, SP, Brazil",
+      title: { en: "Mid-Level Full-Stack Developer", "pt-BR": "Desenvolvedor Full-Stack Pleno" } as LocalizedText,
+      logoUrl: "/icons/keeper-formaturas.png",
+      start: { en: "Jun 2026", "pt-BR": "Jun 2026" } as LocalizedText,
+      end: { en: "Present", "pt-BR": "Presente" } as LocalizedText,
+      bullets: [
+        {
+          en: "Fintech for graduation fundraising and financial management",
+          "pt-BR": "Fintech de arrecadação e gestão financeira para formaturas",
+        } as LocalizedText,
+      ],
+    },
+    {
       company: "MindGroup Consulting e Marketing",
       href: "https://mindgroup.com.br",
       badges: [],
@@ -102,7 +118,7 @@ export const DATA = {
       title: { en: "Full-Stack Developer", "pt-BR": "Desenvolvedor Full-Stack" } as LocalizedText,
       logoUrl: "/icons/LOGOTIPO-Mind-Group-2.png",
       start: { en: "Feb 2025", "pt-BR": "Fev 2025" } as LocalizedText,
-      end: { en: "Present", "pt-BR": "Presente" } as LocalizedText,
+      end: { en: "May 2026", "pt-BR": "Mai 2026" } as LocalizedText,
       bullets: [
         {
           en: "Architected and shipped 3 production systems using a modular monolith approach with NestJS, DDD, Next.js, Docker, and CI/CD — consolidating business operations into unified platforms",

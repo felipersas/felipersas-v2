@@ -122,7 +122,7 @@ export default async function RootLayout(props: {
         <ThemeProvider attribute="class" defaultTheme="dark">
           <TranslationProvider key={locale} initialLocale={locale}>
             <TooltipProvider delayDuration={0}>
-              <div className="fixed inset-0 z-0 pointer-events-none">
+              <div className="fixed inset-0 z-0 pointer-events-none opacity-25 dark:opacity-55">
                 <Dither
                   waveAmplitude={0.18}
                   waveFrequency={2.2}

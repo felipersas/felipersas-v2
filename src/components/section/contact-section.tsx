@@ -6,6 +6,7 @@ import { CopyEmailButton } from "@/components/section/copy-email-button";
 
 export default async function ContactSection({ locale }: { locale: Locale }) {
   const { t } = await getTranslationsServer(locale);
+  const isPtBR = locale === "pt-BR";
 
   const githubHandle = DATA.contact.social.GitHub.url.replace("https://", "");
   const linkedinHandle = DATA.contact.social.LinkedIn.url.replace("https://", "");
@@ -13,11 +14,11 @@ export default async function ContactSection({ locale }: { locale: Locale }) {
   return (
     <div className="font-mono text-sm">
       <div className="text-muted-foreground mb-4">
-        <span className="text-accent">$</span> ./contact --help
+        {isPtBR ? "Vamos conversar" : "Reach me"}
       </div>
       <div className="space-y-2">
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-          <span className="text-accent shrink-0">--email</span>
+          <span className="text-muted-foreground shrink-0 min-w-[68px]">Email</span>
           <Link
             href={DATA.contact.social.email.url}
             className="text-foreground hover:text-accent transition-colors"
@@ -27,7 +28,7 @@ export default async function ContactSection({ locale }: { locale: Locale }) {
           <CopyEmailButton email={DATA.contact.email} />
         </div>
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-          <span className="text-accent shrink-0">--github</span>
+          <span className="text-muted-foreground shrink-0 min-w-[68px]">GitHub</span>
           <Link
             href={DATA.contact.social.GitHub.url}
             target="_blank"
@@ -38,7 +39,7 @@ export default async function ContactSection({ locale }: { locale: Locale }) {
           </Link>
         </div>
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-          <span className="text-accent shrink-0">--linkedin</span>
+          <span className="text-muted-foreground shrink-0 min-w-[68px]">LinkedIn</span>
           <Link
             href={DATA.contact.social.LinkedIn.url}
             target="_blank"
@@ -50,7 +51,7 @@ export default async function ContactSection({ locale }: { locale: Locale }) {
         </div>
       </div>
       <div className="text-muted-foreground mt-4 text-xs">
-        <span className="text-accent">{"//"}</span> {t("contact.afterLinkedin")}
+        {t("contact.afterLinkedin").replace(/^\.\s*/, "")}
       </div>
     </div>
   );

@@ -28,10 +28,10 @@ export function ProjectCard({
 }: Props) {
   return (
     <div className={cn("group", className)}>
-      <div className="flex items-baseline justify-between gap-3 mb-1.5">
+      <div className="flex flex-col gap-1.5 mb-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3">
         <div className="flex items-center gap-2 min-w-0">
           <span className="text-accent shrink-0" aria-hidden>›</span>
-          <h3 className="font-semibold group-hover:text-accent transition-colors truncate">{title}</h3>
+          <h3 className="font-semibold leading-snug group-hover:text-accent transition-colors">{title}</h3>
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <time className="text-xs text-muted-foreground tabular-nums">{dates}</time>
@@ -46,7 +46,7 @@ export function ProjectCard({
           </Link>
         </div>
       </div>
-      <div className="text-xs prose prose-sm max-w-full text-pretty leading-relaxed text-muted-foreground dark:prose-invert pl-5">
+      <div className="text-xs prose prose-sm max-w-full text-pretty leading-relaxed text-muted-foreground dark:prose-invert pl-5 [&>p]:line-clamp-4 sm:[&>p]:line-clamp-3">
         <Markdown>{description}</Markdown>
       </div>
       <div className="flex flex-wrap gap-x-3 gap-y-1 mt-3 pl-5 text-[11px] text-muted-foreground">

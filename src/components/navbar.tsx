@@ -34,7 +34,10 @@ export default function Navbar() {
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-8 z-30">
-      <Dock className="z-50 pointer-events-auto relative h-14 p-1 w-fit mx-auto flex gap-1 border bg-background/95 backdrop-blur-sm font-mono">
+      <Dock
+        magnification={40}
+        className="z-50 pointer-events-auto relative h-14 p-1 w-fit mx-auto flex gap-1 border bg-background/95 backdrop-blur-sm font-mono"
+      >
         {DATA.navbar.map((item) => {
           const isExternal = item.href.startsWith("http");
           return (
