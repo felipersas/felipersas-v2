@@ -35,11 +35,11 @@ export const DATA = {
   location: "Sorocaba, SP, Brazil",
   locationLink: "https://www.google.com/maps/place/Sorocaba",
   description: {
-    en: "Software Engineer building scalable systems with NestJS, Next.js, and AWS. Focused on backend architecture, DDD, and AI-driven automation.",
-    "pt-BR": "Engenheiro de Software construindo sistemas escaláveis com NestJS, Next.js e AWS. Focado em arquitetura backend, DDD e automação com IA.",
+    en: "Software Engineer",
+    "pt-BR": "Engenheiro de Software",
   } as LocalizedText,
   whoami: [
-    { key: "role", value: { en: "full-stack engineer", "pt-BR": "engenheiro full-stack" } as LocalizedText },
+    { key: "role", value: { en: "mid-level full-stack dev", "pt-BR": "desenvolvedor full-stack pleno" } as LocalizedText },
     { key: "location", value: "sorocaba, BR" },
     { key: "stack", value: "typescript · next.js · nestjs · react · go · rust" },
     { key: "interests", value: { en: "games, anime, coffee", "pt-BR": "games, anime, café" } as LocalizedText },
