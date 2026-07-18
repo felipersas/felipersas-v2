@@ -8,10 +8,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import { TranslationProvider, Locale } from "@/hooks/use-translation";
 import { Analytics } from "@vercel/analytics/next";
-import { Dither } from "@/components/magicui/dither";
-import { TuiStatusBar } from "@/components/tui-status-bar";
 
-const geist = Geist({
+const geistSans = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
   weight: ["400", "500", "600", "700"],
@@ -90,14 +88,8 @@ export default async function RootLayout(props: {
   const locale = params.locale as Locale;
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body
-        className={cn(
-          "min-h-screen bg-background font-mono antialiased relative",
-          geist.variable,
-          geistMono.variable
-        )}
-      >
+    <html lang={locale} className={cn(geistSans.variable, geistMono.variable)} suppressHydrationWarning>
+      <body className="min-h-screen bg-background font-sans antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -122,21 +114,8 @@ export default async function RootLayout(props: {
         <ThemeProvider attribute="class" defaultTheme="dark">
           <TranslationProvider key={locale} initialLocale={locale}>
             <TooltipProvider delayDuration={0}>
-              <div className="fixed inset-0 z-0 pointer-events-none opacity-25 dark:opacity-55">
-                <Dither
-                  waveAmplitude={0.18}
-                  waveFrequency={2.2}
-                  waveSpeed={0.025}
-                  colorNum={4}
-                  pixelSize={3}
-                  mouseRadius={0.3}
-                />
-              </div>
-              <div className="relative z-10 max-w-2xl mx-auto py-12 pb-28 sm:py-24 px-6 flex flex-col gap-6">
-                {children}
-              </div>
+              {children}
               <Navbar />
-              <TuiStatusBar />
             </TooltipProvider>
           </TranslationProvider>
         </ThemeProvider>

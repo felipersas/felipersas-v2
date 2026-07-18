@@ -1,156 +1,56 @@
-
-import Image from "next/image";
-import { DATA, localize } from "@/data/resume";
-import Link from "next/link";
-import ContactSection from "@/components/section/contact-section";
-import ProjectsSection from "@/components/section/projects-section";
-import WorkSection from "@/components/section/work-section";
-import { TuiPanel } from "@/components/tui-panel";
-import { ArrowUpRight } from "lucide-react";
-import { getTranslationsServer } from "@/lib/i18n-server";
-import { Locale } from "@/hooks/use-translation";
+import { cn } from "@/lib/utils"
+import { ProfileHeader } from "@/components/sections/profile-header"
+import { Overview } from "@/components/sections/overview"
+import { SocialLinks } from "@/components/sections/social-links"
+import { Hello } from "@/components/sections/hello"
+import { TechStack } from "@/components/sections/tech-stack"
+import { Experiences } from "@/components/sections/experiences"
+import { Education } from "@/components/sections/education"
+import { Projects } from "@/components/sections/projects"
+import { Certifications } from "@/components/sections/certifications"
+import { Locale } from "@/hooks/use-translation"
 
 export async function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'pt-BR' }];
+  return [{ locale: 'en' }, { locale: 'pt-BR' }]
+}
+
+function Separator({ className }: { className?: string }) {
+  return (
+    <div className={cn("stripe-divider h-8 w-full border-x border-line", className)} />
+  )
 }
 
 export default async function Page(props: { params: Promise<{ locale: string }> }) {
-  const params = await props.params;
-  const locale = params.locale as Locale;
-  const { t } = await getTranslationsServer(locale);
-  const isPtBR = locale === "pt-BR";
-  const aboutLabels: Record<string, string> = isPtBR
-    ? { role: "Função", location: "Local", stack: "Stack", interests: "Interesses" }
-    : { role: "Role", location: "Location", stack: "Stack", interests: "Interests" };
+  const params = await props.params
+  const locale = params.locale as Locale
 
   return (
-    <main className="min-h-dvh flex flex-col gap-6 relative">
-      <TuiPanel id="about" title={t('sections.about')} className="anim-in anim-d1">
-        <div className="font-mono text-sm space-y-5">
-          <div className="flex items-start gap-4 sm:gap-5">
-            <div className="size-16 sm:size-20 border border-border rounded-md overflow-hidden relative flex-shrink-0">
-              <Image
-                src={DATA.avatarUrl}
-                alt={`${DATA.name} — Full Stack Developer`}
-                fill
-                sizes="(max-width: 640px) 64px, 80px"
-                className="object-cover"
-                priority
-                fetchPriority="high"
-              />
-            </div>
-            <div className="min-w-0 space-y-2">
-              <h1 className="text-2xl sm:text-3xl font-semibold leading-tight text-foreground">
-                {DATA.name}
-              </h1>
-              <p className="max-w-prose text-muted-foreground leading-relaxed">
-                {localize(DATA.description, locale)}
-              </p>
-            </div>
-          </div>
-          <div className="space-y-1.5">
-            {DATA.whoami.map((entry) => (
-              <div key={entry.key} className="flex gap-3 items-baseline">
-                <span className="text-muted-foreground shrink-0 min-w-[80px]">
-                  {aboutLabels[entry.key] ?? entry.key}
-                </span>
-                <span className="text-foreground/90">{localize(entry.value, locale)}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </TuiPanel>
+    <main className="max-w-screen overflow-x-clip [--separator-height:--spacing(8)] **:data-[slot=panel]:scroll-mt-[calc(var(--header-height)+var(--separator-height))]">
+      <div className="mx-auto max-w-2xl px-6 py-12 pb-20 sm:py-24 sm:pb-28">
+        <ProfileHeader />
+        <Separator />
 
-      <TuiPanel id="work" title={t('sections.work')} className="anim-in anim-d5">
-        <WorkSection />
-      </TuiPanel>
+        <Overview />
+        <SocialLinks />
+        <Separator />
 
-      <TuiPanel id="education" title={t('sections.education')} className="anim-in anim-d7">
-        <div className="font-mono text-sm space-y-2">
-          {DATA.education.map((education, i, arr) => {
-            const isLast = i === arr.length - 1;
-            return (
-              <div key={i} className="flex gap-3">
-                <span className="text-muted-foreground/50 select-none shrink-0">{isLast ? "└──" : "├──"}</span>
-                <Link
-                  href={education.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 min-w-0 group"
-                >
-                  <div className="flex items-baseline justify-between gap-2 flex-wrap">
-                    <div className="flex items-center gap-2">
-                      <span className="font-semibold group-hover:text-accent transition-colors">{education.school}</span>
-                      <ArrowUpRight className="h-3 w-3 text-muted-foreground opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-accent transition-all duration-200" aria-hidden />
-                    </div>
-                    <span className="text-xs text-muted-foreground tabular-nums">
-                      {localize(education.start, locale)} - {localize(education.end, locale)}
-                    </span>
-                  </div>
-                  <div className="text-sm text-muted-foreground">{localize(education.degree, locale)}</div>
-                  {"courses" in education && education.courses && (
-                    <div className="text-xs text-muted-foreground/70 mt-0.5 flex gap-2">
-                      <span>{localize(education.courses, locale)}</span>
-                    </div>
-                  )}
-                </Link>
-              </div>
-            );
-          })}
-        </div>
-      </TuiPanel>
+        <Hello locale={locale} />
+        <Separator />
 
-      <TuiPanel id="certifications" title={t('sections.certifications')} className="anim-in anim-d8">
-        <div className="font-mono text-sm space-y-2">
-          {DATA.certifications.map((cert, i, arr) => {
-            const isLast = i === arr.length - 1;
-            return (
-              <div key={i} className="flex gap-3">
-                <span className="text-muted-foreground/50 select-none shrink-0">{isLast ? "└──" : "├──"}</span>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-baseline justify-between gap-2 flex-wrap">
-                    <div>
-                      <span className="font-semibold">{cert.institution}</span>
-                      <span className="text-sm text-muted-foreground ml-2">{cert.name}</span>
-                    </div>
-                    <span className="text-xs text-muted-foreground tabular-nums">{localize(cert.date, locale)}</span>
-                  </div>
-                  <div className="text-xs text-muted-foreground/70 mt-0.5 flex gap-2">
-                    <span>{localize(cert.skills, locale)}</span>
-                  </div>
-                  {cert.credentialId && (
-                    <div className="text-xs text-muted-foreground/50 flex gap-2">
-                      <span>{isPtBR ? "Credencial" : "Credential"}</span>
-                      <span>{cert.credentialId}</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </TuiPanel>
+        <TechStack />
+        <Separator />
 
-      <TuiPanel id="skills" title={t('sections.skills')} className="anim-in anim-d9">
-        <div className="flex flex-wrap gap-x-3 gap-y-2">
-          {DATA.skills.map((skill) => (
-            <div key={skill.name} className="font-mono text-sm flex items-center gap-1.5 text-foreground/90">
-              <span className="text-accent">[</span>
-              {skill.icon && <skill.icon className="size-3.5 overflow-hidden object-contain" />}
-              <span>{skill.name}</span>
-              <span className="text-accent">]</span>
-            </div>
-          ))}
-        </div>
-      </TuiPanel>
+        <Experiences locale={locale} />
+        <Separator />
 
-      <TuiPanel id="projects" title={t('projects.title')} className="anim-in anim-d11">
-        <ProjectsSection locale={locale} />
-      </TuiPanel>
+        <Education locale={locale} />
+        <Separator />
 
-      <TuiPanel id="contact" title={t('contact.badge')} className="anim-in anim-d13">
-        <ContactSection locale={locale} />
-      </TuiPanel>
+        <Certifications locale={locale} />
+        <Separator />
+
+        <Projects locale={locale} />
+      </div>
     </main>
-  );
+  )
 }
