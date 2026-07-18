@@ -28,7 +28,7 @@ export function PortfolioHero() {
     <section
       aria-hidden="true"
       className="relative h-[150px] w-full overflow-hidden border-x border-t border-line sm:h-[210px]"
-    >k
+    >
       <DitherShader
         src={HERO_IMAGE}
         gridSize={4}
