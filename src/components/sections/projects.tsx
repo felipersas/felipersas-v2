@@ -1,4 +1,5 @@
-import { DATA } from "@/data/resume"
+import { featuredProjects } from "@/data/featured-projects"
+import type { FeaturedProject } from "@/data/featured-projects"
 import {
   Panel,
   PanelHeader,
@@ -7,73 +8,89 @@ import {
 } from "@/components/ui/panel"
 import { Tag } from "@/components/ui/tag"
 import type { Locale } from "@/hooks/use-translation"
-import ReactMarkdown from "react-markdown"
-import remarkGfm from "remark-gfm"
-import { LinkIcon } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 
 const ID = "projects"
 
+function ProjectCard({
+  project,
+  locale,
+}: {
+  project: FeaturedProject
+  locale: Locale
+}) {
+  const description = project.description[locale]
+  const technicalSummary = project.technicalSummary[locale]
+  const evidence = project.evidence?.[locale]
+
+  return (
+    <div className="p-4">
+        <h3 className="text-base font-medium">{project.title}</h3>
+
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          {description}
+        </p>
+
+        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground/70">
+          {technicalSummary}
+        </p>
+
+        {evidence && (
+          <p className="mt-2 text-xs text-muted-foreground/50 tabular-nums">
+            {evidence}
+          </p>
+        )}
+
+        <ul className="mt-3 flex flex-wrap gap-1.5">
+          {project.technologies.map((tech, i) => (
+            <li key={i}>
+              <Tag>{tech}</Tag>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-3 flex items-center gap-4">
+          {project.links.map((link, i) => (
+            <a
+              key={i}
+              href={link.href}
+              target="_blank"
+              rel="noreferrer"
+              className="group/link inline-flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+            >
+              {link.label[locale]}
+              <ArrowUpRight className="size-3.5 transition-transform duration-150 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" aria-hidden />
+            </a>
+          ))}
+        </div>
+    </div>
+  )
+}
+
 export function Projects({ locale }: { locale: Locale }) {
+  const sectionTitle = locale === "pt-BR" ? "Projetos" : "Projects"
+
   return (
     <Panel id={ID}>
       <PanelHeader>
         <PanelTitle>
-          <a href={`#${ID}`}>Projects</a>
-          <PanelTitleSup>({DATA.projects.length})</PanelTitleSup>
+          <a href={`#${ID}`}>{sectionTitle}</a>
+          <PanelTitleSup>({featuredProjects.length})</PanelTitleSup>
         </PanelTitle>
       </PanelHeader>
 
-      <ul>
-        {DATA.projects.map((project, index) => {
-          const description = typeof project.description === "string" ? project.description : project.description[locale]
+      <div className="border-b border-line">
+        <ProjectCard project={featuredProjects[0]} locale={locale} />
+      </div>
 
-          return (
-            <li key={index} className="border-b border-line last:border-none">
-              <div className="group/project flex items-start hover:bg-accent-muted">
-                <div className="mx-4 mt-4 flex size-6 shrink-0 items-center justify-center rounded-lg border border-muted-foreground/15 bg-muted text-muted-foreground ring-1 ring-line select-none">
-                  <span className="text-xs font-medium">{project.title.charAt(0)}</span>
-                </div>
-
-                <div className="min-w-0 flex-1 border-l border-dashed border-line py-4 pr-4">
-                  <a
-                    href={project.href}
-                    target="_blank"
-                    rel="noopener"
-                    className="group/link flex items-center gap-2"
-                  >
-                    <h3 className="text-sm font-medium">{project.title}</h3>
-                    <LinkIcon className="size-3.5 shrink-0 text-muted-foreground opacity-0 group-hover/link:opacity-100 transition-opacity" aria-hidden />
-                  </a>
-
-                  {project.dates && (
-                    <p className="mt-0.5 text-xs text-muted-foreground tabular-nums">
-                      {typeof project.dates === "string" ? project.dates : project.dates[locale]}
-                    </p>
-                  )}
-
-                  {description && (
-                    <div className="typeset typeset-description mt-3 text-sm leading-relaxed text-muted-foreground [&_p]:mt-0 [&_p]:mb-3 [&_p:last-child]:mb-0 [&_ul]:mt-1 [&_ul]:space-y-0.5 [&_li]:mt-0">
-                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                        {description}
-                      </ReactMarkdown>
-                    </div>
-                  )}
-
-                  {project.technologies && project.technologies.length > 0 && (
-                    <ul className="mt-3 flex flex-wrap gap-1.5">
-                      {project.technologies.map((tech, i) => (
-                        <li key={i} className="flex">
-                          <Tag>{tech}</Tag>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </div>
-            </li>
-          )
-        })}
-      </ul>
+      <div className="grid grid-cols-1 md:grid-cols-2">
+        <div className="border-b border-line md:border-b-0 md:border-r md:border-line">
+          <ProjectCard project={featuredProjects[1]} locale={locale} />
+        </div>
+        <div className="border-b border-line md:border-b-0 last:border-b-0">
+          <ProjectCard project={featuredProjects[2]} locale={locale} />
+        </div>
+      </div>
     </Panel>
   )
 }
