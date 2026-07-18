@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { PortfolioHero } from "@/components/sections/portfolio-hero"
 import { ProfileHeader } from "@/components/sections/profile-header"
 import { Overview } from "@/components/sections/overview"
 import { SocialLinks } from "@/components/sections/social-links"
@@ -26,7 +27,8 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
 
   return (
     <main className="max-w-screen overflow-x-clip [--separator-height:--spacing(8)] **:data-[slot=panel]:scroll-mt-[calc(var(--header-height)+var(--separator-height))]">
-      <div className="mx-auto max-w-2xl px-6 py-12 pb-20 sm:py-24 sm:pb-28">
+      <PortfolioHero />
+      <div className="mx-auto max-w-2xl px-6 pt-30 sm:pt-0 sm:pb-28">
         <ProfileHeader />
         <Separator />
 
