@@ -62,22 +62,6 @@ export function Overview() {
             </IntroItemLink>
           </IntroItemContent>
         </IntroItem>
-
-        <IntroItem>
-          <IntroItemContent>
-            <IntroItemLink href={DATA.url}>
-              {new URL(DATA.url).hostname}
-            </IntroItemLink>
-          </IntroItemContent>
-        </IntroItem>
-
-        <IntroItem>
-          <IntroItemContent>
-            <IntroItemLink href={`mailto:${DATA.contact.email}`}>
-              {DATA.contact.email}
-            </IntroItemLink>
-          </IntroItemContent>
-        </IntroItem>
       </PanelContent>
 
       <div className="pointer-events-none absolute top-px bottom-0 left-1/2 -z-1 w-px -translate-x-2.25 bg-[linear-gradient(to_bottom,var(--line)_4px,transparent_2px)] bg-size-[1px_6px] bg-repeat-y max-sm:hidden" />

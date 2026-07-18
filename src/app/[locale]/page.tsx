@@ -28,7 +28,7 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
   return (
     <main className="max-w-screen overflow-x-clip [--separator-height:--spacing(8)] **:data-[slot=panel]:scroll-mt-[calc(var(--header-height)+var(--separator-height))]">
       <PortfolioHero />
-      <div className="mx-auto max-w-2xl px-6 pt-30 sm:pt-0 sm:pb-28">
+      <div className="mx-auto max-w-2xl px-6 sm:pt-0 sm:pb-28">
         <ProfileHeader />
         <Separator />
 
