@@ -19,6 +19,8 @@ import { Prometheus } from "@/components/ui/svgs/prometheus";
 import { RabbitMQ } from "@/components/ui/svgs/rabbitmq";
 import { Linux } from "@/components/ui/svgs/linux";
 import { Java } from "@/components/ui/svgs/java";
+import { Flask } from "@/components/ui/svgs/flask";
+import { SQLAlchemy } from "@/components/ui/svgs/sqlalchemy";
 import type { Locale } from "@/hooks/use-translation";
 
 export type LocalizedText = { en: string; "pt-BR": string };
@@ -46,8 +48,8 @@ export const DATA = {
   ] as { key: string; value: string | LocalizedText }[],
   avatarUrl: "/me.png",
   about: {
-    en: "I like building cool stuff, from pixels to systems that scale. Currently building [Democraft](https://democraft-lp.vercel.app/).",
-    "pt-BR": "Curto construir coisas legais, dos pixels a sistemas que escalam. Atualmente construindo o [Democraft](https://democraft-lp.vercel.app/).",
+    en: "I enjoy building cool things, from pixels to systems that scale. Currently building [DemoCraft](https://democraft-lp.vercel.app) and developing distributed systems and developer tools.",
+    "pt-BR": "Curto construir coisas legais, dos pixels a sistemas que escalam. Atualmente construindo o [DemoCraft](https://democraft-lp.vercel.app), desenvolvendo sistemas distribuídos e developer tools.",
   } as LocalizedText,
   skills: [
     { name: "React", icon: ReactLight, href: "https://react.dev", categories: ["Frontend"] },
@@ -55,6 +57,7 @@ export const DATA = {
     { name: "TypeScript", icon: Typescript, href: "https://www.typescriptlang.org", categories: ["Language"] },
     { name: "Node.js", icon: Nodejs, href: "https://nodejs.org", categories: ["Backend"] },
     { name: "NestJS", icon: NestJS, href: "https://nestjs.com", categories: ["Backend"] },
+    { name: "Flask", icon: Flask, href: "https://flask.palletsprojects.com", categories: ["Backend"] },
     { name: "Python", icon: Python, href: "https://www.python.org", categories: ["Language"] },
     { name: "Go", icon: Golang, href: "https://go.dev", categories: ["Language"] },
     { name: "Rust", icon: Rust, href: "https://www.rust-lang.org", categories: ["Language"] },
@@ -62,6 +65,7 @@ export const DATA = {
     { name: "Postgres", icon: Postgresql, href: "https://www.postgresql.org", categories: ["Database & ORM"] },
     { name: "MySQL", icon: Mysql, href: "https://www.mysql.com", categories: ["Database & ORM"] },
     { name: "Prisma", icon: Prisma, href: "https://www.prisma.io", categories: ["Database & ORM"] },
+    { name: "SQLAlchemy", icon: SQLAlchemy, href: "https://www.sqlalchemy.org", categories: ["Database & ORM"] },
     { name: "Docker", icon: Docker, href: "https://www.docker.com", categories: ["DevOps"] },
     { name: "AWS", icon: Aws, href: "https://aws.amazon.com", categories: ["DevOps"] },
     { name: "TailwindCSS", icon: TailwindCSS, href: "https://tailwindcss.com", categories: ["Frontend"] },

@@ -213,7 +213,7 @@ function ExperienceItem({
             <img
               src={experience.logoUrl}
               alt={`${experience.company} logo`}
-              className="size-5 rounded-full grayscale transition-[filter] duration-300 ease-[cubic-bezier(0.42,0,0.58,1)] group-hover/experience:grayscale-0"
+              className="size-5 rounded-full transition-[filter] duration-300 ease-[cubic-bezier(0.42,0,0.58,1)] group-hover/experience:grayscale-0"
               aria-hidden
             />
           ) : (
