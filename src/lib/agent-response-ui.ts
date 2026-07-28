@@ -9,9 +9,7 @@ import {
 const UI_MARKER = "<!-- portfolio-ui";
 const INLINE_FACT_CITATION =
   /\s*\[(?:certification|contact|education|experience|identity|project|skills):[^\]]+\]/giu;
-const MAX_FACT_IDS = 3;
 const MAX_EVIDENCE_LINKS = 3;
-const MAX_VISIBLE_WORDS = 110;
 
 export type AgentGroundingStatus =
   | "conversational"
@@ -169,7 +167,7 @@ function parseFactIds(value: unknown): {
   factIds: string[];
   valid: boolean;
 } {
-  if (!Array.isArray(value) || value.length > MAX_FACT_IDS) {
+  if (!Array.isArray(value) || value.length > portfolioFacts.length) {
     return { factIds: [], valid: false };
   }
 
@@ -288,23 +286,6 @@ function evidenceForFacts(
   return evidence;
 }
 
-function limitVisibleText(text: string): string {
-  const words = text.trim().split(/\s+/);
-  if (words.length <= MAX_VISIBLE_WORDS) return text;
-
-  const limited = words.slice(0, MAX_VISIBLE_WORDS).join(" ");
-  const lastSentenceEnd = Math.max(
-    limited.lastIndexOf("."),
-    limited.lastIndexOf("!"),
-    limited.lastIndexOf("?")
-  );
-
-  if (lastSentenceEnd >= limited.length * 0.6) {
-    return limited.slice(0, lastSentenceEnd + 1);
-  }
-  return `${limited}…`;
-}
-
 export function parseAgentResponse(
   text: string,
   locale: Locale
@@ -364,7 +345,7 @@ export function parseAgentResponse(
     suggestions: followUpsByTopic[primaryTopic][locale],
     visibleText:
       status === "grounded"
-        ? limitVisibleText(rawVisibleText)
+        ? rawVisibleText
         : safeTextByStatus[status][locale],
   };
 }

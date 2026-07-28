@@ -4,6 +4,7 @@ import {
   parseAgentResponse,
   stripAgentResponseUi,
 } from "./agent-response-ui";
+import { getPortfolioFacts } from "./portfolio-grounding";
 
 describe("agent response grounding metadata", () => {
   it("accepts grounded facts and derives evidence and follow-ups locally", () => {
@@ -58,16 +59,33 @@ describe("agent response grounding metadata", () => {
     });
   });
 
-  it("caps otherwise valid answers without replacing their natural voice", () => {
-    const sentence =
-      "Felipe built production systems at MindGroup with Next.js and NestJS.";
-    const response = `${Array.from({ length: 16 }, () => sentence).join(" ")}
-<!-- portfolio-ui {"status":"grounded","factIds":["experience:mindgroup-consulting-e-marketing"]} -->`;
+  it("preserves a detailed overview supported by all relevant facts", () => {
+    const answer = [
+      "Felipe has built production-grade systems and tools across different industries:",
+      "",
+      "**Fintech & Business Operations:** He currently works as a Mid-Level Full-Stack Developer at Keeper, a fintech for graduation fundraising. Previously, at MindGroup Consulting, he architected modular monolith systems using NestJS and Next.js, automating financial workflows and optimizing database performance.",
+      "",
+      "**AI & Real Estate:** As Co-Founder of FazzLeads, he developed an AI-powered real estate agent using GoHighLevel, Mastra AI, and MCP to automate lead qualification.",
+      "",
+      "**Infrastructure & Tools:** He is building DemoCraft, an open-source toolkit for polished, reproducible product demos. Its workflows are defined in TypeScript, executed in a real browser with Playwright, and rendered deterministically with Remotion. This makes product demos repeatable, reviewable, and version-controlled as applications change.",
+    ].join("\n");
+    const response = `${answer}
+<!-- portfolio-ui {"status":"grounded","factIds":["experience:keeper","experience:mindgroup-consulting-e-marketing","experience:fazzleads","project:democraft"]} -->`;
 
     const parsed = parseAgentResponse(response, "en");
 
-    expect(parsed.visibleText.split(/\s+/).length).toBeLessThanOrEqual(110);
-    expect(parsed.visibleText).toMatch(/^Felipe built production systems/);
+    expect(answer.split(/\s+/).length).toBeGreaterThan(110);
+    expect(parsed.visibleText).toBe(answer);
+    expect(parsed.grounding).toMatchObject({
+      factIds: [
+        "experience:keeper",
+        "experience:mindgroup-consulting-e-marketing",
+        "experience:fazzleads",
+        "project:democraft",
+      ],
+      status: "grounded",
+      valid: true,
+    });
   });
 
   it("accepts natural Portuguese date and typography variations", () => {
@@ -150,12 +168,16 @@ describe("agent response grounding metadata", () => {
     expect(stripAgentResponseUi("Visible answer\n<!-- portfolio-ui {")).toBe(
       "Visible answer"
     );
+    const tooManyFacts = [
+      ...getPortfolioFacts().map((fact) => fact.id),
+      "identity:extra",
+    ];
 
     for (const response of [
       "Visible answer",
       "Visible answer\n<!-- portfolio-ui {not-json} -->",
       'Visible answer\n<!-- portfolio-ui {"status":"insufficient","factIds":["experience:fazzleads"]} -->',
-      'Visible answer\n<!-- portfolio-ui {"status":"grounded","factIds":["a","b","c","d"]} -->',
+      `Visible answer\n<!-- portfolio-ui ${JSON.stringify({ status: "grounded", factIds: tooManyFacts })} -->`,
       'Visible answer\n<!-- portfolio-ui {"status":"grounded","factIds":["experience:keeper","experience:keeper"]} -->',
     ]) {
       expect(parseAgentResponse(response, "en")).toMatchObject({

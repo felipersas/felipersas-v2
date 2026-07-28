@@ -300,20 +300,41 @@ function protectedEntities(
   value: string,
   includeSentenceLeads = false
 ): string[] {
-  const normalizedValue = value.replace(/[‐‑‒–—−]/g, "-");
+  const normalizedValue = value
+    .replace(/[‐‑‒–—−]/g, "-")
+    .replace(/[*_`>#]/g, " ");
   return [...normalizedValue.matchAll(protectedEntityPattern)]
     .filter((match) => {
       if (includeSentenceLeads) return true;
 
       const token = match[0];
       const before = normalizedValue.slice(0, match.index).trimEnd();
+      const after = normalizedValue.slice((match.index ?? 0) + token.length);
       const startsSentence =
         before.length === 0 ||
         /[.!?]\s*$/u.test(before) ||
         /(?:^|\n)\s*[-*]\s*$/u.test(before);
-      const isOrdinaryCapitalizedWord =
-        /^\p{Lu}\p{Ll}+$/u.test(token);
-      return !(startsSentence && isOrdinaryCapitalizedWord);
+      const isAcronym = /^[\p{Lu}\d]{2,}$/u.test(token);
+      const hasInternalCapital = /\p{Ll}[\p{L}\p{N}]*\p{Lu}/u.test(token);
+      const hasTechnicalPunctuation =
+        /[.+#/]/u.test(token) || /^[\p{Lu}\d]{2,}-/u.test(token);
+      const followsEntityContext =
+        /\b(?:at|by|com|na|no|pela?|using|usa|usando|uses|via|with)\s*$/iu.test(
+          before
+        );
+      const leadsEntityClaim =
+        startsSentence &&
+        /^\s+(?:emprega|employs|hosts|hospeda|powers|roda|runs|usa|uses)\b/iu.test(
+          after
+        );
+
+      return (
+        isAcronym ||
+        hasInternalCapital ||
+        hasTechnicalPunctuation ||
+        followsEntityContext ||
+        leadsEntityClaim
+      );
     })
     .map((match) => slugify(match[0]))
     .filter((entity) => entity && !safeEntityWords.has(entity));
