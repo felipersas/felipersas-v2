@@ -28,7 +28,7 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next, api) and all static files
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)',
+    // Skip service routes, Next.js internals, and static files.
+    '/((?!api|eve/v1|_next/static|_next/image|favicon.ico|.*\\..*).*)',
   ],
 }

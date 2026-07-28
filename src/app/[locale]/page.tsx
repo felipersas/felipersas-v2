@@ -11,10 +11,6 @@ import { Projects } from "@/components/sections/projects"
 import { Certifications } from "@/components/sections/certifications"
 import { Locale } from "@/hooks/use-translation"
 
-export async function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'pt-BR' }]
-}
-
 function Separator({ className }: { className?: string }) {
   return (
     <div className={cn("stripe-divider h-8 w-full border-x border-line", className)} />

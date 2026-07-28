@@ -6,6 +6,22 @@
 
 Built with next.js, [shadcn/ui](https://ui.shadcn.com/), and [magic ui](https://magicui.design/), deployed on Vercel.
 
+## Portfolio Agent
+
+The portfolio includes a bilingual Eve agent backed by OpenRouter. It uses
+structured skills for career, project, and contact information, and offers
+private, in-browser speech-to-text with Transformers.js.
+
+1. Use Node.js 24 or newer.
+2. Copy `.env.example` to `.env.local`.
+3. Add your server-only `OPENROUTER_API_KEY`.
+4. Run `npm install` and `npm run dev`.
+
+`OPENROUTER_MODEL` is optional and defaults to
+`google/gemini-2.5-flash`. The public Eve endpoint has per-session token limits;
+production deployments should also configure rate limiting in the Vercel
+Firewall.
+
 # Features
 
 - Setup only takes a few minutes by editing the [single config file](./src/data/resume.tsx)

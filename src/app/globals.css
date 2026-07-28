@@ -80,6 +80,24 @@
   }
 }
 
+::view-transition-group(portfolio-artwork) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(portfolio-artwork),
+::view-transition-new(portfolio-artwork) {
+  animation-duration: 420ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(portfolio-artwork),
+  ::view-transition-old(portfolio-artwork),
+  ::view-transition-new(portfolio-artwork) {
+    animation-duration: 1ms;
+  }
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
