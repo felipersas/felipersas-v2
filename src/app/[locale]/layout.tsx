@@ -8,6 +8,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import { TranslationProvider, Locale } from "@/hooks/use-translation";
 import { Analytics } from "@vercel/analytics/next";
+import { getPortfolioJsonLd } from "@/lib/public-profile";
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -43,7 +44,7 @@ export async function generateMetadata(
 
   return {
     metadataBase: new URL(DATA.url),
-    manifest: "/manifest.json",
+    manifest: "/manifest.webmanifest",
     title: {
       default: title,
       template: `%s | ${DATA.name}`,
@@ -91,6 +92,7 @@ export default async function RootLayout(props: {
   const { children } = props;
   const params = await props.params;
   const locale = params.locale as Locale;
+  const jsonLd = getPortfolioJsonLd(locale);
 
   return (
     <html lang={locale} className={cn(geistSans.variable, geistMono.variable)} suppressHydrationWarning>
@@ -98,21 +100,7 @@ export default async function RootLayout(props: {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: DATA.name,
-              jobTitle: "Desenvolvedor Full Stack",
-              url: DATA.url,
-              sameAs: [
-                "https://github.com/felipersas",
-                "https://linkedin.com/in/felipe-marques-a748b9299",
-              ],
-              worksFor: {
-                "@type": "Organization",
-                name: "MindGroup Consulting",
-              },
-            }),
+            __html: JSON.stringify(jsonLd),
           }}
         />
         <Analytics />

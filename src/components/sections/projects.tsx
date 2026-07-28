@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/panel"
 import { Tag } from "@/components/ui/tag"
 import type { Locale } from "@/hooks/use-translation"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowRight, ArrowUpRight, Bot } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const ID = "projects"
@@ -23,6 +23,10 @@ function ProjectCard({
   const description = project.description[locale]
   const technicalSummary = project.technicalSummary[locale]
   const evidence = project.evidence?.[locale]
+  const agentPrompt =
+    locale === "pt-BR"
+      ? `Explique o projeto ${project.title}, suas decisões de arquitetura, trade-offs e evidências técnicas.`
+      : `Explain the ${project.title} project, its architecture decisions, trade-offs, and technical evidence.`
 
   return (
     <div className="scroll-mt-24 p-4" id={`project-${project.slug}`}>
@@ -50,7 +54,14 @@ function ProjectCard({
           ))}
         </ul>
 
-        <div className="mt-3 flex items-center gap-4">
+        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <a
+            href={`/${locale}/projects/${project.slug}`}
+            className="group/link inline-flex items-center gap-1 text-sm font-medium transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+          >
+            {locale === "pt-BR" ? "Ver case study" : "View case study"}
+            <ArrowRight className="size-3.5 transition-transform duration-150 group-hover/link:translate-x-0.5" aria-hidden />
+          </a>
           {project.links.map((link, i) => {
             const isExternal = link.href.startsWith("http")
             const href =
@@ -69,6 +80,13 @@ function ProjectCard({
             </a>
             )
           })}
+          <a
+            href={`/${locale}/agent?prompt=${encodeURIComponent(agentPrompt)}`}
+            className="group/link inline-flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+          >
+            <Bot className="size-3.5" aria-hidden />
+            {locale === "pt-BR" ? "Perguntar" : "Ask"}
+          </a>
         </div>
     </div>
   )

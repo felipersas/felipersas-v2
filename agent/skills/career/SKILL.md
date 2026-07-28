@@ -39,9 +39,11 @@ Grafana, Prometheus, and React Native/Expo.
 - Developed and maintained two React Native/Expo applications with Stripe and
   eRede/Pix payment integrations.
 
-### Freelance — Full-Stack Developer
+### FazzLeads — Co-Founder & Software Engineer
 
-- Period: June 2024 to present; remote contract work.
+- Period: June 2024 to present; remote.
+- Co-founded FazzLeads, a CRM and automation platform for real-estate
+  businesses and independent professionals.
 - Architected modular back ends with DDD and CQRS in NestJS.
 - Built an AI real-estate agent integrated with GoHighLevel through Mastra AI
   and MCP, orchestrating lead qualification, WhatsApp messages, and property

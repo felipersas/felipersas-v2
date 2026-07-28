@@ -223,18 +223,14 @@ function ExperienceItem({
 
         <div className="flex min-w-0 flex-1 flex-col gap-x-3 gap-y-1 pr-1 sm:flex-row sm:items-baseline sm:justify-between">
           <h3 className="text-xl/6 font-medium">
-            {experience.href && experience.href !== "#" ? (
-              <a
-                className="link-underline"
-                href={experience.href}
-                target="_blank"
-                rel="noopener"
-              >
-                {experience.company}
-              </a>
-            ) : (
-              experience.company
-            )}
+            <a
+              className="link-underline"
+              href={experience.href}
+              target="_blank"
+              rel="noopener"
+            >
+              {experience.company}
+            </a>
           </h3>
 
           {experience.location && (

@@ -34,6 +34,7 @@ import {
   Square,
 } from "lucide-react";
 import {
+  useEffect,
   useRef,
   useState,
   useSyncExternalStore,
@@ -48,7 +49,13 @@ function replaceName(template: string, name: string): string {
   return template.replace("{name}", name);
 }
 
-function PortfolioAgentSession({ locale }: { locale: Locale }) {
+function PortfolioAgentSession({
+  initialPrompt,
+  locale,
+}: {
+  initialPrompt?: string;
+  locale: Locale;
+}) {
   const { t } = useTranslation();
   const [input, setInput] = useState("");
   const [copiedId, setCopiedId] = useState<string | undefined>(undefined);
@@ -63,6 +70,7 @@ function PortfolioAgentSession({ locale }: { locale: Locale }) {
     )
   );
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const initialPromptSentRef = useRef(false);
 
   const agent = useEveAgent({
     session,
@@ -105,8 +113,26 @@ function PortfolioAgentSession({ locale }: { locale: Locale }) {
     }
   }
 
-  async function sendMessage(): Promise<void> {
-    const message = input.trim();
+  useEffect(() => {
+    if (!initialPrompt || initialPromptSentRef.current) return;
+
+    initialPromptSentRef.current = true;
+    void agent
+      .send({
+        message: initialPrompt,
+        clientContext: {
+          locale,
+          page: "Felipe Marques portfolio",
+        },
+      })
+      .catch(() => {
+        setInput(initialPrompt);
+        initialPromptSentRef.current = false;
+      });
+  }, [agent, initialPrompt, locale]);
+
+  async function sendMessage(messageOverride?: string): Promise<void> {
+    const message = (messageOverride ?? input).trim();
     if (!message || isBusy) return;
 
     setInput("");
@@ -136,8 +162,7 @@ function PortfolioAgentSession({ locale }: { locale: Locale }) {
   }
 
   function handleSuggestion(suggestion: string): void {
-    setInput(suggestion);
-    textareaRef.current?.focus();
+    void sendMessage(suggestion);
   }
 
   function handleTranscript(text: string): void {
@@ -392,7 +417,13 @@ function PortfolioAgentSession({ locale }: { locale: Locale }) {
   );
 }
 
-export function PortfolioAgent({ locale }: { locale: Locale }) {
+export function PortfolioAgent({
+  initialPrompt,
+  locale,
+}: {
+  initialPrompt?: string;
+  locale: Locale;
+}) {
   const mounted = useSyncExternalStore(
     () => () => undefined,
     () => true,
@@ -407,7 +438,10 @@ export function PortfolioAgent({ locale }: { locale: Locale }) {
         id={ID}
       >
         {mounted ? (
-          <PortfolioAgentSession locale={locale} />
+          <PortfolioAgentSession
+            initialPrompt={initialPrompt}
+            locale={locale}
+          />
         ) : (
           <div
             className="min-h-0 flex-1 animate-pulse bg-muted/10"

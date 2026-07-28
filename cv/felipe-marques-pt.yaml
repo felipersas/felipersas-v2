@@ -1,0 +1,84 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
+cv:
+  name: Felipe Marques
+  headline: Engenheiro de Software
+  location: Sorocaba, SP, Brasil
+  email: felipemarques.computacao@gmail.com
+  website: https://felipersas-dev.vercel.app
+  social_networks:
+    - network: LinkedIn
+      username: felipe-marques-a748b9299
+    - network: GitHub
+      username: felipersas
+  sections:
+    Experiência:
+      - company: Keeper
+        position: Desenvolvedor Full-Stack Pleno
+        start_date: 2026-06
+        end_date: present
+        location: São Paulo, SP
+        highlights:
+          - Atuação em fintech de arrecadação e gestão financeira para formaturas.
+      - company: MindGroup Consulting e Marketing
+        position: Desenvolvedor Full-Stack
+        start_date: 2025-02
+        end_date: 2026-05
+        location: Sorocaba, SP
+        highlights:
+          - Arquitetou e entregou 3 sistemas em produção com monolito modular, NestJS, DDD, Next.js, Docker e CI/CD.
+          - Projetou APIs REST com autenticação JWT e controle de acesso granular por papéis para aplicações com múltiplos módulos.
+          - Automatizou importações em massa, processamento bancário e emissão de notas fiscais, eliminando mais de 40 horas de trabalho manual por mês.
+          - Reduziu uma consulta crítica de 5 s para 240 ms, uma melhoria de 95%, com views MySQL, índices compostos e paginação por cursor.
+          - Construiu frontends Next.js com carregamento médio de 250 ms e manteve 2 apps React Native/Expo com Stripe e eRede/Pix.
+      - company: FazzLeads
+        position: Cofundador e Engenheiro de Software
+        start_date: 2024-06
+        end_date: present
+        location: Remoto
+        highlights:
+          - Arquitetou backends modulares com DDD e CQRS em NestJS para fluxos de IA e regras de negócio com limites claros.
+          - Desenvolveu um agente imobiliário com Mastra AI, MCP e GoHighLevel para qualificação de leads, WhatsApp e recomendação de imóveis.
+          - Entregou aplicações com SEO, CI/CD e observabilidade em produção usando Grafana e Prometheus.
+    Educação:
+      - institution: SENAI Sorocaba
+        area: Análise e Desenvolvimento de Sistemas
+        degree: Superior
+        start_date: 2025-01
+        end_date: present
+        location: Sorocaba, SP
+      - institution: SENAI Sorocaba
+        area: Desenvolvimento de Sistemas
+        degree: Técnico
+        start_date: 2023-01
+        end_date: 2024-12
+        location: Sorocaba, SP
+    Certificações Profissionais:
+      - name: Supervised Machine Learning - Regression and Classification
+        date: 2026-01
+        location: DeepLearning.AI
+        summary: "Credential ID: L2MYYHXMHCPD"
+    Habilidades Técnicas:
+      - label: Linguagens
+        details: TypeScript, Python, Go, Rust, Java
+      - label: Frontend e Mobile
+        details: React, Next.js, Tailwind CSS, React Native, Expo
+      - label: Backend
+        details: Node.js, NestJS, Flask
+      - label: Dados
+        details: PostgreSQL, MySQL, Prisma, SQLAlchemy, Redis
+      - label: Cloud e Infraestrutura
+        details: AWS, Docker, RabbitMQ, Linux, Grafana, Prometheus, CI/CD
+      - label: Arquitetura e Qualidade
+        details: DDD, CQRS, microsserviços, Saga, Inbox/Outbox, testes unitários, integração e E2E
+design:
+  theme: engineeringresumes
+locale:
+  language: portuguese
+settings:
+  current_date: "2026-07-28"
+  render_command:
+    output_folder: output/pdf
+    pdf_path: OUTPUT_FOLDER/curriculo.pdf
+    dont_generate_markdown: true
+    dont_generate_html: true
+    dont_generate_png: true
