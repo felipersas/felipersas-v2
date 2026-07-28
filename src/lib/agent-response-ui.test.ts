@@ -5,26 +5,21 @@ import {
   stripAgentResponseUi,
 } from "./agent-response-ui";
 
-describe("agent response UI metadata", () => {
-  it("extracts two contextual suggestions and localized evidence", () => {
+describe("agent response grounding metadata", () => {
+  it("accepts grounded facts and derives evidence and follow-ups locally", () => {
     const response = [
-      "Felipe construiu sistemas financeiros distribuídos.",
-      '<!-- portfolio-ui {"suggestions":["Como o Saga mantém a consistência?","Quais testes validam esse fluxo?"],"evidence":["experience","project:real-time-crash-game","code:real-time-crash-game"]} -->',
+      "O Real-Time Crash Game possui mais de 330 testes automatizados.",
+      '<!-- portfolio-ui {"status":"grounded","factIds":["project:real-time-crash-game"]} -->',
     ].join("\n\n");
 
     expect(parseAgentResponse(response, "pt-BR")).toEqual({
-      visibleText: "Felipe construiu sistemas financeiros distribuídos.",
+      visibleText:
+        "O Real-Time Crash Game possui mais de 330 testes automatizados.",
       suggestions: [
-        "Como o Saga mantém a consistência?",
-        "Quais testes validam esse fluxo?",
+        "Quais decisões arquiteturais esse projeto tomou?",
+        "Onde posso ver as evidências desse projeto?",
       ],
       evidence: [
-        {
-          external: false,
-          href: "/pt-BR#experience",
-          key: "experience",
-          label: "Ver experiência",
-        },
         {
           external: false,
           href: "/pt-BR#project-real-time-crash-game",
@@ -38,46 +33,72 @@ describe("agent response UI metadata", () => {
           label: "Ver código",
         },
       ],
+      grounding: {
+        factIds: ["project:real-time-crash-game"],
+        status: "grounded",
+        valid: true,
+      },
     });
   });
 
-  it("keeps only two unique, non-empty suggestions and known evidence", () => {
+  it("fails closed for unknown facts and unsupported metrics", () => {
+    const unknownFact =
+      'Felipe trabalhou na Nubank.\n<!-- portfolio-ui {"status":"grounded","factIds":["experience:nubank"]} -->';
+    const inventedMetric =
+      'A FazzLeads possui 12.000 usuários ativos.\n<!-- portfolio-ui {"status":"grounded","factIds":["experience:fazzleads"]} -->';
+
+    expect(parseAgentResponse(unknownFact, "pt-BR")).toMatchObject({
+      visibleText:
+        "Não consigo confirmar essa resposta com as informações documentadas no portfólio.",
+      grounding: {
+        status: "grounded",
+        valid: false,
+        reason: "unknown-fact",
+      },
+      evidence: [],
+    });
+    expect(parseAgentResponse(inventedMetric, "pt-BR")).toMatchObject({
+      grounding: {
+        valid: false,
+        reason: "unsupported-claim",
+      },
+    });
+  });
+
+  it("allows explicit abstention without fabricated citations", () => {
     const response =
-      'Answer\n<!-- portfolio-ui {"suggestions":["First?","First?","Second?","Third?"],"evidence":["unknown","projects","projects"]} -->';
+      'O portfólio não informa quantos usuários a FazzLeads possui.\n<!-- portfolio-ui {"status":"insufficient","factIds":["experience:fazzleads"]} -->';
 
-    expect(parseAgentResponse(response, "en")).toMatchObject({
-      suggestions: ["First?", "Second?"],
-      evidence: [
-        {
-          href: "/en#projects",
-          key: "projects",
-          label: "View projects",
-        },
-      ],
+    expect(parseAgentResponse(response, "pt-BR")).toMatchObject({
+      visibleText:
+        "O portfólio não informa quantos usuários a FazzLeads possui.",
+      grounding: {
+        factIds: [],
+        status: "insufficient",
+        valid: true,
+      },
+      evidence: [],
     });
   });
 
-  it("hides incomplete or malformed metadata from the rendered answer", () => {
+  it("fails closed when metadata is missing or malformed", () => {
     expect(stripAgentResponseUi("Visible answer\n<!-- portfolio-ui {")).toBe(
       "Visible answer"
     );
 
-    expect(
-      parseAgentResponse(
-        "Visible answer\n<!-- portfolio-ui {not-json} -->",
-        "en"
-      )
-    ).toEqual({
-      evidence: [],
-      suggestions: [],
-      visibleText: "Visible answer",
-    });
-  });
-
-  it("does not render a partial follow-up menu", () => {
-    const response =
-      'Answer\n<!-- portfolio-ui {"suggestions":["Only one?"],"evidence":[]} -->';
-
-    expect(parseAgentResponse(response, "en").suggestions).toEqual([]);
+    for (const response of [
+      "Visible answer",
+      "Visible answer\n<!-- portfolio-ui {not-json} -->",
+    ]) {
+      expect(parseAgentResponse(response, "en")).toMatchObject({
+        visibleText:
+          "I can’t verify that answer against the documented portfolio information.",
+        grounding: {
+          status: "invalid",
+          valid: false,
+          reason: "invalid-metadata",
+        },
+      });
+    }
   });
 });

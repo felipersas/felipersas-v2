@@ -3,8 +3,8 @@ import type {
   SessionState,
 } from "eve/client";
 
-export const EVE_CHAT_STORAGE_KEY = "portfolio-eve-chat-v2";
-const EVE_CHAT_STORAGE_VERSION = 2;
+export const EVE_CHAT_STORAGE_KEY = "portfolio-eve-chat-v3";
+const EVE_CHAT_STORAGE_VERSION = 3;
 const MAX_STORED_CHAT_SIZE = 1_000_000;
 
 export interface StoredEveChat {

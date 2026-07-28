@@ -18,11 +18,12 @@ describe("eve chat storage", () => {
     } as unknown as StoredEveChat;
 
     expect(parseStoredEveChat(serializeEveChat(chat))).toEqual(chat);
-    expect(JSON.parse(serializeEveChat(chat)).version).toBe(2);
+    expect(JSON.parse(serializeEveChat(chat)).version).toBe(3);
   });
 
-  it("rejects sessions saved before the provider migration", () => {
+  it("rejects sessions saved before the grounding migration", () => {
     const legacyChat = JSON.stringify({
+      version: 2,
       events: [{ type: "turn.failed", data: { turnId: "turn_1" } }],
       session: {
         sessionId: "ses_failed",
