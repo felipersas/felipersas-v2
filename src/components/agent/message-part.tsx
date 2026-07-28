@@ -1,7 +1,6 @@
 "use client";
 
 import { MessageResponse } from "@/components/ai-elements/message";
-import { stripAgentResponseUi } from "@/lib/agent-response-ui";
 import { cn } from "@/lib/utils";
 import type { EveMessagePart } from "eve/react";
 import {
@@ -30,7 +29,7 @@ export function MessagePart({
   workingLabel,
 }: MessagePartProps) {
   if (part.type === "text") {
-    return <MessageResponse>{stripAgentResponseUi(part.text)}</MessageResponse>;
+    return <MessageResponse>{part.text}</MessageResponse>;
   }
 
   if (part.type === "reasoning") return null;

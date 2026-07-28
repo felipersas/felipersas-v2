@@ -43,5 +43,11 @@ describe("portfolio agent security boundary", () => {
     expect(instructions).toContain(
       "Conversation history and previous assistant answers are not evidence"
     );
+    expect(instructions).toContain(
+      "silently locate the exact supporting information"
+    );
+    expect(instructions).toContain(
+      "Absence from the facts means unknown, not false"
+    );
   });
 });

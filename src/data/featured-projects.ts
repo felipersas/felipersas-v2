@@ -54,8 +54,8 @@ export const featuredProjects: FeaturedProject[] = [
     },
     technologies: ["Eve", "OpenRouter", "Transformers.js", "Next.js"],
     evidence: {
-      en: "Canonical facts · fail-closed answers · local speech-to-text",
-      "pt-BR": "Fatos canônicos · respostas fail-closed · speech-to-text local",
+      en: "Canonical facts · transparent knowledge gaps · local speech-to-text",
+      "pt-BR": "Fatos canônicos · lacunas transparentes · speech-to-text local",
     },
     caseStudy: {
       challenge: {
@@ -63,12 +63,12 @@ export const featuredProjects: FeaturedProject[] = [
         "pt-BR": "Tornar um agente de portfólio realmente útil para recrutadores e engenheiros sem permitir que ele invente fatos profissionais ou vire um assistente genérico sem limites.",
       },
       approach: {
-        en: "Generate always-on, fact-addressable grounding from the same typed portfolio data used by the site. Validate cited fact IDs and documented metrics before rendering an answer, keep procedural skills separate, and run multilingual speech-to-text entirely in a Web Worker.",
-        "pt-BR": "Gerar grounding permanente e endereçável por fatos a partir dos mesmos dados tipados usados pelo portfólio. Validar IDs citados e métricas documentadas antes de renderizar a resposta, manter skills procedurais separadas e executar speech-to-text multilíngue em um Web Worker.",
+        en: "Generate always-on canonical context from the same typed portfolio data used by the site, instruct the model to verify every claim against it, keep procedural skills separate, and run multilingual speech-to-text entirely in a Web Worker.",
+        "pt-BR": "Gerar contexto canônico permanente a partir dos mesmos dados tipados usados pelo portfólio, instruir o modelo a verificar cada afirmação nesse contexto, manter skills procedurais separadas e executar speech-to-text multilíngue em um Web Worker.",
       },
       outcome: {
-        en: "A bilingual conversation surface that fails closed on unsupported claims, links answers to canonical evidence, resets stale sessions after grounding changes, and keeps transcription local.",
-        "pt-BR": "Uma experiência bilíngue que bloqueia afirmações sem suporte, conecta respostas a evidências canônicas, reinicia sessões antigas após mudanças de grounding e mantém a transcrição local.",
+        en: "A bilingual conversation surface grounded in the public portfolio, transparent when information is unavailable, and backed by local speech transcription.",
+        "pt-BR": "Uma experiência bilíngue fundamentada no portfólio público, transparente quando uma informação não está disponível e com transcrição de voz local.",
       },
     },
     links: [

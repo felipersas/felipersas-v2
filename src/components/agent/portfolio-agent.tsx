@@ -18,7 +18,6 @@ import { AgentResponseActions } from "@/components/agent/response-actions";
 import { SpeechInput } from "@/components/agent/speech-input";
 import { Button } from "@/components/ui/button";
 import { useTranslation, type Locale } from "@/hooks/use-translation";
-import { parseAgentResponse } from "@/lib/agent-response-ui";
 import {
   clearStoredEveChat,
   readStoredEveChat,
@@ -260,17 +259,14 @@ function PortfolioAgentSession({
             </div>
           ) : (
             agent.data.messages.map((message) => {
-              const text = message.parts
+              const responseText = message.parts
                 .filter((part) => part.type === "text")
                 .map((part) => part.text)
-                .join("");
-              const parsedResponse = parseAgentResponse(text, locale);
+                .join("")
+                .trim();
               const isCompletedAssistant =
                 message.role === "assistant" &&
                 message.metadata?.status === "complete";
-              const firstTextPartIndex = message.parts.findIndex(
-                (part) => part.type === "text"
-              );
 
               return (
                 <Message from={message.role} key={message.id}>
@@ -280,57 +276,42 @@ function PortfolioAgentSession({
                         activityLabel={activityLabel}
                         doneLabel={t("agent.activity.done")}
                         key={`${message.id}-${part.type}-${index}`}
-                        part={
-                          isCompletedAssistant && part.type === "text"
-                            ? {
-                                ...part,
-                                text:
-                                  index === firstTextPartIndex
-                                    ? parsedResponse.visibleText
-                                    : "",
-                              }
-                            : part
-                        }
+                        part={part}
                         workingLabel={t("agent.activity.working")}
                       />
                     ))}
                   </MessageContent>
                   {isCompletedAssistant && (
                     <AgentResponseActions
-                      evidence={parsedResponse.evidence}
-                      evidenceLabel={t("agent.evidence")}
                       followUpsLabel={t("agent.followUps")}
                       onSuggestion={handleSuggestion}
                       suggestions={
                         message.id === lastCompletedAssistantId && !isBusy
-                          ? parsedResponse.suggestions
+                          ? suggestions
                           : []
                       }
                     />
                   )}
-                  {isCompletedAssistant && parsedResponse.visibleText && (
-                      <MessageActions>
-                        <MessageAction
-                          onClick={() =>
-                            void copyResponse(
-                              message.id,
-                              parsedResponse.visibleText
-                            )
-                          }
-                          tooltip={
-                            copiedId === message.id
-                              ? t("agent.copied")
-                              : t("agent.copy")
-                          }
-                        >
-                          {copiedId === message.id ? (
-                            <Check className="size-3.5" />
-                          ) : (
-                            <Copy className="size-3.5" />
-                          )}
-                        </MessageAction>
-                      </MessageActions>
-                    )}
+                  {isCompletedAssistant && responseText && (
+                    <MessageActions>
+                      <MessageAction
+                        onClick={() =>
+                          void copyResponse(message.id, responseText)
+                        }
+                        tooltip={
+                          copiedId === message.id
+                            ? t("agent.copied")
+                            : t("agent.copy")
+                        }
+                      >
+                        {copiedId === message.id ? (
+                          <Check className="size-3.5" />
+                        ) : (
+                          <Copy className="size-3.5" />
+                        )}
+                      </MessageAction>
+                    </MessageActions>
+                  )}
                 </Message>
               );
             })
