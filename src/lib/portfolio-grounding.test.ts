@@ -68,5 +68,24 @@ describe("portfolio grounding", () => {
       valid: false,
       reason: "unsupported-claim",
     });
+
+    expect(
+      validatePortfolioGrounding("Felipe has 7 years of Go experience.", [
+        "skills:documented",
+      ])
+    ).toMatchObject({
+      valid: false,
+      reason: "unsupported-claim",
+    });
+
+    expect(
+      validatePortfolioGrounding(
+        "At MindGroup, the query previously took 5 hours.",
+        ["experience:mindgroup-consulting-e-marketing"]
+      )
+    ).toMatchObject({
+      valid: false,
+      reason: "unsupported-claim",
+    });
   });
 });

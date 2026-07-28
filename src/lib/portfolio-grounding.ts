@@ -1,5 +1,6 @@
 import { featuredProjects } from "@/data/featured-projects";
 import { DATA, localize } from "@/data/resume";
+import type { Locale } from "@/hooks/use-translation";
 import { getPublicProfile } from "@/lib/public-profile";
 
 export type PortfolioFactTopic =
@@ -13,6 +14,7 @@ export type PortfolioFactTopic =
 export type PortfolioFact = {
   evidenceKey: string;
   id: string;
+  localizedText: Readonly<Record<Locale, string>>;
   text: string;
   topic: PortfolioFactTopic;
 };
@@ -34,17 +36,51 @@ const slugify = (value: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-function buildPortfolioFacts(): readonly PortfolioFact[] {
-  const profile = getPublicProfile("en");
+type LocalizedPortfolioFact = Omit<PortfolioFact, "localizedText">;
 
-  const facts: PortfolioFact[] = [
+function buildPortfolioFactsForLocale(
+  locale: Locale
+): readonly LocalizedPortfolioFact[] {
+  const profile = getPublicProfile(locale);
+  const copy =
+    locale === "pt-BR"
+      ? {
+          approach: "Abordagem",
+          challenge: "Desafio",
+          contact:
+            "Somente dados públicos de contato. O portfólio registra abertura para conversas profissionais, mas não informa tempo de resposta, remuneração, agenda, mudança de cidade ou termos contratuais.",
+          coursework: "Disciplinas",
+          currentRole: "Cargo atual documentado",
+          documentedSkills: "Habilidades técnicas documentadas",
+          officialWebsite: "Site oficial",
+          outcome: "Resultado",
+          present: "atual",
+          publicLinks: "Links públicos",
+          technologies: "Tecnologias",
+        }
+      : {
+          approach: "Approach",
+          challenge: "Challenge",
+          contact:
+            "Public contact details only. The portfolio documents openness to professional conversations, but does not document response time, compensation, schedule, relocation, or contract terms.",
+          coursework: "Coursework",
+          currentRole: "Current documented role",
+          documentedSkills: "Documented technical skills",
+          officialWebsite: "Official website",
+          outcome: "Outcome",
+          present: "present",
+          publicLinks: "Public links",
+          technologies: "Technologies",
+        };
+
+  const facts: LocalizedPortfolioFact[] = [
     {
       id: "identity:profile",
       topic: "identity",
       evidenceKey: "experience",
       text: normalizeWhitespace(
-        `${profile.name} is a ${profile.role} based in ${profile.location}. ` +
-          `Current documented role: ${profile.currentRole.title} at ${profile.currentRole.company}. ` +
+        `${profile.name}: ${profile.role}. ${profile.location}. ` +
+          `${copy.currentRole}: ${profile.currentRole.title}, ${profile.currentRole.company}. ` +
           profile.summary
       ),
     },
@@ -52,10 +88,10 @@ function buildPortfolioFacts(): readonly PortfolioFact[] {
       id: "skills:documented",
       topic: "skills",
       evidenceKey: "stack",
-      text: `Documented technical skills: ${profile.skills.join(", ")}.`,
+      text: `${copy.documentedSkills}: ${profile.skills.join(", ")}.`,
     },
     ...profile.experience.map(
-      (experience): PortfolioFact => ({
+      (experience): LocalizedPortfolioFact => ({
         id: `experience:${slugify(experience.company)}`,
         topic: "experience",
         evidenceKey: "experience",
@@ -63,31 +99,33 @@ function buildPortfolioFacts(): readonly PortfolioFact[] {
           `${experience.company}. ${experience.positions
             .map(
               (position) =>
-                `${position.title}, ${position.start} to ${position.end ?? "present"}. ${
+                `${position.title}, ${position.start} — ${
+                  position.end ?? copy.present
+                }. ${
                   position.description ?? ""
                 }`
             )
-            .join(" ")} Official website: ${experience.url}`
+            .join(" ")} ${copy.officialWebsite}: ${experience.url}`
         ),
       })
     ),
     ...DATA.education.map(
-      (education, index): PortfolioFact => ({
+      (education, index): LocalizedPortfolioFact => ({
         id: `education:${slugify(education.school)}-${index + 1}`,
         topic: "education",
         evidenceKey: "experience",
         text: normalizeWhitespace(
-          `${education.school}: ${localize(education.degree, "en")}, ${
+          `${education.school}: ${localize(education.degree, locale)}, ${
             education.start
-          } to ${localize(education.end, "en")}. Coursework: ${localize(
+          } — ${localize(education.end, locale)}. ${copy.coursework}: ${localize(
             education.courses,
-            "en"
+            locale
           )}.`
         ),
       })
     ),
     ...DATA.certifications.map(
-      (certification): PortfolioFact => ({
+      (certification): LocalizedPortfolioFact => ({
         id: `certification:${slugify(
           `${certification.institution}-${certification.name}`
         )}`,
@@ -96,19 +134,19 @@ function buildPortfolioFacts(): readonly PortfolioFact[] {
         text: normalizeWhitespace(
           `${certification.institution}: ${certification.name}, ${
             certification.date
-          }. Credential ID: ${certification.credentialId}. Documented topics: ${localize(
+          }. Credential ID: ${certification.credentialId}. ${copy.documentedSkills}: ${localize(
             certification.skills,
-            "en"
+            locale
           )}.`
         ),
       })
     ),
-    ...profile.projects.map((project): PortfolioFact => {
+    ...profile.projects.map((project): LocalizedPortfolioFact => {
       const source = featuredProjects.find(
         (candidate) => candidate.slug === project.slug
       );
       const caseStudy = source
-        ? `Challenge: ${source.caseStudy.challenge.en} Approach: ${source.caseStudy.approach.en} Outcome: ${source.caseStudy.outcome.en}`
+        ? `${copy.challenge}: ${source.caseStudy.challenge[locale]} ${copy.approach}: ${source.caseStudy.approach[locale]} ${copy.outcome}: ${source.caseStudy.outcome[locale]}`
         : "";
 
       return {
@@ -118,9 +156,9 @@ function buildPortfolioFacts(): readonly PortfolioFact[] {
         text: normalizeWhitespace(
           `${project.title}. ${project.description} ${project.technicalSummary} ${
             project.evidence ?? ""
-          } ${caseStudy} Technologies: ${project.technologies.join(
+          } ${caseStudy} ${copy.technologies}: ${project.technologies.join(
             ", "
-          )}. Public links: ${project.links
+          )}. ${copy.publicLinks}: ${project.links
             .map((link) => `${link.label}: ${link.url}`)
             .join("; ")}.`
         ),
@@ -131,9 +169,9 @@ function buildPortfolioFacts(): readonly PortfolioFact[] {
       topic: "contact",
       evidenceKey: "experience",
       text: normalizeWhitespace(
-        `Public contact details only. Email: ${profile.contact.email}. ` +
+        `${copy.contact} Email: ${profile.contact.email}. ` +
           `GitHub: ${profile.contact.github}. LinkedIn: ${profile.contact.linkedin}. ` +
-          `Résumé: ${profile.contact.resume}. The portfolio documents openness to professional conversations, but does not document response time, compensation, schedule, relocation, or contract terms.`
+          `Currículo/Résumé: ${profile.contact.resume}.`
       ),
     },
   ];
@@ -141,7 +179,21 @@ function buildPortfolioFacts(): readonly PortfolioFact[] {
   return Object.freeze(facts.map((fact) => Object.freeze(fact)));
 }
 
-const portfolioFacts = buildPortfolioFacts();
+const englishFacts = buildPortfolioFactsForLocale("en");
+const portugueseFactsById = new Map(
+  buildPortfolioFactsForLocale("pt-BR").map((fact) => [fact.id, fact])
+);
+const portfolioFacts: readonly PortfolioFact[] = Object.freeze(
+  englishFacts.map((fact) =>
+    Object.freeze({
+      ...fact,
+      localizedText: Object.freeze({
+        en: fact.text,
+        "pt-BR": portugueseFactsById.get(fact.id)?.text ?? fact.text,
+      }),
+    })
+  )
+);
 const factsById = new Map(portfolioFacts.map((fact) => [fact.id, fact]));
 
 export function getPortfolioFacts(): readonly PortfolioFact[] {
@@ -166,7 +218,20 @@ ${facts}
 }
 
 const protectedClaimPattern =
-  /https?:\/\/[^\s)]+|\b\d{4}\b|\b\d+(?:[.,]\d+)?\s*(?:%|\+|ms|milliseconds?|milissegundos?|seconds?|segundos?|s|hours?|horas?|(?:(?:active|automated)\s+)?users?|usuários?|(?:(?:active|automated)\s+)?tests?|testes|serviços?|services?)/giu;
+  /https?:\/\/[^\s)]+|\b\d{4}\b|\b\d+(?:[.,]\d+)?\s*(?:%|\+|ms|milliseconds?|milissegundos?|seconds?|segundos?|s|hours?|horas?|years?|anos?|(?:(?:active|automated|ativos?|automatizados?)\s+)?(?:users?|usuários?|tests?|testes|serviços?|services?)(?:\s+(?:active|automated|ativos?|automatizados?))?)/giu;
+
+function claimUnit(claim: string): string {
+  if (/%/.test(claim)) return "percent";
+  if (/\+/.test(claim)) return "plus";
+  if (/\b(?:ms|milliseconds?|milissegundos?)\b/.test(claim)) return "ms";
+  if (/\b(?:seconds?|segundos?|s)\b/.test(claim)) return "seconds";
+  if (/\b(?:hours?|horas?)\b/.test(claim)) return "hours";
+  if (/\b(?:years?|anos?)\b/.test(claim)) return "years";
+  if (/\b(?:users?|usuários?)\b/.test(claim)) return "users";
+  if (/\b(?:tests?|testes)\b/.test(claim)) return "tests";
+  if (/\b(?:services?|serviços?)\b/.test(claim)) return "services";
+  return "number";
+}
 
 function protectedClaims(value: string): string[] {
   return [...value.matchAll(protectedClaimPattern)].map((match) => {
@@ -175,9 +240,9 @@ function protectedClaims(value: string): string[] {
       return claim.replace(/[.,;:]+$/g, "");
     }
 
-    return (
-      claim.match(/\d+(?:[.,]\d+)?/)?.[0].replace(",", ".") ?? claim
-    );
+    const number =
+      claim.match(/\d+(?:[.,]\d+)?/)?.[0].replace(",", ".") ?? claim;
+    return `${number}:${claimUnit(claim)}`;
   });
 }
 
@@ -200,7 +265,9 @@ export function validatePortfolioGrounding(
   }
 
   const sourceClaims = new Set(
-    citedFacts.flatMap((fact) => protectedClaims(fact?.text ?? ""))
+    citedFacts.flatMap((fact) =>
+      Object.values(fact?.localizedText ?? {}).flatMap(protectedClaims)
+    )
   );
   const hasUnsupportedClaim = protectedClaims(answer).some(
     (claim) => !sourceClaims.has(claim)

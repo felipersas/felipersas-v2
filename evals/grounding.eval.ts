@@ -1,5 +1,6 @@
 import { defineEval } from "eve/evals";
-import { includes } from "eve/evals/expect";
+
+import { parseAgentResponse } from "../src/lib/agent-response-ui";
 
 const groundedCases = [
   {
@@ -35,8 +36,17 @@ const groundingEvals = [
       async test(t) {
         await t.send(prompt);
         t.succeeded();
-        t.check(t.reply, includes('"status":"grounded"'));
-        t.check(t.reply, includes(`"${factId}"`));
+        const parsed = parseAgentResponse(
+          t.reply ?? "",
+          /[ãáéíóúç]/i.test(prompt) ? "pt-BR" : "en"
+        );
+        if (
+          !parsed.grounding.valid ||
+          parsed.grounding.status !== "grounded" ||
+          !parsed.grounding.factIds.includes(factId)
+        ) {
+          throw new Error(`Invalid grounding metadata: ${t.reply}`);
+        }
       },
     })
   ),
@@ -46,7 +56,14 @@ const groundingEvals = [
       async test(t) {
         await t.send(prompt);
         t.succeeded();
-        t.check(t.reply, includes('"status":"insufficient"'));
+        const parsed = parseAgentResponse(t.reply ?? "", "pt-BR");
+        if (
+          !parsed.grounding.valid ||
+          parsed.grounding.status !== "insufficient" ||
+          parsed.grounding.factIds.length !== 0
+        ) {
+          throw new Error(`Expected a validated abstention: ${t.reply}`);
+        }
       },
     })
   ),

@@ -12,9 +12,9 @@ describe("agent response grounding metadata", () => {
       '<!-- portfolio-ui {"status":"grounded","factIds":["project:real-time-crash-game"]} -->',
     ].join("\n\n");
 
-    expect(parseAgentResponse(response, "pt-BR")).toEqual({
-      visibleText:
-        "O Real-Time Crash Game possui mais de 330 testes automatizados.",
+    const parsed = parseAgentResponse(response, "pt-BR");
+
+    expect(parsed).toMatchObject({
       suggestions: [
         "Quais decisões arquiteturais esse projeto tomou?",
         "Onde posso ver as evidências desse projeto?",
@@ -39,6 +39,8 @@ describe("agent response grounding metadata", () => {
         valid: true,
       },
     });
+    expect(parsed.visibleText).toContain("Real-Time Crash Game");
+    expect(parsed.visibleText).toContain("330 testes automatizados");
   });
 
   it("fails closed for unknown facts and unsupported metrics", () => {
@@ -67,11 +69,11 @@ describe("agent response grounding metadata", () => {
 
   it("allows explicit abstention without fabricated citations", () => {
     const response =
-      'O portfólio não informa quantos usuários a FazzLeads possui.\n<!-- portfolio-ui {"status":"insufficient","factIds":["experience:fazzleads"]} -->';
+      'O portfólio não informa quantos usuários a FazzLeads possui.\n<!-- portfolio-ui {"status":"insufficient","factIds":[]} -->';
 
     expect(parseAgentResponse(response, "pt-BR")).toMatchObject({
       visibleText:
-        "O portfólio não informa quantos usuários a FazzLeads possui.",
+        "Não consigo confirmar essa resposta com as informações documentadas no portfólio.",
       grounding: {
         factIds: [],
         status: "insufficient",
@@ -79,6 +81,21 @@ describe("agent response grounding metadata", () => {
       },
       evidence: [],
     });
+  });
+
+  it("never renders model-authored claims, regardless of their status label", () => {
+    const mislabeled =
+      'Felipe trabalhou na Nubank.\n<!-- portfolio-ui {"status":"conversational","factIds":[]} -->';
+    const groundedHallucination =
+      'A Keeper usa Kubernetes em produção.\n<!-- portfolio-ui {"status":"grounded","factIds":["experience:keeper"]} -->';
+
+    const conversational = parseAgentResponse(mislabeled, "pt-BR");
+    const grounded = parseAgentResponse(groundedHallucination, "pt-BR");
+
+    expect(conversational.visibleText).not.toContain("Nubank");
+    expect(conversational.visibleText).toContain("Posso responder");
+    expect(grounded.visibleText).not.toContain("Kubernetes");
+    expect(grounded.visibleText).toContain("Keeper");
   });
 
   it("fails closed when metadata is missing or malformed", () => {
@@ -89,6 +106,9 @@ describe("agent response grounding metadata", () => {
     for (const response of [
       "Visible answer",
       "Visible answer\n<!-- portfolio-ui {not-json} -->",
+      'Visible answer\n<!-- portfolio-ui {"status":"insufficient","factIds":["experience:fazzleads"]} -->',
+      'Visible answer\n<!-- portfolio-ui {"status":"grounded","factIds":["a","b","c","d","e","f"]} -->',
+      'Visible answer\n<!-- portfolio-ui {"status":"grounded","factIds":["experience:keeper","experience:keeper"]} -->',
     ]) {
       expect(parseAgentResponse(response, "en")).toMatchObject({
         visibleText:

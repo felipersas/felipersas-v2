@@ -69,6 +69,20 @@ const fallbackText = {
     "Não consigo confirmar essa resposta com as informações documentadas no portfólio.",
 } as const;
 
+const safeTextByStatus = {
+  conversational: {
+    en: "Hello! I can answer questions about Felipe’s documented experience, projects, skills, and public contact details.",
+    "pt-BR":
+      "Olá! Posso responder sobre as experiências, projetos, habilidades e contatos públicos documentados do Felipe.",
+  },
+  insufficient: fallbackText,
+  "out-of-scope": {
+    en: "I can only help with Felipe’s documented professional portfolio.",
+    "pt-BR":
+      "Só consigo ajudar com as informações profissionais documentadas no portfólio do Felipe.",
+  },
+} as const;
+
 const followUpsByTopic: Record<
   PortfolioFactTopic | "default",
   Record<Locale, [string, string]>
@@ -144,17 +158,26 @@ export function stripAgentResponseUi(text: string): string {
   return (markerIndex === -1 ? text : text.slice(0, markerIndex)).trimEnd();
 }
 
-function uniqueStrings(value: unknown, limit: number): string[] {
-  if (!Array.isArray(value)) return [];
+function parseFactIds(value: unknown): {
+  factIds: string[];
+  valid: boolean;
+} {
+  if (!Array.isArray(value) || value.length > MAX_FACT_IDS) {
+    return { factIds: [], valid: false };
+  }
 
   const unique = new Set<string>();
   for (const item of value) {
-    if (typeof item !== "string") continue;
+    if (typeof item !== "string") {
+      return { factIds: [], valid: false };
+    }
     const normalized = item.trim();
-    if (normalized) unique.add(normalized);
-    if (unique.size === limit) break;
+    if (!normalized || unique.has(normalized)) {
+      return { factIds: [], valid: false };
+    }
+    unique.add(normalized);
   }
-  return [...unique];
+  return { factIds: [...unique], valid: true };
 }
 
 function resolveEvidence(
@@ -258,15 +281,31 @@ function evidenceForFacts(
   return evidence;
 }
 
+function canonicalTextForFacts(
+  factIds: readonly string[],
+  locale: Locale
+): string {
+  return factIds
+    .map((factId) => factsById.get(factId)?.localizedText[locale])
+    .filter((text): text is string => Boolean(text))
+    .join("\n\n");
+}
+
 export function parseAgentResponse(
   text: string,
   locale: Locale
 ): ParsedAgentResponse {
   const rawVisibleText = stripAgentResponseUi(text);
   const metadata = parseMetadata(text);
-  const factIds = uniqueStrings(metadata?.factIds, MAX_FACT_IDS);
+  const parsedFactIds = parseFactIds(metadata?.factIds);
+  const factIds = parsedFactIds.factIds;
 
-  if (!metadata || !isResponseStatus(metadata.status)) {
+  if (
+    !metadata ||
+    !isResponseStatus(metadata.status) ||
+    !parsedFactIds.valid ||
+    (metadata.status !== "grounded" && factIds.length > 0)
+  ) {
     return {
       evidence: [],
       grounding: {
@@ -309,6 +348,9 @@ export function parseAgentResponse(
       valid: true,
     },
     suggestions: followUpsByTopic[primaryTopic][locale],
-    visibleText: rawVisibleText,
+    visibleText:
+      status === "grounded"
+        ? canonicalTextForFacts(effectiveFactIds, locale)
+        : safeTextByStatus[status][locale],
   };
 }
