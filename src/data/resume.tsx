@@ -152,18 +152,18 @@ export const DATA = {
       ],
     },
     {
-      company: "Freelance",
-      href: "#",
+      company: "FazzLeads",
+      href: "https://fazzleads.com.br/",
       location: { en: "Remote", "pt-BR": "Remoto" } as LocalizedText,
       locationType: "Remote",
-      logoUrl: "",
+      logoUrl: "/icons/logo-fazzleads.png",
       isCurrentEmployer: true,
       positions: [
         {
-          title: { en: "Freelance Full-Stack Developer", "pt-BR": "Desenvolvedor Full-Stack Autônomo" } as LocalizedText,
+          title: { en: "Co-Founder & Software Engineer", "pt-BR": "Cofundador e Engenheiro de Software" } as LocalizedText,
           start: "Jun 2024",
           end: undefined,
-          employmentType: "Contract",
+          employmentType: "Self-employed",
           description: {
             en: "- Architected modular back-end solutions using Domain-Driven Design (DDD) and CQRS with NestJS, enabling scalable AI workflows, clear domain boundaries, and maintainable business logic\n- Developed an AI-powered real estate agent integrated with GoHighLevel via Mastra AI and MCP, orchestrating asynchronous lead qualification, WhatsApp messaging, and property recommendations — consolidating multiple SaaS workflows into a unified automated pipeline\n- Built and deployed conversion-oriented web applications with production-grade SEO optimization, performance tuning, and continuous delivery — improving search visibility and client acquisition\n- Implemented observability with Grafana and Prometheus for production metrics, alerting, and health monitoring — improving operational visibility and incident response across deployments",
             "pt-BR": "- Arquitetou soluções back-end modulares com Domain-Driven Design (DDD) e CQRS em NestJS, viabilizando fluxos de IA escaláveis, limites de domínio claros e lógica de negócio mantentível\n- Desenvolveu agente imobiliário com IA integrado ao GoHighLevel via Mastra AI e MCP, orquestrando qualificação assíncrona de leads, mensagens no WhatsApp e recomendação de imóveis — consolidando múltiplos fluxos SaaS em um pipeline automatizado unificado\n- Construiu e publicou landing pages orientadas a conversão com SEO otimizado para produção, tuning de performance e entrega contínua — melhorando indexação e aquisição de clientes\n- Estruturou monitoramento com Grafana e Prometheus para métricas e alertas em produção — melhorando a visibilidade operacional e detecção proativa de incidentes nos sistemas dos clientes",

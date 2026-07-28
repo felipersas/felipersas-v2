@@ -9,6 +9,7 @@ import { Experiences } from "@/components/sections/experiences"
 import { Education } from "@/components/sections/education"
 import { Projects } from "@/components/sections/projects"
 import { Certifications } from "@/components/sections/certifications"
+import { ContactFooter } from "@/components/sections/contact-footer"
 import { Locale } from "@/hooks/use-translation"
 
 function Separator({ className }: { className?: string }) {
@@ -33,21 +34,19 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
         <Separator />
 
         <Hello locale={locale} />
-        <Separator />
 
         <TechStack />
         <Separator />
 
         <Experiences locale={locale} />
-        <Separator />
 
         <Education locale={locale} />
-        <Separator />
 
         <Certifications locale={locale} />
         <Separator />
 
         <Projects locale={locale} />
+        <ContactFooter locale={locale} />
       </div>
     </main>
   )

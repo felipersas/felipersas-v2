@@ -15,6 +15,20 @@ export type FeaturedProject = {
     en: string
     "pt-BR": string
   }
+  caseStudy: {
+    challenge: {
+      en: string
+      "pt-BR": string
+    }
+    approach: {
+      en: string
+      "pt-BR": string
+    }
+    outcome: {
+      en: string
+      "pt-BR": string
+    }
+  }
   links: Array<{
     label: {
       en: string
@@ -43,6 +57,20 @@ export const featuredProjects: FeaturedProject[] = [
       en: "Durable sessions · on-demand skills · local speech-to-text",
       "pt-BR": "Sessões duráveis · skills sob demanda · speech-to-text local",
     },
+    caseStudy: {
+      challenge: {
+        en: "Make a portfolio agent useful enough for recruiters and engineers without letting it invent career facts or turn into an unrestricted general-purpose assistant.",
+        "pt-BR": "Tornar um agente de portfólio realmente útil para recrutadores e engenheiros sem permitir que ele invente fatos profissionais ou vire um assistente genérico sem limites.",
+      },
+      approach: {
+        en: "Separate durable behavioral instructions from load-on-demand career, project, and contact knowledge. Keep sessions on the same origin, validate UI metadata locally, and run multilingual speech-to-text entirely in a Web Worker.",
+        "pt-BR": "Separar instruções comportamentais duráveis do conhecimento de carreira, projetos e contato carregado sob demanda. Manter sessões na mesma origem, validar os metadados da interface localmente e executar speech-to-text multilíngue em um Web Worker.",
+      },
+      outcome: {
+        en: "A bilingual, evidence-linked conversation surface with durable sessions, contextual follow-ups, local transcription, and a read-only security boundary.",
+        "pt-BR": "Uma experiência bilíngue com evidências, sessões duráveis, perguntas contextuais, transcrição local e uma fronteira de segurança somente leitura.",
+      },
+    },
     links: [
       {
         label: { en: "Live demo", "pt-BR": "Demo ao vivo" },
@@ -62,6 +90,20 @@ export const featuredProjects: FeaturedProject[] = [
     technicalSummary: {
       en: "Demo flows are defined in TypeScript, executed in a real browser with Playwright, and rendered deterministically with Remotion.",
       "pt-BR": "Os fluxos são definidos em TypeScript, executados em um navegador real com Playwright e renderizados de forma determinística com Remotion.",
+    },
+    caseStudy: {
+      challenge: {
+        en: "Product demos are often fragile screen recordings that are difficult to reproduce after the application changes.",
+        "pt-BR": "Demos de produto geralmente são gravações frágeis e difíceis de reproduzir quando a aplicação muda.",
+      },
+      approach: {
+        en: "Describe a real browser workflow in TypeScript, execute it with Playwright, and render the captured sequence deterministically with Remotion.",
+        "pt-BR": "Descrever um fluxo real do navegador em TypeScript, executá-lo com Playwright e renderizar a sequência capturada de forma determinística com Remotion.",
+      },
+      outcome: {
+        en: "An open-source workflow that makes polished product demos repeatable, reviewable, and version-controlled.",
+        "pt-BR": "Um fluxo open source que torna demos de produto polidas reproduzíveis, revisáveis e versionáveis.",
+      },
     },
     technologies: ["TypeScript", "Playwright", "Remotion", "React"],
     links: [
@@ -92,6 +134,20 @@ export const featuredProjects: FeaturedProject[] = [
       en: "330+ automated tests",
       "pt-BR": "330+ testes automatizados",
     },
+    caseStudy: {
+      challenge: {
+        en: "Keep rounds, bets, balances, and payments consistent while multiple low-latency services update the same multiplayer game.",
+        "pt-BR": "Manter rodadas, apostas, saldos e pagamentos consistentes enquanto múltiplos serviços de baixa latência atualizam o mesmo jogo multiplayer.",
+      },
+      approach: {
+        en: "Use event-driven services with database-per-service isolation, Saga coordination, Inbox/Outbox delivery guarantees, WebSockets, and end-to-end observability.",
+        "pt-BR": "Usar serviços orientados a eventos com isolamento database-per-service, coordenação Saga, garantias de entrega com Inbox/Outbox, WebSockets e observabilidade ponta a ponta.",
+      },
+      outcome: {
+        en: "A distributed gameplay architecture backed by more than 330 unit, integration, and end-to-end tests.",
+        "pt-BR": "Uma arquitetura distribuída de gameplay sustentada por mais de 330 testes unitários, de integração e ponta a ponta.",
+      },
+    },
     links: [
       {
         label: { en: "GitHub", "pt-BR": "GitHub" },
@@ -110,6 +166,20 @@ export const featuredProjects: FeaturedProject[] = [
     technicalSummary: {
       en: "Uses choreographed Saga orchestration, DDD boundaries, idempotent operations, and OpenTelemetry tracing to ensure financial consistency across distributed services.",
       "pt-BR": "Utiliza orquestração Saga coreografada, boundaries DDD, operações idempotentes e tracing OpenTelemetry para garantir consistência financeira entre serviços distribuídos.",
+    },
+    caseStudy: {
+      challenge: {
+        en: "Coordinate a financial transfer across independently deployed services without relying on a shared database or synchronous coupling.",
+        "pt-BR": "Coordenar uma transferência financeira entre serviços independentes sem depender de banco compartilhado ou acoplamento síncrono.",
+      },
+      approach: {
+        en: "Model user, account, and transfer boundaries as Go services connected through RabbitMQ, with idempotency, choreographed Saga compensation, circuit breaking, and distributed tracing.",
+        "pt-BR": "Modelar os limites de usuário, conta e transferência como serviços Go conectados por RabbitMQ, com idempotência, compensação Saga coreografada, circuit breaker e tracing distribuído.",
+      },
+      outcome: {
+        en: "A fault-aware transfer flow whose consistency decisions can be inspected through OpenTelemetry traces.",
+        "pt-BR": "Um fluxo de transferência tolerante a falhas cujas decisões de consistência podem ser inspecionadas por traces do OpenTelemetry.",
+      },
     },
     technologies: ["Go", "PostgreSQL", "RabbitMQ", "Docker"],
     links: [

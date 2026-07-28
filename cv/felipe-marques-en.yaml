@@ -1,0 +1,84 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
+cv:
+  name: Felipe Marques
+  headline: Software Engineer
+  location: Sorocaba, SP, Brazil
+  email: felipemarques.computacao@gmail.com
+  website: https://felipersas-dev.vercel.app
+  social_networks:
+    - network: LinkedIn
+      username: felipe-marques-a748b9299
+    - network: GitHub
+      username: felipersas
+  sections:
+    Experience:
+      - company: Keeper
+        position: Mid-Level Full-Stack Developer
+        start_date: 2026-06
+        end_date: present
+        location: São Paulo, SP, Brazil
+        highlights:
+          - Work on a fintech platform for graduation fundraising and financial management.
+      - company: MindGroup Consulting e Marketing
+        position: Full-Stack Developer
+        start_date: 2025-02
+        end_date: 2026-05
+        location: Sorocaba, SP, Brazil
+        highlights:
+          - Architected and shipped 3 production systems using a modular monolith, NestJS, DDD, Next.js, Docker, and CI/CD.
+          - Designed REST APIs with JWT authentication and granular role-based access control for multi-module applications.
+          - Automated bulk imports, bank transaction processing, and invoice generation, eliminating more than 40 hours of manual work per month.
+          - Reduced a critical query from 5 s to 240 ms, a 95% improvement, using MySQL views, composite indexes, and cursor pagination.
+          - Built Next.js frontends averaging 250 ms page loads and maintained 2 React Native/Expo apps with Stripe and eRede/Pix.
+      - company: FazzLeads
+        position: Co-Founder & Software Engineer
+        start_date: 2024-06
+        end_date: present
+        location: Remote
+        highlights:
+          - Architected modular NestJS backends with DDD and CQRS for AI workflows and clearly bounded business logic.
+          - Built a real estate agent with Mastra AI, MCP, and GoHighLevel for lead qualification, WhatsApp messaging, and property recommendations.
+          - Delivered applications with production SEO, CI/CD, and observability using Grafana and Prometheus.
+    Education:
+      - institution: SENAI Sorocaba
+        area: Systems Analysis and Development
+        degree: Associate Degree
+        start_date: 2025-01
+        end_date: present
+        location: Sorocaba, SP, Brazil
+      - institution: SENAI Sorocaba
+        area: Systems Development
+        degree: Technical Degree
+        start_date: 2023-01
+        end_date: 2024-12
+        location: Sorocaba, SP, Brazil
+    Professional Certificates:
+      - name: Supervised Machine Learning - Regression and Classification
+        date: 2026-01
+        location: DeepLearning.AI
+        summary: "Credential ID: L2MYYHXMHCPD"
+    Technical Skills:
+      - label: Languages
+        details: TypeScript, Python, Go, Rust, Java
+      - label: Frontend and Mobile
+        details: React, Next.js, Tailwind CSS, React Native, Expo
+      - label: Backend
+        details: Node.js, NestJS, Flask
+      - label: Data
+        details: PostgreSQL, MySQL, Prisma, SQLAlchemy, Redis
+      - label: Cloud and Infrastructure
+        details: AWS, Docker, RabbitMQ, Linux, Grafana, Prometheus, CI/CD
+      - label: Architecture and Quality
+        details: DDD, CQRS, microservices, Saga, Inbox/Outbox, unit, integration, and E2E testing
+design:
+  theme: engineeringresumes
+locale:
+  language: english
+settings:
+  current_date: "2026-07-28"
+  render_command:
+    output_folder: output/pdf
+    pdf_path: OUTPUT_FOLDER/resume_en.pdf
+    dont_generate_markdown: true
+    dont_generate_html: true
+    dont_generate_png: true

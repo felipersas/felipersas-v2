@@ -55,7 +55,7 @@ export default function Navbar() {
       <div className="mx-auto flex h-14 max-w-2xl items-center justify-between gap-2 pl-14 pr-4 sm:px-6">
         <div
           aria-label={t("navbar.modeSelector")}
-          className="flex items-center border border-line"
+          className="flex items-center gap-0.5"
           role="group"
         >
           {modes.map(({ icon: Icon, label, mode }) => {
@@ -65,12 +65,10 @@ export default function Navbar() {
               <Link
                 aria-current={isActive ? "page" : undefined}
                 aria-label={label}
-                className={`relative flex h-8 items-center justify-center gap-1.5 px-2 font-mono text-[10px] font-medium uppercase tracking-wide transition-colors focus-visible:z-10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring sm:px-2.5 ${
-                  mode === "agent" ? "border-l border-line" : ""
-                } ${
+                className={`relative flex size-8 items-center justify-center gap-1.5 rounded-md font-mono text-[10px] font-medium uppercase tracking-wide transition-colors focus-visible:z-10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring sm:h-8 sm:w-auto sm:px-2.5 ${
                   isActive
-                    ? "bg-muted/60 text-foreground after:absolute after:inset-x-2 after:-bottom-px after:h-px after:bg-foreground"
-                    : "text-muted-foreground hover:bg-muted/30 hover:text-foreground"
+                    ? "bg-accent text-foreground after:absolute after:inset-x-2 after:bottom-0 after:h-px after:bg-foreground"
+                    : "text-muted-foreground hover:bg-accent hover:text-foreground"
                 }`}
                 href={getPortfolioModeHref(locale, mode)}
                 key={mode}
