@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -7,8 +9,17 @@ import {
 } from "../../agent/openrouter-config";
 
 describe("OpenRouter attribution headers", () => {
-  it("uses the OpenRouter Auto Router by default", () => {
-    expect(OPENROUTER_DEFAULT_MODEL).toBe("openrouter/auto");
+  it("uses only OpenRouter's zero-cost model router", () => {
+    const agentSource = readFileSync(
+      resolve(process.cwd(), "agent/agent.ts"),
+      "utf8"
+    );
+
+    expect(OPENROUTER_DEFAULT_MODEL).toBe("openrouter/free");
+    expect(agentSource).not.toMatch(/process\.env\.OPENROUTER_MODEL/);
+    expect(agentSource).not.toMatch(/reasoning:/);
+    expect(agentSource).toMatch(/modelContextWindowTokens:\s*200_000/);
+    expect(agentSource).toMatch(/maxOutputTokens:\s*1_200/);
   });
 
   it("uses values accepted by the Node.js Headers implementation", () => {

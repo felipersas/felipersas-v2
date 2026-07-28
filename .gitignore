@@ -50,3 +50,6 @@ next-env.d.ts
 # eve generated runtime
 /.eve/
 /.output/
+
+# isolated feature worktrees
+/.worktrees/

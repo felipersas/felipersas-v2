@@ -1,4 +1,5 @@
 import { createOpenRouter } from "@openrouter/ai-sdk-provider";
+import { defaultSettingsMiddleware, wrapLanguageModel } from "ai";
 import { defineAgent } from "eve";
 
 import {
@@ -14,22 +15,26 @@ const openrouter = createOpenRouter({
   compatibility: "strict",
 });
 
-const modelId =
-  process.env.OPENROUTER_MODEL?.trim() || OPENROUTER_DEFAULT_MODEL;
-
-export default defineAgent({
-  description:
-    "Felipe Marques's bilingual portfolio guide for career, project, and contact questions.",
-  model: openrouter(modelId, {
+const groundedModel = wrapLanguageModel({
+  model: openrouter(OPENROUTER_DEFAULT_MODEL, {
     provider: {
       data_collection: "deny",
       require_parameters: true,
     },
     usage: { include: true },
   }),
-  // Sessions stay below the context windows used by the Auto Router's
-  // tool-capable model pool.
-  modelContextWindowTokens: 1_000_000,
+  middleware: defaultSettingsMiddleware({
+    settings: {
+      maxOutputTokens: 1_200,
+    },
+  }),
+});
+
+export default defineAgent({
+  description:
+    "Felipe Marques's bilingual portfolio guide for career, project, and contact questions.",
+  model: groundedModel,
+  modelContextWindowTokens: 200_000,
   limits: {
     maxInputTokensPerSession: 50_000,
     maxOutputTokensPerSession: 8_000,

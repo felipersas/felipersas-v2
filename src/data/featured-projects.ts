@@ -54,8 +54,8 @@ export const featuredProjects: FeaturedProject[] = [
     },
     technologies: ["Eve", "OpenRouter", "Transformers.js", "Next.js"],
     evidence: {
-      en: "Durable sessions · on-demand skills · local speech-to-text",
-      "pt-BR": "Sessões duráveis · skills sob demanda · speech-to-text local",
+      en: "Canonical facts · fail-closed answers · local speech-to-text",
+      "pt-BR": "Fatos canônicos · respostas fail-closed · speech-to-text local",
     },
     caseStudy: {
       challenge: {
@@ -63,12 +63,12 @@ export const featuredProjects: FeaturedProject[] = [
         "pt-BR": "Tornar um agente de portfólio realmente útil para recrutadores e engenheiros sem permitir que ele invente fatos profissionais ou vire um assistente genérico sem limites.",
       },
       approach: {
-        en: "Separate durable behavioral instructions from load-on-demand career, project, and contact knowledge. Keep sessions on the same origin, validate UI metadata locally, and run multilingual speech-to-text entirely in a Web Worker.",
-        "pt-BR": "Separar instruções comportamentais duráveis do conhecimento de carreira, projetos e contato carregado sob demanda. Manter sessões na mesma origem, validar os metadados da interface localmente e executar speech-to-text multilíngue em um Web Worker.",
+        en: "Generate always-on, fact-addressable grounding from the same typed portfolio data used by the site. Validate cited fact IDs and documented metrics before rendering an answer, keep procedural skills separate, and run multilingual speech-to-text entirely in a Web Worker.",
+        "pt-BR": "Gerar grounding permanente e endereçável por fatos a partir dos mesmos dados tipados usados pelo portfólio. Validar IDs citados e métricas documentadas antes de renderizar a resposta, manter skills procedurais separadas e executar speech-to-text multilíngue em um Web Worker.",
       },
       outcome: {
-        en: "A bilingual, evidence-linked conversation surface with durable sessions, contextual follow-ups, local transcription, and a read-only security boundary.",
-        "pt-BR": "Uma experiência bilíngue com evidências, sessões duráveis, perguntas contextuais, transcrição local e uma fronteira de segurança somente leitura.",
+        en: "A bilingual conversation surface that fails closed on unsupported claims, links answers to canonical evidence, resets stale sessions after grounding changes, and keeps transcription local.",
+        "pt-BR": "Uma experiência bilíngue que bloqueia afirmações sem suporte, conecta respostas a evidências canônicas, reinicia sessões antigas após mudanças de grounding e mantém a transcrição local.",
       },
     },
     links: [

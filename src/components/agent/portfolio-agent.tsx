@@ -268,6 +268,9 @@ function PortfolioAgentSession({
               const isCompletedAssistant =
                 message.role === "assistant" &&
                 message.metadata?.status === "complete";
+              const firstTextPartIndex = message.parts.findIndex(
+                (part) => part.type === "text"
+              );
 
               return (
                 <Message from={message.role} key={message.id}>
@@ -277,7 +280,17 @@ function PortfolioAgentSession({
                         activityLabel={activityLabel}
                         doneLabel={t("agent.activity.done")}
                         key={`${message.id}-${part.type}-${index}`}
-                        part={part}
+                        part={
+                          isCompletedAssistant && part.type === "text"
+                            ? {
+                                ...part,
+                                text:
+                                  index === firstTextPartIndex
+                                    ? parsedResponse.visibleText
+                                    : "",
+                              }
+                            : part
+                        }
                         workingLabel={t("agent.activity.working")}
                       />
                     ))}

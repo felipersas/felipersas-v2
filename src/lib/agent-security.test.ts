@@ -27,4 +27,21 @@ describe("portfolio agent security boundary", () => {
 
     expect(channel).toMatch(/uploadPolicy:\s*"disabled"/);
   });
+
+  it("injects canonical facts into every model call", () => {
+    const groundingInstructions = projectFile(
+      "agent/instructions/grounding.ts"
+    );
+    const instructions = projectFile("agent/instructions.md").replace(
+      /\s+/g,
+      " "
+    );
+
+    expect(groundingInstructions).toContain(
+      "getPortfolioKnowledgeMarkdown()"
+    );
+    expect(instructions).toContain(
+      "Conversation history and previous assistant answers are not evidence"
+    );
+  });
 });
