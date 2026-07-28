@@ -28,6 +28,46 @@
   "navbar": {
     "theme": "Theme",
     "language": "Language",
-    "resume": "Resume"
+    "resume": "Resume",
+    "agent": "Ask my agent",
+    "navigation": "Primary navigation",
+    "modeSelector": "Portfolio mode",
+    "portfolioMode": "Portfolio",
+    "agentMode": "Agent"
+  },
+  "agent": {
+    "title": "Ask my agent",
+    "description": "Ask about my experience, projects, or stack.",
+    "emptyTitle": "What would you like to know?",
+    "placeholder": "Ask about my work, projects, or stack…",
+    "send": "Send message",
+    "newChat": "New conversation",
+    "copy": "Copy response",
+    "copied": "Copied",
+    "evidence": "Supporting evidence",
+    "followUps": "Related questions",
+    "thinking": "Consulting the portfolio…",
+    "cancelling": "Stopping this turn…",
+    "cancel": "Stop response",
+    "error": "I couldn't answer. Start a new conversation and try again.",
+    "activity": {
+      "skill": "Consulting {name}",
+      "tool": "Using {name}",
+      "done": "Complete",
+      "working": "Working"
+    },
+    "suggestions": {
+      "career": "What has Felipe built professionally?",
+      "projects": "Explain the architecture of his strongest project.",
+      "fit": "Which roles best match his experience?"
+    },
+    "speech": {
+      "microphone": "Use microphone",
+      "recording": "Recording",
+      "loading": "Loading local Whisper model",
+      "transcribing": "Transcribing locally",
+      "denied": "Microphone access was denied.",
+      "unsupported": "Local voice input is not supported in this browser."
+    }
   }
 }

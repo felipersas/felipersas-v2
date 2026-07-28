@@ -1,5 +1,4 @@
 import { Icons } from "@/components/icons";
-import { CodeXmlIcon, HomeIcon } from "lucide-react";
 import { ReactLight } from "@/components/ui/svgs/reactLight";
 import { NextjsIconDark } from "@/components/ui/svgs/nextjsIconDark";
 import { Typescript } from "@/components/ui/svgs/typescript";
@@ -74,9 +73,6 @@ export const DATA = {
     { name: "RabbitMQ", icon: RabbitMQ, href: "https://rabbitmq.com", categories: ["DevOps"] },
     { name: "Linux", icon: Linux, href: "https://www.linux.org", categories: ["DevOps"] },
   ],
-  navbar: [
-    { href: "/", icon: HomeIcon, label: { en: "Home", "pt-BR": "Início" } as LocalizedText },
-  ],
   contact: {
     email: "felipemarques.computacao@gmail.com",
     social: {
@@ -105,7 +101,7 @@ export const DATA = {
     {
       company: "Keeper",
       href: "https://www.keeper.com.br/",
-      location: "Sorocaba, SP, Brazil",
+      location: "São Paulo, SP, Brazil",
       locationType: "Hybrid",
       logoUrl: "/icons/keeper-formaturas.png",
       isCurrentEmployer: true,

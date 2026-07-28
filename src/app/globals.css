@@ -80,6 +80,36 @@
   }
 }
 
+::view-transition-group(portfolio-artwork) {
+  z-index: 0;
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-group(portfolio-surface) {
+  z-index: 1;
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(portfolio-artwork),
+::view-transition-new(portfolio-artwork),
+::view-transition-old(portfolio-surface),
+::view-transition-new(portfolio-surface) {
+  animation-duration: 420ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(portfolio-artwork),
+  ::view-transition-group(portfolio-surface),
+  ::view-transition-old(portfolio-artwork),
+  ::view-transition-new(portfolio-artwork),
+  ::view-transition-old(portfolio-surface),
+  ::view-transition-new(portfolio-surface) {
+    animation-duration: 1ms;
+  }
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);

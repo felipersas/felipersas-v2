@@ -28,6 +28,46 @@
   "navbar": {
     "theme": "Tema",
     "language": "Idioma",
-    "resume": "Currículo"
+    "resume": "Currículo",
+    "agent": "Pergunte ao meu agente",
+    "navigation": "Navegação principal",
+    "modeSelector": "Modo do portfólio",
+    "portfolioMode": "Portfólio",
+    "agentMode": "Agente"
+  },
+  "agent": {
+    "title": "Pergunte ao meu agente",
+    "description": "Pergunte sobre minha experiência, projetos ou stack.",
+    "emptyTitle": "O que você quer saber?",
+    "placeholder": "Pergunte sobre meu trabalho, projetos ou stack…",
+    "send": "Enviar mensagem",
+    "newChat": "Nova conversa",
+    "copy": "Copiar resposta",
+    "copied": "Copiado",
+    "evidence": "Evidências relacionadas",
+    "followUps": "Perguntas relacionadas",
+    "thinking": "Consultando o portfólio…",
+    "cancelling": "Interrompendo esta resposta…",
+    "cancel": "Parar resposta",
+    "error": "Não consegui responder. Tente uma nova conversa.",
+    "activity": {
+      "skill": "Consultando {name}",
+      "tool": "Usando {name}",
+      "done": "Concluído",
+      "working": "Em andamento"
+    },
+    "suggestions": {
+      "career": "O que o Felipe já construiu profissionalmente?",
+      "projects": "Explique a arquitetura do projeto mais forte dele.",
+      "fit": "Quais vagas mais combinam com a experiência dele?"
+    },
+    "speech": {
+      "microphone": "Usar microfone",
+      "recording": "Gravando",
+      "loading": "Carregando o Whisper local",
+      "transcribing": "Transcrevendo localmente",
+      "denied": "O acesso ao microfone foi negado.",
+      "unsupported": "A entrada de voz local não é suportada neste navegador."
+    }
   }
 }

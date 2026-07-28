@@ -23,6 +23,10 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+export function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "pt-BR" }];
+}
+
 export async function generateMetadata(
   props: { params: Promise<{ locale: string }> }
 ): Promise<Metadata> {
@@ -39,6 +43,7 @@ export async function generateMetadata(
 
   return {
     metadataBase: new URL(DATA.url),
+    manifest: "/manifest.json",
     title: {
       default: title,
       template: `%s | ${DATA.name}`,

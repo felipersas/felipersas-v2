@@ -9,6 +9,7 @@ import {
 import { Tag } from "@/components/ui/tag"
 import type { Locale } from "@/hooks/use-translation"
 import { ArrowUpRight } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 const ID = "projects"
 
@@ -24,7 +25,7 @@ function ProjectCard({
   const evidence = project.evidence?.[locale]
 
   return (
-    <div className="p-4">
+    <div className="scroll-mt-24 p-4" id={`project-${project.slug}`}>
         <h3 className="text-base font-medium">{project.title}</h3>
 
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
@@ -50,18 +51,24 @@ function ProjectCard({
         </ul>
 
         <div className="mt-3 flex items-center gap-4">
-          {project.links.map((link, i) => (
+          {project.links.map((link, i) => {
+            const isExternal = link.href.startsWith("http")
+            const href =
+              link.href === "/agent" ? `/${locale}/agent` : link.href
+
+            return (
             <a
               key={i}
-              href={link.href}
-              target="_blank"
-              rel="noreferrer"
+              href={href}
+              target={isExternal ? "_blank" : undefined}
+              rel={isExternal ? "noreferrer" : undefined}
               className="group/link inline-flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors duration-150 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
             >
               {link.label[locale]}
               <ArrowUpRight className="size-3.5 transition-transform duration-150 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" aria-hidden />
             </a>
-          ))}
+            )
+          })}
         </div>
     </div>
   )
@@ -69,6 +76,9 @@ function ProjectCard({
 
 export function Projects({ locale }: { locale: Locale }) {
   const sectionTitle = locale === "pt-BR" ? "Projetos" : "Projects"
+  const remainingProjects = featuredProjects.slice(1)
+  const finalRowSize = remainingProjects.length % 2 === 0 ? 2 : 1
+  const finalRowStart = remainingProjects.length - finalRowSize
 
   return (
     <Panel id={ID}>
@@ -84,12 +94,19 @@ export function Projects({ locale }: { locale: Locale }) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2">
-        <div className="border-b border-line md:border-b-0 md:border-r md:border-line">
-          <ProjectCard project={featuredProjects[1]} locale={locale} />
-        </div>
-        <div className="border-b border-line md:border-b-0 last:border-b-0">
-          <ProjectCard project={featuredProjects[2]} locale={locale} />
-        </div>
+        {remainingProjects.map((project, index) => (
+          <div
+            className={cn(
+              "border-line",
+              index < remainingProjects.length - 1 && "border-b",
+              index % 2 === 0 && "md:border-r",
+              index >= finalRowStart && "md:border-b-0"
+            )}
+            key={project.slug}
+          >
+            <ProjectCard project={project} locale={locale} />
+          </div>
+        ))}
       </div>
     </Panel>
   )
