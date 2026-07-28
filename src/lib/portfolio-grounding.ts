@@ -219,17 +219,67 @@ ${facts}
 
 const protectedClaimPattern =
   /https?:\/\/[^\s)]+|\b\d{4}\b|\b\d+(?:[.,]\d+)?\s*(?:%|\+|ms|milliseconds?|milissegundos?|seconds?|segundos?|s|hours?|horas?|years?|anos?|(?:(?:active|automated|ativos?|automatizados?)\s+)?(?:users?|usuários?|tests?|testes|serviços?|services?)(?:\s+(?:active|automated|ativos?|automatizados?))?)/giu;
+const protectedEntityPattern =
+  /\b[\p{Lu}][\p{L}\p{N}]*(?:[.+#/-][\p{L}\p{N}]+)*\b/gu;
+const safeEntityWords = new Set(
+  [
+    "a",
+    "além",
+    "an",
+    "as",
+    "at",
+    "currently",
+    "dec",
+    "december",
+    "dez",
+    "dezembro",
+    "destaques",
+    "ele",
+    "em",
+    "experience",
+    "experiência",
+    "felipe",
+    "for",
+    "he",
+    "highlights",
+    "his",
+    "in",
+    "jan",
+    "janeiro",
+    "january",
+    "jun",
+    "june",
+    "junho",
+    "jul",
+    "julho",
+    "july",
+    "na",
+    "no",
+    "o",
+    "os",
+    "overall",
+    "para",
+    "professionally",
+    "projects",
+    "projetos",
+    "seu",
+    "sua",
+    "the",
+    "this",
+  ].map((word) => slugify(word))
+);
 
 function claimUnit(claim: string): string {
-  if (/%/.test(claim)) return "percent";
-  if (/\+/.test(claim)) return "plus";
-  if (/\b(?:ms|milliseconds?|milissegundos?)\b/.test(claim)) return "ms";
-  if (/\b(?:seconds?|segundos?|s)\b/.test(claim)) return "seconds";
-  if (/\b(?:hours?|horas?)\b/.test(claim)) return "hours";
-  if (/\b(?:years?|anos?)\b/.test(claim)) return "years";
-  if (/\b(?:users?|usuários?)\b/.test(claim)) return "users";
-  if (/\b(?:tests?|testes)\b/.test(claim)) return "tests";
-  if (/\b(?:services?|serviços?)\b/.test(claim)) return "services";
+  const unit = claim.replace(/^\d+(?:[.,]\d+)?\s*/, "");
+  if (unit.startsWith("%")) return "percent";
+  if (unit.startsWith("+")) return "plus";
+  if (/^(?:ms|milliseconds?|milissegundos?)\b/.test(unit)) return "ms";
+  if (/^(?:seconds?|segundos?|s)\b/.test(unit)) return "seconds";
+  if (/^(?:hours?|horas?)\b/.test(unit)) return "hours";
+  if (/^(?:years?|anos?)\b/.test(unit)) return "years";
+  if (/^(?:users?|usuários?)\b/.test(unit)) return "users";
+  if (/^(?:tests?|testes)\b/.test(unit)) return "tests";
+  if (/^(?:services?|serviços?)\b/.test(unit)) return "services";
   return "number";
 }
 
@@ -244,6 +294,29 @@ function protectedClaims(value: string): string[] {
       claim.match(/\d+(?:[.,]\d+)?/)?.[0].replace(",", ".") ?? claim;
     return `${number}:${claimUnit(claim)}`;
   });
+}
+
+function protectedEntities(
+  value: string,
+  includeSentenceLeads = false
+): string[] {
+  const normalizedValue = value.replace(/[‐‑‒–—−]/g, "-");
+  return [...normalizedValue.matchAll(protectedEntityPattern)]
+    .filter((match) => {
+      if (includeSentenceLeads) return true;
+
+      const token = match[0];
+      const before = normalizedValue.slice(0, match.index).trimEnd();
+      const startsSentence =
+        before.length === 0 ||
+        /[.!?]\s*$/u.test(before) ||
+        /(?:^|\n)\s*[-*]\s*$/u.test(before);
+      const isOrdinaryCapitalizedWord =
+        /^\p{Lu}\p{Ll}+$/u.test(token);
+      return !(startsSentence && isOrdinaryCapitalizedWord);
+    })
+    .map((match) => slugify(match[0]))
+    .filter((entity) => entity && !safeEntityWords.has(entity));
 }
 
 export function validatePortfolioGrounding(
@@ -272,8 +345,18 @@ export function validatePortfolioGrounding(
   const hasUnsupportedClaim = protectedClaims(answer).some(
     (claim) => !sourceClaims.has(claim)
   );
+  const sourceEntities = new Set(
+    citedFacts.flatMap((fact) =>
+      Object.values(fact?.localizedText ?? {}).flatMap((text) =>
+        protectedEntities(text, true)
+      )
+    )
+  );
+  const hasUnsupportedEntity = protectedEntities(answer).some(
+    (entity) => !sourceEntities.has(entity)
+  );
 
-  if (hasUnsupportedClaim) {
+  if (hasUnsupportedClaim || hasUnsupportedEntity) {
     return {
       factIds: uniqueFactIds,
       valid: false,

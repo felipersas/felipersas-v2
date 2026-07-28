@@ -47,6 +47,13 @@ describe("portfolio grounding", () => {
       factIds: ["experience:mindgroup-consulting-e-marketing"],
       valid: true,
     });
+
+    expect(
+      validatePortfolioGrounding(
+        "A consulta caiu 95 %, de 5 s para 240 ms.",
+        ["experience:mindgroup-consulting-e-marketing"]
+      )
+    ).toMatchObject({ valid: true });
   });
 
   it("rejects unknown facts and unsupported numeric claims", () => {
@@ -82,6 +89,18 @@ describe("portfolio grounding", () => {
       validatePortfolioGrounding(
         "At MindGroup, the query previously took 5 hours.",
         ["experience:mindgroup-consulting-e-marketing"]
+      )
+    ).toMatchObject({
+      valid: false,
+      reason: "unsupported-claim",
+    });
+  });
+
+  it("rejects technologies borrowed from a different project", () => {
+    expect(
+      validatePortfolioGrounding(
+        "PayFlow uses the Inbox/Outbox pattern for event delivery.",
+        ["project:payflow"]
       )
     ).toMatchObject({
       valid: false,

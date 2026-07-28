@@ -17,9 +17,9 @@ describe("OpenRouter attribution headers", () => {
 
     expect(OPENROUTER_DEFAULT_MODEL).toBe("openrouter/free");
     expect(agentSource).not.toMatch(/process\.env\.OPENROUTER_MODEL/);
-    expect(agentSource).not.toMatch(/reasoning:/);
+    expect(agentSource).toMatch(/exclude:\s*true/);
     expect(agentSource).toMatch(/modelContextWindowTokens:\s*200_000/);
-    expect(agentSource).toMatch(/maxOutputTokens:\s*1_200/);
+    expect(agentSource).toMatch(/maxOutputTokens:\s*600/);
   });
 
   it("uses values accepted by the Node.js Headers implementation", () => {

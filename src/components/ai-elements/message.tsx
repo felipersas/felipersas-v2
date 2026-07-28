@@ -21,10 +21,10 @@ export function Message({ className, from, ...props }: MessageProps) {
   return (
     <article
       className={cn(
-        "group flex w-full max-w-[94%] flex-col gap-2",
+        "group flex w-full flex-col gap-2",
         from === "user"
-          ? "is-user ml-auto items-end"
-          : "is-assistant items-start",
+          ? "is-user ml-auto max-w-[94%] items-end"
+          : "is-assistant max-w-[70ch] items-start",
         className
       )}
       {...props}

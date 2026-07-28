@@ -5,7 +5,6 @@ import { stripAgentResponseUi } from "@/lib/agent-response-ui";
 import { cn } from "@/lib/utils";
 import type { EveMessagePart } from "eve/react";
 import {
-  Brain,
   Check,
   FileText,
   LoaderCircle,
@@ -34,17 +33,7 @@ export function MessagePart({
     return <MessageResponse>{stripAgentResponseUi(part.text)}</MessageResponse>;
   }
 
-  if (part.type === "reasoning" && part.text) {
-    return (
-      <details className="w-full rounded-md border border-line bg-muted/20 px-3 py-2 text-xs text-muted-foreground">
-        <summary className="flex cursor-pointer list-none items-center gap-2 font-medium">
-          <Brain className="size-3.5" />
-          Reasoning
-        </summary>
-        <p className="mt-2 whitespace-pre-wrap leading-relaxed">{part.text}</p>
-      </details>
-    );
-  }
+  if (part.type === "reasoning") return null;
 
   if (part.type === "dynamic-tool") {
     const kind =

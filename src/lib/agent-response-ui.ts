@@ -7,8 +7,11 @@ import {
 } from "./portfolio-grounding";
 
 const UI_MARKER = "<!-- portfolio-ui";
-const MAX_FACT_IDS = 5;
+const INLINE_FACT_CITATION =
+  /\s*\[(?:certification|contact|education|experience|identity|project|skills):[^\]]+\]/giu;
+const MAX_FACT_IDS = 3;
 const MAX_EVIDENCE_LINKS = 3;
+const MAX_VISIBLE_WORDS = 110;
 
 export type AgentGroundingStatus =
   | "conversational"
@@ -158,6 +161,10 @@ export function stripAgentResponseUi(text: string): string {
   return (markerIndex === -1 ? text : text.slice(0, markerIndex)).trimEnd();
 }
 
+function stripInlineFactCitations(text: string): string {
+  return text.replace(INLINE_FACT_CITATION, "").replace(/[ \t]+\n/g, "\n").trim();
+}
+
 function parseFactIds(value: unknown): {
   factIds: string[];
   valid: boolean;
@@ -281,21 +288,28 @@ function evidenceForFacts(
   return evidence;
 }
 
-function canonicalTextForFacts(
-  factIds: readonly string[],
-  locale: Locale
-): string {
-  return factIds
-    .map((factId) => factsById.get(factId)?.localizedText[locale])
-    .filter((text): text is string => Boolean(text))
-    .join("\n\n");
+function limitVisibleText(text: string): string {
+  const words = text.trim().split(/\s+/);
+  if (words.length <= MAX_VISIBLE_WORDS) return text;
+
+  const limited = words.slice(0, MAX_VISIBLE_WORDS).join(" ");
+  const lastSentenceEnd = Math.max(
+    limited.lastIndexOf("."),
+    limited.lastIndexOf("!"),
+    limited.lastIndexOf("?")
+  );
+
+  if (lastSentenceEnd >= limited.length * 0.6) {
+    return limited.slice(0, lastSentenceEnd + 1);
+  }
+  return `${limited}…`;
 }
 
 export function parseAgentResponse(
   text: string,
   locale: Locale
 ): ParsedAgentResponse {
-  const rawVisibleText = stripAgentResponseUi(text);
+  const rawVisibleText = stripInlineFactCitations(stripAgentResponseUi(text));
   const metadata = parseMetadata(text);
   const parsedFactIds = parseFactIds(metadata?.factIds);
   const factIds = parsedFactIds.factIds;
@@ -350,7 +364,7 @@ export function parseAgentResponse(
     suggestions: followUpsByTopic[primaryTopic][locale],
     visibleText:
       status === "grounded"
-        ? canonicalTextForFacts(effectiveFactIds, locale)
+        ? limitVisibleText(rawVisibleText)
         : safeTextByStatus[status][locale],
   };
 }

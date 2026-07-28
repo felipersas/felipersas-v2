@@ -17,6 +17,10 @@ const openrouter = createOpenRouter({
 
 const groundedModel = wrapLanguageModel({
   model: openrouter(OPENROUTER_DEFAULT_MODEL, {
+    reasoning: {
+      effort: "minimal",
+      exclude: true,
+    },
     provider: {
       data_collection: "deny",
       require_parameters: true,
@@ -25,7 +29,7 @@ const groundedModel = wrapLanguageModel({
   }),
   middleware: defaultSettingsMiddleware({
     settings: {
-      maxOutputTokens: 1_200,
+      maxOutputTokens: 600,
     },
   }),
 });

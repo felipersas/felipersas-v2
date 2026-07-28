@@ -15,6 +15,8 @@ describe("agent response grounding metadata", () => {
     const parsed = parseAgentResponse(response, "pt-BR");
 
     expect(parsed).toMatchObject({
+      visibleText:
+        "O Real-Time Crash Game possui mais de 330 testes automatizados.",
       suggestions: [
         "Quais decisões arquiteturais esse projeto tomou?",
         "Onde posso ver as evidências desse projeto?",
@@ -39,8 +41,51 @@ describe("agent response grounding metadata", () => {
         valid: true,
       },
     });
-    expect(parsed.visibleText).toContain("Real-Time Crash Game");
-    expect(parsed.visibleText).toContain("330 testes automatizados");
+  });
+
+  it("keeps broad grounded answers natural and concise", () => {
+    const answer =
+      "Professionally, Felipe has built fintech products at Keeper, internal platforms and financial automation at MindGroup, and AI-powered real-estate workflows at FazzLeads.";
+    const response = `${answer} [experience:keeper] [experience:mindgroup-consulting-e-marketing] [experience:fazzleads]\n<!-- portfolio-ui {"status":"grounded","factIds":["experience:keeper","experience:mindgroup-consulting-e-marketing","experience:fazzleads"]} -->`;
+
+    const parsed = parseAgentResponse(response, "en");
+
+    expect(parsed.visibleText).toBe(answer);
+    expect(parsed.visibleText.split(/\s+/)).toHaveLength(21);
+    expect(parsed.grounding).toMatchObject({
+      status: "grounded",
+      valid: true,
+    });
+  });
+
+  it("caps otherwise valid answers without replacing their natural voice", () => {
+    const sentence =
+      "Felipe built production systems at MindGroup with Next.js and NestJS.";
+    const response = `${Array.from({ length: 16 }, () => sentence).join(" ")}
+<!-- portfolio-ui {"status":"grounded","factIds":["experience:mindgroup-consulting-e-marketing"]} -->`;
+
+    const parsed = parseAgentResponse(response, "en");
+
+    expect(parsed.visibleText.split(/\s+/).length).toBeLessThanOrEqual(110);
+    expect(parsed.visibleText).toMatch(/^Felipe built production systems/);
+  });
+
+  it("accepts natural Portuguese date and typography variations", () => {
+    const response = [
+      "Felipe Marques é Co-Founder e Software Engineer na FazzLeads, desde Junho de 2024 até o presente.",
+      "",
+      "Nesta empresa, ele arquitetou backends modulares com DDD e CQRS usando NestJS e implementou observabilidade com Grafana e Prometheus.",
+      '<!-- portfolio-ui {"status":"grounded","factIds":["identity:profile","experience:fazzleads"]} -->',
+    ].join("\n");
+    const typographicHyphen = [
+      "Felipe trabalha na Keeper como **Mid‑Level Full‑Stack Developer** em uma fintech para formaturas.",
+      '<!-- portfolio-ui {"status":"grounded","factIds":["experience:keeper"]} -->',
+    ].join("\n");
+
+    expect(parseAgentResponse(response, "pt-BR").grounding.valid).toBe(true);
+    expect(
+      parseAgentResponse(typographicHyphen, "pt-BR").grounding.valid
+    ).toBe(true);
   });
 
   it("fails closed for unknown facts and unsupported metrics", () => {
@@ -95,7 +140,10 @@ describe("agent response grounding metadata", () => {
     expect(conversational.visibleText).not.toContain("Nubank");
     expect(conversational.visibleText).toContain("Posso responder");
     expect(grounded.visibleText).not.toContain("Kubernetes");
-    expect(grounded.visibleText).toContain("Keeper");
+    expect(grounded.grounding).toMatchObject({
+      valid: false,
+      reason: "unsupported-claim",
+    });
   });
 
   it("fails closed when metadata is missing or malformed", () => {
@@ -107,7 +155,7 @@ describe("agent response grounding metadata", () => {
       "Visible answer",
       "Visible answer\n<!-- portfolio-ui {not-json} -->",
       'Visible answer\n<!-- portfolio-ui {"status":"insufficient","factIds":["experience:fazzleads"]} -->',
-      'Visible answer\n<!-- portfolio-ui {"status":"grounded","factIds":["a","b","c","d","e","f"]} -->',
+      'Visible answer\n<!-- portfolio-ui {"status":"grounded","factIds":["a","b","c","d"]} -->',
       'Visible answer\n<!-- portfolio-ui {"status":"grounded","factIds":["experience:keeper","experience:keeper"]} -->',
     ]) {
       expect(parseAgentResponse(response, "en")).toMatchObject({
