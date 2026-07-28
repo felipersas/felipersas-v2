@@ -400,10 +400,10 @@ export function PortfolioAgent({ locale }: { locale: Locale }) {
   );
 
   return (
-    <div className="flex h-full w-full flex-col">
+    <div className="relative flex h-full w-full flex-col">
       <AgentArtwork />
       <section
-        className="mx-auto flex min-h-0 w-full max-w-3xl flex-1 flex-col border-x border-line"
+        className="relative z-1 mx-auto flex min-h-0 w-full max-w-3xl flex-1 flex-col border-x border-line bg-background sm:pt-4"
         id={ID}
       >
         {mounted ? (

@@ -22,9 +22,9 @@ export default async function Page(props: { params: Promise<{ locale: string }> 
   const locale = params.locale as Locale
 
   return (
-    <main className="max-w-screen overflow-x-clip [--separator-height:--spacing(8)] **:data-[slot=panel]:scroll-mt-[calc(var(--header-height)+var(--separator-height))]">
+    <main className="relative max-w-screen overflow-x-clip [--separator-height:--spacing(8)] **:data-[slot=panel]:scroll-mt-[calc(var(--header-height)+var(--separator-height))]">
       <PortfolioHero />
-      <div className="mx-auto max-w-2xl px-6 sm:pt-0 sm:pb-28">
+      <div className="relative z-1 mx-auto max-w-2xl bg-background px-6 sm:pt-4 sm:pb-28">
         <ProfileHeader />
         <Separator />
 
