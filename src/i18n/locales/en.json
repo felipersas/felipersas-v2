@@ -49,6 +49,8 @@
     "thinking": "Consulting the portfolio…",
     "cancelling": "Stopping this turn…",
     "cancel": "Stop response",
+    "conversationLabel": "Conversation with the portfolio agent",
+    "scrollToLatest": "Scroll to latest message",
     "error": "I couldn't answer. Start a new conversation and try again.",
     "activity": {
       "skill": "Consulting {name}",

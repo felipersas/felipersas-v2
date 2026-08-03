@@ -29,7 +29,7 @@ const groundedModel = wrapLanguageModel({
   }),
   middleware: defaultSettingsMiddleware({
     settings: {
-      maxOutputTokens: 600,
+      maxOutputTokens: 2_000,
     },
   }),
 });

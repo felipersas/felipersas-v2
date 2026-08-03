@@ -19,7 +19,19 @@ describe("OpenRouter attribution headers", () => {
     expect(agentSource).not.toMatch(/process\.env\.OPENROUTER_MODEL/);
     expect(agentSource).toMatch(/exclude:\s*true/);
     expect(agentSource).toMatch(/modelContextWindowTokens:\s*200_000/);
-    expect(agentSource).toMatch(/maxOutputTokens:\s*600/);
+  });
+
+  it("keeps an output ceiling that only guards runaways", () => {
+    const agentSource = readFileSync(
+      resolve(process.cwd(), "agent/agent.ts"),
+      "utf8"
+    );
+
+    const ceiling = agentSource.match(/maxOutputTokens:\s*([\d_]+)/);
+    expect(ceiling).not.toBeNull();
+    expect(Number(ceiling![1].replaceAll("_", ""))).toBeGreaterThanOrEqual(
+      1_500
+    );
   });
 
   it("uses values accepted by the Node.js Headers implementation", () => {

@@ -441,6 +441,8 @@ function parsePosition(pos: string): [number, number] {
       // Load the image
       const img = new Image();
       img.crossOrigin = "anonymous";
+      img.decoding = "async";
+      img.fetchPriority = "high";
       img.src = src;
 
       img.onload = () => {

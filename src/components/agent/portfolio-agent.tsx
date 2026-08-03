@@ -157,6 +157,12 @@ function PortfolioAgentSession({
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       void sendMessage();
+      return;
+    }
+
+    if (event.key === "Escape" && activeTurnId && !isCancelling) {
+      event.preventDefault();
+      void handleCancel();
     }
   }
 
@@ -228,11 +234,11 @@ function PortfolioAgentSession({
         className="diagonal-stripes h-3 shrink-0 border-b border-line [--pattern-foreground:var(--line)]"
       />
 
-      <Conversation className="min-h-0 flex-1">
-        <ConversationContent
-          aria-live="polite"
-          className="mx-auto min-h-full w-full max-w-2xl gap-6 px-4 py-6 sm:px-6 sm:py-8"
-        >
+      <Conversation
+        aria-label={t("agent.conversationLabel")}
+        className="min-h-0 flex-1"
+      >
+        <ConversationContent className="mx-auto min-h-full w-full max-w-2xl gap-6 px-4 py-6 sm:px-6 sm:py-8">
           {agent.data.messages.length === 0 ? (
             <div className="mx-auto my-auto w-full max-w-md py-8">
               <h2 className="text-center text-lg font-medium tracking-tight">
@@ -276,6 +282,7 @@ function PortfolioAgentSession({
                         activityLabel={activityLabel}
                         doneLabel={t("agent.activity.done")}
                         key={`${message.id}-${part.type}-${index}`}
+                        locale={locale}
                         part={part}
                         workingLabel={t("agent.activity.working")}
                       />
@@ -338,7 +345,7 @@ function PortfolioAgentSession({
             </div>
           )}
         </ConversationContent>
-        <ConversationScrollButton />
+        <ConversationScrollButton label={t("agent.scrollToLatest")} />
       </Conversation>
 
       <form
@@ -348,13 +355,14 @@ function PortfolioAgentSession({
         <div className="mx-auto w-full max-w-2xl">
           <div className="border border-input bg-background transition-colors focus-within:border-foreground/40">
             <textarea
+              aria-busy={isBusy}
               aria-label={t("agent.placeholder")}
               className="max-h-32 min-h-14 w-full resize-none bg-transparent px-3 py-3 text-sm outline-none placeholder:text-muted-foreground"
-              disabled={isBusy}
               maxLength={MAX_MESSAGE_LENGTH}
               onChange={(event) => setInput(event.currentTarget.value)}
               onKeyDown={handleKeyDown}
               placeholder={t("agent.placeholder")}
+              readOnly={isBusy}
               ref={textareaRef}
               rows={1}
               value={input}

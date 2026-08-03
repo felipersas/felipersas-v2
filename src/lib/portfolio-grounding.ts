@@ -43,6 +43,7 @@ function buildPortfolioFactsForLocale(
           challenge: "Desafio",
           contact:
             "Somente dados públicos de contato. O portfólio registra abertura para conversas profissionais, mas não informa tempo de resposta, remuneração, agenda, mudança de cidade ou termos contratuais.",
+          caseStudyPage: "Página do case no portfólio",
           coursework: "Disciplinas",
           currentRole: "Cargo atual documentado",
           documentedSkills: "Habilidades técnicas documentadas",
@@ -57,6 +58,7 @@ function buildPortfolioFactsForLocale(
           challenge: "Challenge",
           contact:
             "Public contact details only. The portfolio documents openness to professional conversations, but does not document response time, compensation, schedule, relocation, or contract terms.",
+          caseStudyPage: "Portfolio case study page",
           coursework: "Coursework",
           currentRole: "Current documented role",
           documentedSkills: "Documented technical skills",
@@ -142,6 +144,9 @@ function buildPortfolioFactsForLocale(
       const caseStudy = source
         ? `${copy.challenge}: ${source.caseStudy.challenge[locale]} ${copy.approach}: ${source.caseStudy.approach[locale]} ${copy.outcome}: ${source.caseStudy.outcome[locale]}`
         : "";
+      const caseStudyPage = source
+        ? ` ${copy.caseStudyPage}: /projects/${project.slug}.`
+        : "";
 
       return {
         id: `project:${project.slug}`,
@@ -154,7 +159,7 @@ function buildPortfolioFactsForLocale(
             ", "
           )}. ${copy.publicLinks}: ${project.links
             .map((link) => `${link.label}: ${link.url}`)
-            .join("; ")}.`
+            .join("; ")}.${caseStudyPage}`
         ),
       };
     }),

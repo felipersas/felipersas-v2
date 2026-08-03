@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import type { CSSProperties } from "react";
 import { memo, useMemo } from "react";
 
@@ -22,6 +22,11 @@ function ShimmerComponent({
     () => (children?.length ?? 0) * spread,
     [children, spread]
   );
+  const prefersReducedMotion = useReducedMotion();
+
+  if (prefersReducedMotion) {
+    return <p className={cn("text-muted-foreground", className)}>{children}</p>;
+  }
 
   return (
     <motion.p

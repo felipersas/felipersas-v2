@@ -49,6 +49,8 @@
     "thinking": "Consultando o portfólio…",
     "cancelling": "Interrompendo esta resposta…",
     "cancel": "Parar resposta",
+    "conversationLabel": "Conversa com o agente do portfólio",
+    "scrollToLatest": "Ir para a última mensagem",
     "error": "Não consegui responder. Tente uma nova conversa.",
     "activity": {
       "skill": "Consultando {name}",

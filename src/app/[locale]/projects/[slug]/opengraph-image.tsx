@@ -8,7 +8,9 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export function generateStaticParams() {
-  return featuredProjects.map((project) => ({ slug: project.slug }));
+  return ["en", "pt-BR"].flatMap((locale) =>
+    featuredProjects.map((project) => ({ locale, slug: project.slug }))
+  );
 }
 
 export default async function Image(props: {

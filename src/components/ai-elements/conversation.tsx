@@ -15,10 +15,14 @@ export type ConversationProps = ComponentProps<typeof StickToBottom>;
 export function Conversation({ className, ...props }: ConversationProps) {
   return (
     <StickToBottom
-      className={cn("relative flex-1 overflow-y-hidden", className)}
+      className={cn(
+        "relative flex-1 overflow-y-hidden focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-ring",
+        className
+      )}
       initial="smooth"
       resize="smooth"
       role="log"
+      tabIndex={0}
       {...props}
     />
   );
@@ -42,8 +46,9 @@ export function ConversationContent({
 
 export function ConversationScrollButton({
   className,
+  label,
   ...props
-}: ComponentProps<typeof Button>) {
+}: ComponentProps<typeof Button> & { label: string }) {
   const { isAtBottom, scrollToBottom } = useStickToBottomContext();
   const handleScrollToBottom = useCallback(() => {
     scrollToBottom();
@@ -53,7 +58,7 @@ export function ConversationScrollButton({
 
   return (
     <Button
-      aria-label="Scroll to latest message"
+      aria-label={label}
       className={cn(
         "absolute bottom-3 left-1/2 size-8 -translate-x-1/2 rounded-full bg-background",
         className

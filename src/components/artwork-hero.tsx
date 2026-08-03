@@ -38,6 +38,14 @@ export function ArtworkHero({
 
   return (
     <>
+      <link
+        as="image"
+        crossOrigin="anonymous"
+        fetchPriority="high"
+        href={src}
+        rel="preload"
+      />
+
       <ViewTransition name="portfolio-artwork">
         <section
           aria-hidden="true"

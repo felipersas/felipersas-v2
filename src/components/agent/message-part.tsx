@@ -14,6 +14,7 @@ import {
 interface MessagePartProps {
   activityLabel: (kind: "skill" | "tool", name: string) => string;
   doneLabel: string;
+  locale?: string;
   part: EveMessagePart;
   workingLabel: string;
 }
@@ -25,11 +26,12 @@ function formatSkillName(name: string): string {
 export function MessagePart({
   activityLabel,
   doneLabel,
+  locale,
   part,
   workingLabel,
 }: MessagePartProps) {
   if (part.type === "text") {
-    return <MessageResponse>{part.text}</MessageResponse>;
+    return <MessageResponse locale={locale}>{part.text}</MessageResponse>;
   }
 
   if (part.type === "reasoning") return null;
