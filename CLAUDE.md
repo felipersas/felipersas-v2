@@ -94,8 +94,10 @@ src/
 - Agent reply length is steered by the "Response length" section in
   `agent/instructions.md`, **not** by `maxOutputTokens` — that value is only a
   runaway guard, and lowering it truncates replies mid-sentence
-- The public agent channel is unauthenticated; `src/proxy.ts` rate limits
-  `/eve/v1` per IP
+- The public agent channel is unauthenticated. `src/proxy.ts` has a per-IP rate
+  limiter for `/eve/v1`, but its counter is in-memory and **does not currently
+  protect the Vercel deployment** — see the note in that file. Shared state or a
+  platform firewall rule is still needed
 - Chats persist in localStorage but expire after 24h, so a returning visitor
   gets the empty state instead of a stale transcript
 
