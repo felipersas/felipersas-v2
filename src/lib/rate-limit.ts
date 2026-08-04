@@ -72,7 +72,6 @@ export class RateLimiter {
       if (bucket.resetAt <= now) this.buckets.delete(key);
     }
 
-    // A spoofed X-Forwarded-For could otherwise grow this map without bound.
     if (this.buckets.size <= this.maxTrackedKeys) return;
 
     const excess = this.buckets.size - this.maxTrackedKeys;

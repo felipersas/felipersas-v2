@@ -7,8 +7,6 @@ export const EVE_CHAT_STORAGE_KEY = "portfolio-eve-chat-v4";
 const EVE_CHAT_STORAGE_VERSION = 4;
 const MAX_STORED_CHAT_SIZE = 1_000_000;
 
-// A returning visitor should land on the empty state with suggestions, not on a
-// wall of text from a conversation they no longer remember having.
 export const EVE_CHAT_MAX_AGE_MS = 24 * 60 * 60 * 1_000;
 
 export interface StoredEveChat {
@@ -55,8 +53,6 @@ export function parseStoredEveChat(
       return EMPTY_EVE_CHAT;
     }
 
-    // Chats written before savedAt existed have no known age, so drop them
-    // rather than keeping them forever.
     if (
       typeof parsed.savedAt !== "number" ||
       now - parsed.savedAt > EVE_CHAT_MAX_AGE_MS

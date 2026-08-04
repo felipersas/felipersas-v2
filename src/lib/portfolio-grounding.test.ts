@@ -31,9 +31,21 @@ describe("portfolio grounding", () => {
     const markdown = getPortfolioKnowledgeMarkdown();
 
     expect(markdown).toContain("# Canonical portfolio facts");
-    expect(markdown).toContain("[experience:fazzleads]");
-    expect(markdown).toContain("[project:democraft]");
     expect(markdown).toContain("Conversation history is not evidence");
+    expect(markdown).toContain("## Experience");
+    expect(markdown).toContain("## Projects");
+    expect(markdown).toContain("FazzLeads");
+    expect(markdown).toContain("DemoCraft");
+  });
+
+  it("keeps internal fact ids out of the prompt", () => {
+    const markdown = getPortfolioKnowledgeMarkdown();
+
+    for (const fact of getPortfolioFacts()) {
+      expect(markdown).not.toContain(fact.id);
+    }
+
+    expect(markdown).not.toMatch(/\[[a-z]+:[a-z0-9-]+\]/);
   });
 
 });

@@ -8,24 +8,12 @@ const defaultLocale: Locale = 'pt-BR'
 
 const AGENT_PATH_PREFIX = '/eve/v1'
 
-// The agent channel is unauthenticated, so anyone can open sessions against
-// Felipe's OpenRouter key. Session limits cap one conversation; this is meant to
-// cap how many a single client may start.
-//
-// KNOWN GAP: this counter lives in memory, so it only accumulates while requests
-// share a process. Verified working against a local dev server (30 allowed, then
-// 429), but 34 consecutive POSTs to the Vercel deployment produced no 429 at all
-// — serverless requests do not reuse an isolate reliably enough for this to bite.
-// Treat it as protection only for single-process deployments. Real protection
-// needs shared state (Vercel KV / Upstash) or Vercel's own firewall rules.
 const agentLimiter = new RateLimiter({
   limit: Number(process.env.AGENT_RATE_LIMIT ?? 30),
   windowMs: Number(process.env.AGENT_RATE_LIMIT_WINDOW_MS ?? 10 * 60 * 1_000),
 })
 
 function rateLimitAgent(request: NextRequest) {
-  // Only writes are limited. The stream is a long-lived GET for a session the
-  // client already paid for, and counting it would cut conversations short.
   if (request.method !== 'POST') return
 
   const decision = agentLimiter.check(clientKeyFromHeaders(request.headers))
@@ -71,8 +59,7 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and static files. /eve/v1 is matched on purpose so
-    // the agent endpoint can be rate limited before it reaches the runtime.
+    // Skip service routes, Next.js internals, and static files.
     '/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)',
   ],
 }

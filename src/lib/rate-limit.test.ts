@@ -50,7 +50,6 @@ describe("RateLimiter", () => {
       limiter.check(`client-${index}`, 0);
     }
 
-    // Still enforcing for a client tracked after the pruning.
     expect(limiter.check("client-499", 0).allowed).toBe(false);
   });
 });

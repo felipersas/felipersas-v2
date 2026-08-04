@@ -198,10 +198,27 @@ export function getPortfolioFacts(): readonly PortfolioFact[] {
   return portfolioFacts;
 }
 
+const TOPIC_HEADINGS: Readonly<Record<PortfolioFactTopic, string>> = {
+  contact: "Contact",
+  education: "Education and certifications",
+  experience: "Experience",
+  identity: "Identity",
+  projects: "Projects",
+  skills: "Skills",
+};
+
 export function getPortfolioKnowledgeMarkdown(): string {
-  const facts = portfolioFacts
-    .map((fact) => `- [${fact.id}] ${fact.text}`)
-    .join("\n");
+  const order = Object.keys(TOPIC_HEADINGS) as PortfolioFactTopic[];
+  const sections = order
+    .map((topic) => {
+      const facts = portfolioFacts.filter((fact) => fact.topic === topic);
+      if (facts.length === 0) return "";
+
+      const lines = facts.map((fact) => `- ${fact.text}`).join("\n");
+      return `## ${TOPIC_HEADINGS[topic]}\n\n${lines}`;
+    })
+    .filter(Boolean)
+    .join("\n\n");
 
   return `# Canonical portfolio facts
 
@@ -211,6 +228,6 @@ evidence. Translate or paraphrase facts when useful, but never add a company,
 date, metric, technology, credential, link, client, or result that is absent
 from these facts.
 
-${facts}
+${sections}
 `;
 }
