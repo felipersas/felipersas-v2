@@ -26,7 +26,7 @@ cv:
         location: Sorocaba, SP, Brazil
         highlights:
           - Architected and shipped 3 production systems using a modular monolith, NestJS, DDD, Next.js, Docker, and CI/CD.
-          - Designed REST APIs with JWT authentication and granular role-based access control for multi-module applications.
+          - Designed REST APIs with JWT authentication and granular role-based access control.
           - Automated bulk imports, bank transaction processing, and invoice generation, eliminating more than 40 hours of manual work per month.
           - Reduced a critical query from 5 s to 240 ms, a 95% improvement, using MySQL views, composite indexes, and cursor pagination.
           - Built Next.js frontends averaging 250 ms page loads and maintained 2 React Native/Expo apps with Stripe and eRede/Pix.
@@ -36,9 +36,10 @@ cv:
         end_date: present
         location: Remote
         highlights:
-          - Architected modular NestJS backends with DDD and CQRS for AI workflows and clearly bounded business logic.
-          - Built a real estate agent with Mastra AI, MCP, and GoHighLevel for lead qualification, WhatsApp messaging, and property recommendations.
-          - Delivered applications with production SEO, CI/CD, and observability using Grafana and Prometheus.
+          - Co-founded a platform for real estate agencies and independent brokers, now with 6 paying clients and hundreds of leads a month in the system.
+          - Put into production an AI agent with Mastra AI, MCP, and GoHighLevel that answers and qualifies leads over WhatsApp and recommends listings, in an operation where leads previously went unanswered.
+          - "Consolidated into the platform what each client used to pay for as separate SaaS tools: property catalog, campaign tracking, site hosting, and an automation builder."
+          - Architected the backends with DDD and CQRS in NestJS, with production SEO, CI/CD, and observability.
     Education:
       - institution: SENAI Sorocaba
         area: Systems Analysis and Development
@@ -53,7 +54,7 @@ cv:
         end_date: 2024-12
         location: Sorocaba, SP, Brazil
     Professional Certificates:
-      - name: Supervised Machine Learning - Regression and Classification
+      - name: "Supervised Machine Learning: Regression and Classification"
         date: 2026-01
         location: DeepLearning.AI
         summary: "Credential ID: L2MYYHXMHCPD"
@@ -62,10 +63,8 @@ cv:
         details: TypeScript, Python, Go, Rust, Java
       - label: Frontend and Mobile
         details: React, Next.js, Tailwind CSS, React Native, Expo
-      - label: Backend
-        details: Node.js, NestJS, Flask
-      - label: Data
-        details: PostgreSQL, MySQL, Prisma, SQLAlchemy, Redis
+      - label: Backend and Data
+        details: Node.js, NestJS, Flask, PostgreSQL, MySQL, Prisma, SQLAlchemy, Redis
       - label: Cloud and Infrastructure
         details: AWS, Docker, RabbitMQ, Linux, Grafana, Prometheus, CI/CD
       - label: Architecture and Quality

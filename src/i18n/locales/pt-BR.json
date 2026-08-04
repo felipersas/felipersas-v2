@@ -61,7 +61,11 @@
     "suggestions": {
       "career": "O que o Felipe já construiu profissionalmente?",
       "projects": "Explique a arquitetura do projeto mais forte dele.",
-      "fit": "Quais vagas mais combinam com a experiência dele?"
+      "fit": "Quais vagas mais combinam com a experiência dele?",
+      "tradeoffs": "Quais trade-offs ele assumiu nessas decisões?",
+      "impact": "Quais resultados mensuráveis ele entregou?",
+      "stack": "Com quais tecnologias ele trabalha no dia a dia?",
+      "contact": "Como faço para falar com ele?"
     },
     "speech": {
       "microphone": "Usar microfone",

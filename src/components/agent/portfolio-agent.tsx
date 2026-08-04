@@ -43,9 +43,28 @@ import {
 
 const ID = "agent";
 const MAX_MESSAGE_LENGTH = 1_200;
+const VISIBLE_SUGGESTIONS = 3;
+const SUGGESTION_KEYS = [
+  "career",
+  "projects",
+  "fit",
+  "tradeoffs",
+  "impact",
+  "stack",
+  "contact",
+] as const;
 
 function replaceName(template: string, name: string): string {
   return template.replace("{name}", name);
+}
+
+export function normalizeQuestion(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .trim()
+    .toLowerCase();
 }
 
 function PortfolioAgentSession({
@@ -97,13 +116,21 @@ function PortfolioAgentSession({
 
   const isBusy =
     agent.status === "submitted" || agent.status === "streaming";
-  const suggestions = [
-    t("agent.suggestions.career"),
-    t("agent.suggestions.projects"),
-    t("agent.suggestions.fit"),
-  ];
+  const suggestionPool = SUGGESTION_KEYS.map((key) =>
+    t(`agent.suggestions.${key}`)
+  );
+  const openingSuggestions = suggestionPool.slice(0, VISIBLE_SUGGESTIONS);
+
+  const asked = new Set<string>();
   let lastCompletedAssistantId: string | undefined;
   for (const message of agent.data.messages) {
+    if (message.role === "user") {
+      const text = message.parts
+        .filter((part) => part.type === "text")
+        .map((part) => part.text)
+        .join("");
+      asked.add(normalizeQuestion(text));
+    }
     if (
       message.role === "assistant" &&
       message.metadata?.status === "complete"
@@ -111,6 +138,10 @@ function PortfolioAgentSession({
       lastCompletedAssistantId = message.id;
     }
   }
+
+  const followUpSuggestions = suggestionPool
+    .filter((suggestion) => !asked.has(normalizeQuestion(suggestion)))
+    .slice(0, VISIBLE_SUGGESTIONS);
 
   useEffect(() => {
     if (!initialPrompt || initialPromptSentRef.current) return;
@@ -245,7 +276,7 @@ function PortfolioAgentSession({
                 {t("agent.emptyTitle")}
               </h2>
               <div className="mt-6 border-y border-line">
-                {suggestions.map((suggestion, index) => (
+                {openingSuggestions.map((suggestion, index) => (
                   <button
                     className="group relative flex w-full items-center justify-center border-b border-line px-8 py-3 text-center text-sm transition-colors last:border-b-0 hover:bg-muted/30 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-ring"
                     disabled={isBusy}
@@ -294,7 +325,7 @@ function PortfolioAgentSession({
                       onSuggestion={handleSuggestion}
                       suggestions={
                         message.id === lastCompletedAssistantId && !isBusy
-                          ? suggestions
+                          ? followUpSuggestions
                           : []
                       }
                     />

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   EMPTY_EVE_CHAT,
+  EVE_CHAT_MAX_AGE_MS,
   parseStoredEveChat,
   serializeEveChat,
   type StoredEveChat,
@@ -52,5 +53,34 @@ describe("eve chat storage", () => {
     });
 
     expect(parseStoredEveChat(huge)).toEqual(EMPTY_EVE_CHAT);
+  });
+
+  describe("expiry", () => {
+    const chat = {
+      events: [{ type: "session.waiting", data: {} }],
+    } as unknown as StoredEveChat;
+
+    it("restores a chat that is still within the window", () => {
+      const stored = serializeEveChat(chat, 0);
+
+      expect(parseStoredEveChat(stored, EVE_CHAT_MAX_AGE_MS)).toEqual(chat);
+    });
+
+    it("drops a chat once it is older than the window", () => {
+      const stored = serializeEveChat(chat, 0);
+
+      expect(parseStoredEveChat(stored, EVE_CHAT_MAX_AGE_MS + 1)).toEqual(
+        EMPTY_EVE_CHAT
+      );
+    });
+
+    it("drops a chat written before savedAt was recorded", () => {
+      const legacy = JSON.stringify({
+        version: 4,
+        events: [{ type: "session.waiting", data: {} }],
+      });
+
+      expect(parseStoredEveChat(legacy)).toEqual(EMPTY_EVE_CHAT);
+    });
   });
 });

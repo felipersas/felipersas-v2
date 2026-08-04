@@ -26,7 +26,7 @@ cv:
         location: Sorocaba, SP
         highlights:
           - Arquitetou e entregou 3 sistemas em produção com monolito modular, NestJS, DDD, Next.js, Docker e CI/CD.
-          - Projetou APIs REST com autenticação JWT e controle de acesso granular por papéis para aplicações com múltiplos módulos.
+          - Projetou APIs REST com autenticação JWT e controle de acesso granular por papéis.
           - Automatizou importações em massa, processamento bancário e emissão de notas fiscais, eliminando mais de 40 horas de trabalho manual por mês.
           - Reduziu uma consulta crítica de 5 s para 240 ms, uma melhoria de 95%, com views MySQL, índices compostos e paginação por cursor.
           - Construiu frontends Next.js com carregamento médio de 250 ms e manteve 2 apps React Native/Expo com Stripe e eRede/Pix.
@@ -36,9 +36,10 @@ cv:
         end_date: present
         location: Remoto
         highlights:
-          - Arquitetou backends modulares com DDD e CQRS em NestJS para fluxos de IA e regras de negócio com limites claros.
-          - Desenvolveu um agente imobiliário com Mastra AI, MCP e GoHighLevel para qualificação de leads, WhatsApp e recomendação de imóveis.
-          - Entregou aplicações com SEO, CI/CD e observabilidade em produção usando Grafana e Prometheus.
+          - Cofundou uma plataforma para imobiliárias e corretores autônomos, hoje com 6 clientes pagantes e centenas de leads por mês no sistema.
+          - Colocou em produção um agente de IA com Mastra AI, MCP e GoHighLevel que atende e qualifica leads pelo WhatsApp e recomenda imóveis, em uma operação onde antes o lead ficava sem resposta.
+          - "Reuniu na plataforma o que cada cliente pagava como SaaS separados: catálogo de imóveis, acompanhamento de campanhas, hospedagem de sites e construtor de automações."
+          - Arquitetou os backends com DDD e CQRS em NestJS, com SEO, CI/CD e observabilidade em produção.
     Educação:
       - institution: SENAI Sorocaba
         area: Análise e Desenvolvimento de Sistemas
@@ -53,7 +54,7 @@ cv:
         end_date: 2024-12
         location: Sorocaba, SP
     Certificações Profissionais:
-      - name: Supervised Machine Learning - Regression and Classification
+      - name: "Supervised Machine Learning: Regression and Classification"
         date: 2026-01
         location: DeepLearning.AI
         summary: "Credential ID: L2MYYHXMHCPD"
@@ -62,10 +63,8 @@ cv:
         details: TypeScript, Python, Go, Rust, Java
       - label: Frontend e Mobile
         details: React, Next.js, Tailwind CSS, React Native, Expo
-      - label: Backend
-        details: Node.js, NestJS, Flask
-      - label: Dados
-        details: PostgreSQL, MySQL, Prisma, SQLAlchemy, Redis
+      - label: Backend e Dados
+        details: Node.js, NestJS, Flask, PostgreSQL, MySQL, Prisma, SQLAlchemy, Redis
       - label: Cloud e Infraestrutura
         details: AWS, Docker, RabbitMQ, Linux, Grafana, Prometheus, CI/CD
       - label: Arquitetura e Qualidade

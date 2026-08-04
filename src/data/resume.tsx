@@ -47,8 +47,8 @@ export const DATA = {
   ] as { key: string; value: string | LocalizedText }[],
   avatarUrl: "/me.png",
   about: {
-    en: "I enjoy building cool things, from pixels to systems that scale. Currently building [DemoCraft](https://democraft-lp.vercel.app) and developing distributed systems and developer tools.",
-    "pt-BR": "Curto construir coisas legais, dos pixels a sistemas que escalam. Atualmente construindo o [DemoCraft](https://democraft-lp.vercel.app), desenvolvendo sistemas distribuídos e developer tools.",
+    en: "I'm a full-stack developer. I work across backend, frontend, mobile and the infrastructure that runs it.\n\nAt [MindGroup](https://mindconsulting.com.br/) I architected and shipped 3 production systems that run legal and financial operations for client businesses. I took a critical query from 5s to 240ms and cut 40+ hours of manual work every month. I co-founded [FazzLeads](https://fazzleads.com.br/), a platform for real estate agencies that now serves 6 paying clients and hundreds of leads a month. I'm at [Keeper](https://www.keeper.com.br/) today, a fintech for graduation fundraising.\n\nOutside of work I build distributed systems and developer tools, including [DemoCraft](https://democraft-lp.vercel.app).",
+    "pt-BR": "Sou desenvolvedor full-stack. Atuo em backend, frontend, mobile e na infraestrutura que roda tudo isso.\n\nNa [MindGroup](https://mindconsulting.com.br/) arquitetei e entreguei 3 sistemas em produção que rodam operações jurídicas e financeiras de empresas clientes. Reduzi uma consulta crítica de 5s para 240ms e cortei mais de 40 horas de trabalho manual por mês. Cofundei a [FazzLeads](https://fazzleads.com.br/), uma plataforma para imobiliárias que hoje atende 6 clientes pagantes e centenas de leads por mês. Hoje estou na [Keeper](https://www.keeper.com.br/), uma fintech de arrecadação e gestão financeira para formaturas.\n\nFora do trabalho construo sistemas distribuídos e developer tools, entre eles o [DemoCraft](https://democraft-lp.vercel.app).",
   } as LocalizedText,
   skills: [
     { name: "React", icon: ReactLight, href: "https://react.dev", categories: ["Frontend"] },
@@ -112,8 +112,8 @@ export const DATA = {
           end: undefined,
           employmentType: "Full-time",
           description: {
-            en: "- Fintech for graduation fundraising and financial management",
-            "pt-BR": "- Fintech de arrecadação e gestão financeira para formaturas",
+            en: "Fintech for graduation fundraising and financial management, where money collected from a class has to stay reconciled from the first payment to the last payout.\n\nI work across the stack on the platform.",
+            "pt-BR": "Fintech de arrecadação e gestão financeira para formaturas, onde o dinheiro arrecadado por uma turma precisa fechar do primeiro pagamento até o último repasse.\n\nAtuo full-stack na plataforma.",
           } as LocalizedText,
           skills: [],
           isExpanded: true,
@@ -122,7 +122,7 @@ export const DATA = {
     },
     {
       company: "MindGroup Consulting e Marketing",
-      href: "https://mindgroup.com.br",
+      href: "https://mindconsulting.com.br/",
       location: "Sorocaba, SP, Brazil",
       locationType: "Hybrid",
       logoUrl: "/icons/LOGOTIPO-Mind-Group-2.png",
@@ -133,8 +133,8 @@ export const DATA = {
           end: "May 2026",
           employmentType: "Full-time",
           description: {
-            en: "- Architected and shipped 3 production systems using a modular monolith approach with NestJS, DDD, Next.js, Docker, and CI/CD — consolidating business operations into unified platforms\n- Designed RESTful APIs with NestJS implementing JWT authentication and granular role-based access control — enabling secure, self-service permission management across modules\n- Automated legal and financial workflows — bulk data imports, bank transaction processing, and invoice generation — eliminating 40+ hours of manual work per month\n- Optimized database performance by 95%, reducing query execution from 5s to 240ms through MySQL views, composite indexing strategies, and cursor-based pagination\n- Built performant Next.js frontends leveraging Server Components, code splitting, memoization, and TanStack Query — achieving 250ms average page loads across production applications\n- Developed and maintained 2 React Native/Expo mobile applications with Stripe and eRede/Pix integrations — enabling mobile-first payment processing in production",
-            "pt-BR": "- Arquitetou e entregou 3 sistemas em produção com monolito modular (NestJS, DDD, Next.js, Docker) e CI/CD automatizado — consolidando operações de negócio em plataformas unificadas\n- Projetou APIs RESTful com NestJS implementando autenticação JWT e controle de acesso granular por papéis — viabilizando gestão autônoma e segura de permissões em aplicações multi-módulo\n- Automatizou fluxos judiciais e financeiros — importação em massa, processamento bancário e emissão de notas fiscais — eliminando 40+ horas de trabalho manual por mês\n- Otimizou performance de banco de dados em 95%, reduzindo queries de 5s para 240ms através de views MySQL, indexação composta e paginação baseada em cursor\n- Construiu frontends performáticos em Next.js com Server Components, code splitting, memoização e TanStack Query — carregamento médio de 250ms em produção\n- Desenvolveu e manteve 2 apps mobile em React Native/Expo com integração aos gateways Stripe e eRede/Pix — viabilizando processamento de pagamentos mobile-first em produção",
+            en: "Digital product studio. I worked across the stack on the platforms that run the legal and financial operations of client businesses.\n\n- Architected and shipped 3 production systems as modular monoliths with NestJS, DDD, Next.js and Docker, each with its own CI/CD pipeline.\n- Reduced a critical query from 5s to 240ms, a 95% improvement, using MySQL views, composite indexes and cursor-based pagination.\n- Automated bulk data imports, bank transaction processing and invoice issuing in the legal system, which cut 40+ hours of manual work per month.\n- Designed REST APIs with JWT authentication and role-based permissions granular enough for clients to manage module access without asking an engineer.\n- Built the Next.js frontends with Server Components, code splitting, memoization and TanStack Query. Average page load came out at 250ms.\n- Developed and maintained 2 React Native/Expo apps with Stripe and eRede/Pix payment integrations.\n\nThe three systems ran as modular monoliths instead of separate services: one deploy to operate, but domain boundaries kept explicit so a module could be pulled out later if it ever justified the cost.",
+            "pt-BR": "Estúdio de produtos digitais. Atuei full-stack nas plataformas que rodam as operações jurídicas e financeiras de empresas clientes.\n\n- Arquitetei e entreguei 3 sistemas em produção como monolitos modulares com NestJS, DDD, Next.js e Docker, cada um com seu pipeline de CI/CD.\n- Reduzi uma consulta crítica de 5s para 240ms, uma melhoria de 95%, usando views MySQL, índices compostos e paginação por cursor.\n- Automatizei importação em massa, processamento bancário e emissão de notas fiscais no sistema jurídico, o que cortou mais de 40 horas de trabalho manual por mês.\n- Projetei APIs REST com autenticação JWT e permissões por papel granulares o bastante para o cliente gerenciar acesso por módulo sem precisar de um dev.\n- Construí os frontends em Next.js com Server Components, code splitting, memoização e TanStack Query. O carregamento médio ficou em 250ms.\n- Desenvolvi e mantive 2 apps React Native/Expo com integração de pagamentos Stripe e eRede/Pix.\n\nOs três sistemas rodaram como monolitos modulares em vez de serviços separados: um único deploy para operar, mas com limites de domínio explícitos para que um módulo pudesse ser extraído depois, se algum dia compensasse o custo.",
           } as LocalizedText,
           skills: [
             "NestJS",
@@ -165,8 +165,8 @@ export const DATA = {
           end: undefined,
           employmentType: "Self-employed",
           description: {
-            en: "- Architected modular back-end solutions using Domain-Driven Design (DDD) and CQRS with NestJS, enabling scalable AI workflows, clear domain boundaries, and maintainable business logic\n- Developed an AI-powered real estate agent integrated with GoHighLevel via Mastra AI and MCP, orchestrating asynchronous lead qualification, WhatsApp messaging, and property recommendations — consolidating multiple SaaS workflows into a unified automated pipeline\n- Built and deployed conversion-oriented web applications with production-grade SEO optimization, performance tuning, and continuous delivery — improving search visibility and client acquisition\n- Implemented observability with Grafana and Prometheus for production metrics, alerting, and health monitoring — improving operational visibility and incident response across deployments",
-            "pt-BR": "- Arquitetou soluções back-end modulares com Domain-Driven Design (DDD) e CQRS em NestJS, viabilizando fluxos de IA escaláveis, limites de domínio claros e lógica de negócio mantentível\n- Desenvolveu agente imobiliário com IA integrado ao GoHighLevel via Mastra AI e MCP, orquestrando qualificação assíncrona de leads, mensagens no WhatsApp e recomendação de imóveis — consolidando múltiplos fluxos SaaS em um pipeline automatizado unificado\n- Construiu e publicou landing pages orientadas a conversão com SEO otimizado para produção, tuning de performance e entrega contínua — melhorando indexação e aquisição de clientes\n- Estruturou monitoramento com Grafana e Prometheus para métricas e alertas em produção — melhorando a visibilidade operacional e detecção proativa de incidentes nos sistemas dos clientes",
+            en: "Company I co-founded. We sell a platform to real estate agencies and independent brokers who were running without process or traceability. Six paying clients today, with hundreds of leads a month going through the system.\n\n- Put an AI agent into production that answers and qualifies leads over WhatsApp and recommends listings. Before it, a lead that came in went unanswered.\n- Pulled into the platform what each client used to pay for as separate SaaS tools: property catalog, campaign tracking, site hosting and an automation builder.\n- Built the agent on Mastra AI and MCP, integrated with GoHighLevel, over a NestJS backend with DDD and CQRS. AI workflows sit behind explicit domain boundaries, so prompt logic never leaks into business rules.\n- Set up metrics, alerting and health monitoring with Grafana and Prometheus across every client deployment.\n- Shipped landing pages built for conversion, with SEO, performance tuning and continuous delivery.",
+            "pt-BR": "Empresa que cofundei. Vendemos uma plataforma para imobiliárias e corretores autônomos que operavam sem processo e sem rastreabilidade. Hoje são 6 clientes pagantes, com centenas de leads por mês passando pelo sistema.\n\n- Coloquei em produção um agente de IA que atende e qualifica leads pelo WhatsApp e recomenda imóveis. Antes dele, o lead que chegava ficava sem resposta.\n- Reunimos na plataforma o que cada cliente pagava como SaaS separados: catálogo de imóveis, acompanhamento de campanhas, hospedagem de sites e construtor de automações.\n- Construí o agente sobre Mastra AI e MCP, integrado ao GoHighLevel, com backend NestJS em DDD e CQRS. Os fluxos de IA ficam atrás de limites de domínio explícitos, então a lógica de prompt não vaza para as regras de negócio.\n- Estruturei métricas, alertas e monitoramento de saúde com Grafana e Prometheus em todos os deploys de cliente.\n- Entreguei landing pages feitas para conversão, com SEO, tuning de performance e entrega contínua.",
           } as LocalizedText,
           skills: [
             "NestJS",
@@ -234,8 +234,8 @@ export const DATA = {
       dates: { en: "May 2026 - Present", "pt-BR": "Mai 2026 - Presente" } as LocalizedText,
       active: true,
       description: {
-        en: "Distributed real-time crash game built with a microservices architecture using NestJS, RabbitMQ, PostgreSQL, and Next.js. Implements event-driven communication, Saga-based distributed transactions, Inbox/Outbox patterns, and database-per-service isolation for reliable multiplayer betting flows. Features low-latency WebSocket synchronization, provably fair gameplay, centralized authentication with Kong + Keycloak, full observability with Prometheus and Grafana, and automated CI pipelines with 330+ unit, integration, and E2E tests using Playwright and Testcontainers.",
-        "pt-BR": "Crash game multiplayer em tempo real construído com arquitetura de microsserviços utilizando NestJS, RabbitMQ, PostgreSQL e Next.js. Implementa comunicação orientada a eventos, transações distribuídas com Saga Pattern, Inbox/Outbox patterns e isolamento database-per-service para fluxos de apostas confiáveis. Possui sincronização WebSocket de baixa latência, mecanismo provably fair, autenticação centralizada com Kong + Keycloak, observabilidade completa com Prometheus e Grafana, além de pipelines de CI automatizados com mais de 330 testes entre unitários, integração e E2E utilizando Playwright e Testcontainers.",
+        en: "A real-time multiplayer crash game split into microservices with NestJS, RabbitMQ, PostgreSQL and Next.js. Each service owns its database, and bets stay consistent through Saga transactions with Inbox/Outbox delivery guarantees. Rounds sync over WebSockets, the gameplay is provably fair, Kong and Keycloak handle authentication, and Prometheus and Grafana cover observability. CI runs 330+ unit, integration and E2E tests with Playwright and Testcontainers.",
+        "pt-BR": "Um crash game multiplayer em tempo real dividido em microsserviços com NestJS, RabbitMQ, PostgreSQL e Next.js. Cada serviço tem seu próprio banco, e as apostas ficam consistentes através de transações Saga com garantias de entrega Inbox/Outbox. As rodadas sincronizam por WebSocket, o gameplay é provably fair, Kong e Keycloak cuidam da autenticação, e Prometheus e Grafana cobrem a observabilidade. O CI roda mais de 330 testes unitários, de integração e E2E com Playwright e Testcontainers.",
       } as LocalizedText,
       technologies: [
         "TypeScript",
@@ -264,8 +264,8 @@ export const DATA = {
       dates: { en: "May 2026 - Present", "pt-BR": "Mai 2026 - Presente" } as LocalizedText,
       active: true,
       description: {
-        en: "A comprehensive food delivery platform built as distributed microservices with NestJS. Implements DDD architecture with TypeORM, PostgreSQL, and Redis. Features six independent services (customer, restaurant, order, kitchen, payment, gateway) with role-based authentication, resource ownership validation, and complete domain modeling including aggregates, value objects, and domain events. Orchestrated via Docker Compose with production-ready configuration.",
-        "pt-BR": "Plataforma completa de delivery de comida construída como microsserviços distribuídos com NestJS. Implementa arquitetura DDD com TypeORM, PostgreSQL e Redis. Seis serviços independentes (customer, restaurant, order, kitchen, payment, gateway) com autenticação baseada em roles, validação de ownership de recursos e modelagem completa de domínio incluindo agregados, value objects e domain events. Orquestrado via Docker Compose com configuração production-ready.",
+        en: "A food delivery platform built as six independent NestJS services: customer, restaurant, order, kitchen, payment and gateway. The domain is modeled with DDD (aggregates, value objects and domain events) on TypeORM, PostgreSQL and Redis, with role-based authentication and ownership checks on every resource. Docker Compose runs the whole thing locally.",
+        "pt-BR": "Uma plataforma de delivery construída como seis serviços NestJS independentes: customer, restaurant, order, kitchen, payment e gateway. O domínio é modelado com DDD (agregados, value objects e domain events) sobre TypeORM, PostgreSQL e Redis, com autenticação por roles e verificação de ownership em todo recurso. O Docker Compose sobe tudo localmente.",
       } as LocalizedText,
       technologies: [
         "TypeScript",
@@ -292,8 +292,8 @@ export const DATA = {
       dates: { en: "Apr 2026 - Present", "pt-BR": "Abr 2026 - Presente" } as LocalizedText,
       active: true,
       description: {
-        en: "A microservices-based financial transfer system built with Go, featuring saga pattern orchestration via RabbitMQ, DDD architecture, and distributed tracing. Comprises three services (user, account, transfer) with idempotent operations, circuit breaker, and OpenTelemetry integration.",
-        "pt-BR": "Sistema de transferências financeiras baseado em microsserviços construído com Go, com orquestração via saga pattern usando RabbitMQ, arquitetura DDD e distributed tracing. Composto por três serviços (user, account, transfer) com operações idempotentes, circuit breaker e integração com OpenTelemetry.",
+        en: "A financial transfer system in Go, split into three services: user, account and transfer. They talk only through RabbitMQ, with Saga handling compensation when a transfer fails partway. Operations are idempotent, calls go through a circuit breaker, and OpenTelemetry traces the path across services.",
+        "pt-BR": "Um sistema de transferências financeiras em Go, dividido em três serviços: user, account e transfer. Eles conversam só por RabbitMQ, com Saga cuidando da compensação quando uma transferência falha no meio. As operações são idempotentes, as chamadas passam por circuit breaker e o OpenTelemetry rastreia o caminho entre os serviços.",
       } as LocalizedText,
       technologies: [
         "Go",
@@ -319,8 +319,8 @@ export const DATA = {
       dates: { en: "Mar 2026 - Present", "pt-BR": "Mar 2026 - Presente" } as LocalizedText,
       active: true,
       description: {
-        en: "A serverless website monitoring platform on AWS using SST v4. Features real-time outage detection via Lambda cron jobs, Telegram bot notifications, DynamoDB state management, and a Next.js dashboard with Cognito authentication.",
-        "pt-BR": "Plataforma serverless de monitoramento de websites na AWS usando SST v4. Detecção de quedas em tempo real via Lambda cron jobs, notificações por bot do Telegram, gerenciamento de estado no DynamoDB e dashboard Next.js com autenticação Cognito.",
+        en: "A serverless website monitor on AWS, built with SST v4. Lambda cron jobs check the sites, DynamoDB keeps the state, and a Telegram bot messages you when something goes down. The dashboard is Next.js with Cognito authentication.",
+        "pt-BR": "Um monitor de sites serverless na AWS, construído com SST v4. Lambdas em cron checam os sites, o DynamoDB guarda o estado e um bot do Telegram te avisa quando alguma coisa cai. O dashboard é Next.js com autenticação Cognito.",
       } as LocalizedText,
       technologies: [
         "TypeScript",
@@ -346,8 +346,8 @@ export const DATA = {
       dates: { en: "Jan 2025 - Present", "pt-BR": "Jan 2025 - Presente" } as LocalizedText,
       active: true,
       description: {
-        en: "Full-stack personal finance management platform with AI. Features CSV bank statement import, automatic transaction categorization, financial analytics dashboard, and an AI chatbot with SSE streaming. Built as a monorepo with a NestJS API (hexagonal architecture), Next.js 15 web app (Turborepo + tRPC), and an Expo mobile app — all orchestrated with Docker Swarm and Traefik.",
-        "pt-BR": "Plataforma full-stack de gestão financeira pessoal com inteligência artificial. Importação de extratos bancários via CSV, categorização automática de transações, dashboard de analytics financeiro e chatbot com IA via SSE streaming. Monorepo com API NestJS (arquitetura hexagonal), web app Next.js 15 (Turborepo + tRPC) e app mobile Expo — tudo orquestrado com Docker Swarm e Traefik.",
+        en: "A personal finance platform. You import a bank statement as CSV, it categorizes the transactions on its own, and an AI chatbot answers questions about them over SSE streaming. The monorepo holds a NestJS API built with hexagonal architecture, a Next.js 15 web app on Turborepo and tRPC, and an Expo mobile app. Docker Swarm and Traefik handle deployment.",
+        "pt-BR": "Uma plataforma de finanças pessoais. Você importa o extrato bancário em CSV, ela categoriza as transações sozinha, e um chatbot com IA responde perguntas sobre elas via SSE streaming. O monorepo tem uma API NestJS em arquitetura hexagonal, um web app Next.js 15 com Turborepo e tRPC, e um app mobile em Expo. Docker Swarm e Traefik cuidam do deploy.",
       } as LocalizedText,
       technologies: [
         "TypeScript",
@@ -374,8 +374,8 @@ export const DATA = {
       dates: { en: "Apr 2026 - Present", "pt-BR": "Abr 2026 - Presente" } as LocalizedText,
       active: true,
       description: {
-        en: "A Go CLI tool for seamless remote development bridging. Enables SSH session management with tmux integration, Termux support for mobile development, and push notifications for long-running commands. Features shell completion (bash, zsh, fish, PowerShell), notifier wait mechanisms, and intent-based session management for Android devices.",
-        "pt-BR": "Ferramenta CLI em Go para ponte de desenvolvimento remoto. Permite gerenciamento de sessões SSH com integração tmux, suporte Termux para desenvolvimento mobile e notificações push para comandos de longa duração. Features incluem completion de shell (bash, zsh, fish, PowerShell), mecanismos de wait para notificadores e gerenciamento de sessões baseado em intents para Android.",
+        en: "A Go CLI for working on a remote machine from a phone. It manages SSH sessions with tmux, runs under Termux on Android, and pushes a notification when a long command finishes. Also has shell completion for bash, zsh, fish and PowerShell, and uses Android intents to handle sessions.",
+        "pt-BR": "Uma CLI em Go para trabalhar em uma máquina remota pelo celular. Gerencia sessões SSH com tmux, roda sob Termux no Android e dispara notificação quando um comando longo termina. Também tem completion de shell para bash, zsh, fish e PowerShell, e usa intents do Android para lidar com as sessões.",
       } as LocalizedText,
       technologies: [
         "Go",
@@ -398,8 +398,8 @@ export const DATA = {
       dates: { en: "Dec 2024 - Present", "pt-BR": "Dez 2024 - Presente" } as LocalizedText,
       active: true,
       description: {
-        en: "A type-safe ORM for Node.js featuring a Drizzle-inspired query builder, blazing-fast native caching with TTL, and a robust migration system. The Rust engine via N-API provides unmatched performance for query execution.",
-        "pt-BR": "Um ORM type-safe para Node.js com um query builder inspirado no Drizzle, cache nativo ultrarrápido com TTL e um sistema robusto de migrações. O engine em Rust via N-API fornece desempenho incomparável para execução de queries.",
+        en: "A type-safe ORM for Node.js with a Drizzle-inspired query builder, native caching with TTL and a migration system. Query execution runs on a Rust engine exposed to Node through N-API.",
+        "pt-BR": "Um ORM type-safe para Node.js com query builder inspirado no Drizzle, cache nativo com TTL e sistema de migrações. A execução das queries roda em um engine Rust exposto ao Node via N-API.",
       } as LocalizedText,
       technologies: [
         "TypeScript",
@@ -424,8 +424,8 @@ export const DATA = {
       dates: { en: "Feb 2026 - Present", "pt-BR": "Fev 2026 - Presente" } as LocalizedText,
       active: true,
       description: {
-        en: "A lightweight machine learning engine implemented in Rust from scratch, focusing on performance and memory safety. Built to understand the fundamentals of ML implementation in systems programming.",
-        "pt-BR": "Um engine de machine learning leve implementado em Rust do zero, com foco em desempenho e segurança de memória. Construído para entender os fundamentos da implementação de ML em programação de sistemas.",
+        en: "A small machine learning engine written in Rust from scratch. I built it to understand what the libraries are actually doing, and Rust forced me to be explicit about memory along the way.",
+        "pt-BR": "Um engine de machine learning pequeno escrito em Rust do zero. Construí para entender o que as bibliotecas realmente fazem por baixo, e o Rust me obrigou a ser explícito com memória no caminho.",
       } as LocalizedText,
       technologies: [
         "Rust",

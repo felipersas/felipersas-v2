@@ -61,7 +61,11 @@
     "suggestions": {
       "career": "What has Felipe built professionally?",
       "projects": "Explain the architecture of his strongest project.",
-      "fit": "Which roles best match his experience?"
+      "fit": "Which roles best match his experience?",
+      "tradeoffs": "What tradeoffs did he make in those decisions?",
+      "impact": "What measurable results has he delivered?",
+      "stack": "Which technologies does he work with day to day?",
+      "contact": "How can I get in touch with him?"
     },
     "speech": {
       "microphone": "Use microphone",
