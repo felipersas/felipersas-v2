@@ -25,6 +25,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },
+    {
+      url: `${DATA.url}/${locale}/reading`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+      alternates: {
+        languages: {
+          "pt-BR": `${DATA.url}/pt-BR/reading`,
+          en: `${DATA.url}/en/reading`,
+        },
+      },
+    },
     ...featuredProjects.map((project) => ({
       url: `${DATA.url}/${locale}/projects/${project.slug}`,
       lastModified,

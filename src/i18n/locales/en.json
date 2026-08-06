@@ -26,14 +26,17 @@
     "present": "Present"
   },
   "navbar": {
-    "theme": "Theme",
-    "language": "Language",
     "resume": "Resume",
-    "agent": "Ask my agent",
     "navigation": "Primary navigation",
-    "modeSelector": "Portfolio mode",
-    "portfolioMode": "Portfolio",
-    "agentMode": "Agent"
+    "menu": "More options",
+    "reading": "Reading",
+    "themeLight": "Light theme",
+    "themeDark": "Dark theme"
+  },
+  "ask": {
+    "label": "Ask the portfolio agent",
+    "placeholder": "Ask about Felipe…",
+    "submit": "Ask"
   },
   "agent": {
     "title": "Ask my agent",

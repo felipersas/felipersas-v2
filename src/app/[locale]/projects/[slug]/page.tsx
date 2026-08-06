@@ -84,7 +84,7 @@ export default async function ProjectPage(props: ProjectPageProps) {
   ];
 
   return (
-    <main className="min-h-screen pb-28">
+    <main className="min-h-screen pt-12 pb-28">
       <article className="mx-auto max-w-2xl border-x border-line bg-background">
         <header className="border-b border-line px-5 py-8 sm:px-8 sm:py-12">
           <a

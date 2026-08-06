@@ -39,6 +39,7 @@ src/
 │   ├── [locale]/           # pt-BR | en
 │   │   ├── page.tsx        # Home
 │   │   ├── agent/          # Agent chat page
+│   │   ├── reading/        # Curated blog links, grouped by category
 │   │   └── projects/[slug] # Case study pages (+ per-project OG image)
 │   ├── globals.css
 │   ├── llms.txt/           # Machine-readable profile for LLMs
@@ -52,12 +53,14 @@ src/
 │   └── ui/                 # Buttons, dither shader, skill SVGs
 ├── data/
 │   ├── resume.tsx          # All personal data
-│   └── featured-projects.ts # Case studies (slug, tradeoffs, evidence)
+│   ├── featured-projects.ts # Case studies (slug, tradeoffs, evidence)
+│   └── reading-categories.ts # Reading-list categories (ordered, bilingual)
 ├── hooks/use-translation.tsx
 ├── i18n/locales/           # en.json, pt-BR.json
 ├── lib/
 │   ├── portfolio-grounding.ts  # Builds the canonical fact block
 │   ├── public-profile.ts       # Locale-aware profile projection
+│   ├── reading-links.ts        # CSV reader for the reading list
 │   └── eve-chat-storage.ts     # localStorage chat persistence
 ├── workers/                # Whisper transcription worker
 └── proxy.ts                # Locale rewriting (Next 16 proxy, not middleware)
@@ -78,6 +81,24 @@ src/
   see the Knowledge policy in `agent/instructions.md`
 - **Agent output is untrusted:** hrefs the model emits are validated in
   `src/components/ai-elements/message.tsx` before becoming links
+- **Navigation has no "mode" concept.** There are two persistent pieces, both
+  mounted in `[locale]/layout.tsx`: `site-header.tsx` (fixed, 3rem, wordmark +
+  résumé + a `⋯` menu holding Leituras, locale, theme and socials) and
+  `ask-dock.tsx` (fixed bottom, hidden on `/agent`). The dock is a real GET form
+  posting to `/[locale]/agent?prompt=…`, so it works without JavaScript and the
+  agent opens already answering. Pages clear the header themselves — the home
+  column needs `sm:pt-16` because the artwork is absolutely positioned from `sm`
+  up
+- **The reading list is the one remote data source.** `src/lib/reading-links.ts`
+  reads a Google Sheet published as CSV (`BLOG_LINKS_CSV_URL`) so links can be
+  added without a deploy. It never throws: an unset variable, a failed request,
+  or a non-CSV response all return `{ links: [], ok: false }`. Because of it,
+  `/[locale]` and `/[locale]/reading` are ISR (600s), not fully static
+- **Keep the reading list out of `getPublicProfile()`** in
+  `src/lib/public-profile.ts`. That single function feeds both the Eve system
+  prompt (via `portfolio-grounding.ts`) and the public `llms.txt`, so anything
+  added there becomes a claim the agent is allowed to make. The page, the home
+  teaser and the sitemap are safe surfaces
 - **i18n:** `src/proxy.ts` rewrites locale-less paths; `useTranslation` for
   client copy, `i18n-server.ts` for server
 - **Styling:** Tailwind CSS v4, `cn()` utility for class merging
@@ -91,6 +112,9 @@ src/
 - Path alias `@/*` maps to `src/`
 - The Eve dev runtime starts alongside `npm run dev`; the agent needs
   `OPENROUTER_API_KEY` in `.env`
+- `BLOG_LINKS_CSV_URL` points at the published reading-list sheet. It is
+  optional — without it the reading page shows its failure state and the home
+  teaser renders nothing
 - Agent reply length is steered by the "Response length" section in
   `agent/instructions.md`, **not** by `maxOutputTokens` — that value is only a
   runaway guard, and lowering it truncates replies mid-sentence
@@ -103,6 +127,7 @@ src/
 
 ## Dependencies
 
-- **zod**: on v3.x
+- **zod**: on v3.x, and it lives in `devDependencies` and is imported nowhere —
+  do not reach for it in a Server Component without promoting it first
 - **motion**: animation library (import from `motion/react`)
 - **eve**: agent runtime; `@openrouter/ai-sdk-provider` for model access

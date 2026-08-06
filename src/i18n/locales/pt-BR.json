@@ -26,14 +26,17 @@
     "present": "Presente"
   },
   "navbar": {
-    "theme": "Tema",
-    "language": "Idioma",
     "resume": "Currículo",
-    "agent": "Pergunte ao meu agente",
     "navigation": "Navegação principal",
-    "modeSelector": "Modo do portfólio",
-    "portfolioMode": "Portfólio",
-    "agentMode": "Agente"
+    "menu": "Mais opções",
+    "reading": "Leituras",
+    "themeLight": "Tema claro",
+    "themeDark": "Tema escuro"
+  },
+  "ask": {
+    "label": "Pergunte ao agente do portfólio",
+    "placeholder": "Pergunte sobre o Felipe…",
+    "submit": "Perguntar"
   },
   "agent": {
     "title": "Pergunte ao meu agente",

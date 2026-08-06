@@ -1,4 +1,5 @@
-import Navbar from "@/components/navbar";
+import { AskDock } from "@/components/ask-dock";
+import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
@@ -107,8 +108,9 @@ export default async function RootLayout(props: {
         <ThemeProvider attribute="class" defaultTheme="dark">
           <TranslationProvider key={locale} initialLocale={locale}>
             <TooltipProvider delayDuration={0}>
+              <SiteHeader />
               {children}
-              <Navbar />
+              <AskDock />
             </TooltipProvider>
           </TranslationProvider>
         </ThemeProvider>
